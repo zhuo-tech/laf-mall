@@ -1,0 +1,26 @@
+# http://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+max_line_length = 150
+tab_width = 4
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+[*.vue]
+indent_size = 2
+tab_width = 2
+
+[{*.ats,*.cts,*.mts,*.ts}]
+max_line_length = 180
+
+[{*.cjs,*.js}]
+max_line_length = 180

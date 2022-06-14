@@ -1,0 +1,15 @@
+{
+    "name": "common",
+    "private": true,
+    "version": "1.0.0",
+    "description": "通用: entity, 类型定义, 工具方法",
+    "scripts": {
+
+    },
+    "dependencies": {
+
+    },
+    "devDependencies": {
+        "typescript": "^4.7.3"
+    }
+}
