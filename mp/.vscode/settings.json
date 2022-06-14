@@ -1,0 +1,59 @@
+{
+  // git
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  // editor
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorBlinking": "expand",
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.tabSize": 2,
+  "editor.suggestSelection": "first",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.codeActionsOnSave": {
+    // "source.fixAll.eslint": true
+  },
+  // eslint
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
+  "eslint.run": "onSave",
+  "eslint.codeActionsOnSave.mode": "all",
+  // vue & volar
+  "[vue]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "johnsoncodehk.volar"
+  },
+  // javascript
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  // typescript
+  "typescript.format.semicolons": "remove",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  // json
+  "[json]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "cSpell.words": [
+    "ifdef",
+    "logined",
+    "pinia",
+    "uniapp",
+    "vite"
+  ],
+  "i18n-ally.localesPaths": [
+    "locales"
+  ]
+}
