@@ -24,7 +24,5 @@ dist-ssr
 *.sw?
 
 coverage
-package-lock.json
 yarn.lock
-
 *.mp4

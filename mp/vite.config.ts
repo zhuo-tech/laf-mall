@@ -16,3 +16,7 @@ export default defineConfig({
   }
 
 })
+
+module.exports = {
+  transpileDependencies: ['@dcloudio/uni-ui']
+}

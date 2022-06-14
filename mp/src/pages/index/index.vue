@@ -1,18 +1,179 @@
-
 <template>
   <view class="content">
-  <view class="seek">
-  </view>
-
+    <view class="seek">
+      <uni-search-bar class="uni-mt-10" radius="100" placeholder="请输入关键词" />
+    </view>
+    <view>
+      <view class="uni-margin-wrap">
+        <swiper
+          class="swiper"
+          circular
+          :indicator-dots="true"
+          :autoplay="true"
+          :interval="2000"
+          :duration="500"
+        >
+          <swiper-item>
+            <view class="swiper-item"
+              ><img class="slideshow" src="../../static/img/1.png" alt=""
+            /></view>
+          </swiper-item>
+          <swiper-item>
+            <view class="swiper-item"
+              ><img class="slideshow" src="../../static/img/2.jpg" alt=""
+            /></view>
+          </swiper-item>
+          <swiper-item>
+            <view class="swiper-item"
+              ><img class="slideshow" src="../../static/img/3.jpg" alt=""
+            /></view>
+          </swiper-item>
+        </swiper>
+      </view>
+    </view>
+    <view class="nav">
+      <view class="navbox">
+        <img class="nav-icon" src="../../static/icon/qb.png" alt="" />
+        <view class="nav-text">全部商品</view>
+      </view>
+      <view class="navbox">
+        <img class="nav-icon" src="../../static/icon/pt.png" alt="" />
+        <view class="nav-text">限时拼团</view>
+      </view>
+      <view class="navbox">
+        <img class="nav-icon" src="../../static/icon/mx.png" alt="" />
+        <view class="nav-text">限时秒杀</view>
+      </view>
+      <view class="navbox">
+        <img class="nav-icon" src="../../static/icon/jf.png" alt="" />
+        <view class="nav-text">积分商城</view>
+      </view>
+      <view class="navbox">
+        <img class="nav-icon" src="../../static/icon/kj.png" alt="" />
+        <view class="nav-text">砍价专区</view>
+      </view>
+    </view>
+    <view class="limit">
+      <view class="countdown">
+        <view class="limit-text">限时秒杀</view>
+        <view>
+          <uni-countdown
+            :show-day="false"
+            color="#FFFFFF"
+            background-color="#fb5556"
+            :hour="2"
+            :minute="30"
+            :second="0"
+          ></uni-countdown>
+        </view>
+      </view>
+      <view class="seckill">
+        <view class="seckill-commodity">
+          <img class="seckill-img" src="../../static/img/1.png" alt="" />
+          <view class="seckill-name">秒杀品</view>
+          <view class="seckill-price">￥1280</view>
+          <view class="seckill-Past-price">￥1580</view>
+        </view>
+        <view class="seckill-commodity">
+          <img class="seckill-img" src="../../static/img/2.jpg" alt="" />
+          <view class="seckill-name">秒杀品</view>
+          <view class="seckill-price">￥1280</view>
+          <view class="seckill-Past-price">￥1580</view>
+        </view>
+        <view class="seckill-commodity">
+          <img class="seckill-img" src="../../static/img/3.jpg" alt="" />
+          <view class="seckill-name">秒杀品</view>
+          <view class="seckill-price">￥1280</view>
+          <view class="seckill-Past-price">￥1580</view>
+        </view>
+      </view>
+      <view class="recommend">
+        <view class="a"></view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useUserStore } from '../../store/user'
+import { ref, reactive } from "vue";
 
-
+const tablist = reactive([{ name: "精品推荐" }, { name: "新品" }, { name: "优惠" }]);
 </script>
 
 <style lang="less">
+.content {
+  .swiper {
+    height: 430rpx;
+    .slideshow {
+      width: 100%;
+    }
+  }
+  .nav {
+    margin: 32rpx 0 40rpx 0;
+    display: flex;
+    justify-content: space-around;
+    .navbox {
+      width: 96rpx;
+      height: 148rpx;
+      .nav-icon {
+        margin-left: 4rpx;
+        width: 88rpx;
+        height: 88rpx;
+      }
+      .nav-text {
+        margin-top: 5rpx;
+        font-size: 24rpx;
+        color: #666666;
+      }
+    }
+  }
+  .limit {
+    .countdown {
+      display: flex;
+    }
+    .limit-text {
+      margin: 0rpx 25rpx;
+      width: 150rpx;
+      font-size: 35rpx;
+      font-weight: 700;
+      line-height: 45rpx;
+      color: #272727;
+      opacity: 1;
+    }
+    .seckill {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 32rpx;
+      width: 100%;
+      .seckill-commodity {
+        width: 200rpx;
+        .seckill-img {
+          width: 200rpx;
+          height: 180rpx;
+        }
+        .seckill-name {
+          font-size: 25rpx;
+          line-height: 40rpx;
+          color: #645e5e;
+          text-align: center;
+        }
+        .seckill-price {
+          line-height: 50rpx;
+          color: #ee5382;
+          font-size: 32rpx;
+          font-weight: bold;
+          text-align: center;
+        }
+        .seckill-Past-price {
+          font-size: 20rpx;
+          font-weight: 400;
+          line-height: 37rpx;
+          color: #645e5e;
+          text-align: center;
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+}
 </style>
