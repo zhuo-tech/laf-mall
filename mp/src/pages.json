@@ -50,13 +50,13 @@
         "pagePath": "pages/index/classify",
         "iconPath": "static/tabbar/fenlei.png",
         "selectedIconPath": "static/tabbar/fenleichoice.png",
-        "text": "消息"
+        "text": "分类"
       },
       {
         "pagePath": "pages/index/shoppingTrolley",
         "iconPath": "static/tabbar/gouwuche.png",
         "selectedIconPath": "static/tabbar/gouwuchechoice.png",
-        "text": "我的"
+        "text": "购物车"
       },
       {
         "pagePath": "pages/index/mine",
