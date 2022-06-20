@@ -1,10 +1,11 @@
 <template>
   <view class="page">
     <view class="head">
-      <view style="margin-left: 30rpx"
+      <view style="margin-left: 40rpx"
         >购物数量 <span style="color: #ee5382">3</span></view
       >
-      <view class="but">取消</view>
+      <view @click="ChooseRedact" v-show="redact == false" class="but">取消</view>
+      <view @click="ChooseRedact" v-show="redact == true" class="but">管理</view>
     </view>
     <view class="entry">
       <view class="text">
@@ -23,8 +24,10 @@
     <view v-for="(item, index) in 3" class="goods">
       <view style="display: flex">
         <view class="checkbox">
-          <checkbox style="transform: scale(0.7)" value="cb" color="#979494"
-        /></view>
+          <checkbox-group @change="touch">
+            <checkbox style="transform: scale(0.7)" value="value" color="#ee5382"
+          /></checkbox-group>
+        </view>
         <img class="goods-img" src="../../static/img/3.jpg" alt="" />
         <view style="margin-left: 20rpx">
           <view class="goods-name">风萧萧兮</view>
@@ -36,15 +39,30 @@
       </view>
     </view>
     <view class="bottom">
-      <view class="a">
-        <checkbox style="transform: scale(0.7)" value="cb" color="#979494" />
+      <view class="checkbox">
+        <view><checkbox style="transform: scale(0.7)" value="cb" color="#ee5382" /></view>
+        <view v-show="redact == false" class="checkall">全选</view>
+        <view v-show="redact == true" class="checkall-in">合计:￥0</view>
       </view>
+      <view v-show="redact == false" class="del">删除</view>
+      <view v-show="redact == true" class="order">立即下单</view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, ref } from "vue";
+
+const redact = ref(true);
+
+function ChooseRedact() {
+  redact.value = !redact.value;
+}
+
+function touch(e: any) {
+  console.log(e);
+  console.log("现在是什么");
+}
 </script>
 
 <style lang="scss" scoped>
@@ -118,11 +136,48 @@ import { reactive, toRefs } from "vue";
     }
   }
   .bottom {
+    display: flex;
+    justify-content: space-between;
     position: fixed;
-    bottom: 105rpx;
+    bottom: 95rpx;
     width: 100%;
-    height: 88rpx;
+    height: 120rpx;
     background-color: #fffeff;
+    .checkbox {
+      display: flex;
+      margin: 40rpx 0 0 20rpx;
+      .checkall {
+        font-size: 30rpx;
+        color: #707070;
+        line-height: 48rpx;
+      }
+      .checkall-in {
+        font-size: 30rpx;
+        color: #ee5382;
+        line-height: 48rpx;
+      }
+    }
+    .del {
+      margin: 35rpx 20rpx 0 0;
+      width: 165rpx;
+      height: 48rpx;
+      border: 1px solid #707070;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 48rpx;
+      color: #a7a7a7;
+    }
+    .order {
+      background-color: #ee5382;
+      margin: 25rpx 20rpx 0 0;
+      width: 200rpx;
+      height: 60rpx;
+      border: 1px solid #ee5382;
+      border-radius: 20px;
+      text-align: center;
+      line-height: 60rpx;
+      color: #fff;
+    }
   }
 }
 </style>

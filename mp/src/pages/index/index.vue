@@ -1,7 +1,7 @@
 <template>
   <view class="content">
-    <view>
-      <uni-search-bar class="uni-mt-10" radius="100" placeholder="请输入关键词" />
+    <view @click="goGoodSearch">
+      <uni-search-bar cancelButton="none" radius="100" placeholder="请输入关键词" />
     </view>
     <view>
       <view class="uni-margin-wrap">
@@ -14,25 +14,19 @@
           :duration="500"
         >
           <swiper-item>
-            <view class="swiper-item"
-              ><img class="slideshow" src="../../static/img/1.png" alt=""
-            /></view>
+            <img class="slideshow" src="../../static/img/1.png" alt="" />
           </swiper-item>
           <swiper-item>
-            <view class="swiper-item"
-              ><img class="slideshow" src="../../static/img/2.jpg" alt=""
-            /></view>
+            <img class="slideshow" src="../../static/img/2.jpg" alt="" />
           </swiper-item>
           <swiper-item>
-            <view class="swiper-item"
-              ><img class="slideshow" src="../../static/img/3.jpg" alt=""
-            /></view>
+            <img class="slideshow" src="../../static/img/3.jpg" alt="" />
           </swiper-item>
         </swiper>
       </view>
     </view>
     <view class="nav">
-      <view class="navbox">
+      <view @click="goAllCommodity" class="navbox">
         <img class="nav-icon" src="../../static/icon/qb.png" alt="" />
         <view class="nav-text">全部商品</view>
       </view>
@@ -99,7 +93,12 @@
         </view>
       </view>
       <view class="product">
-        <view v-show="recom == 0" v-for="item in 5" class="product-item">
+        <view
+          @click="GoodsDetails"
+          v-show="recom == 0"
+          v-for="item in 5"
+          class="product-item"
+        >
           <img class="product-img" src="../../static/img/3.jpg" alt="" />
           <view class="product-text">精品地毯</view>
           <view style="display: flex">
@@ -107,7 +106,12 @@
             <view class="product-Past-price">￥1580</view>
           </view>
         </view>
-        <view v-show="recom == 1" v-for="item in 4" class="product-item">
+        <view
+          @click="GoodsDetails"
+          v-show="recom == 1"
+          v-for="item in 4"
+          class="product-item"
+        >
           <img class="product-img" src="../../static/img/2.jpg" alt="" />
           <view class="product-text">精品地毯</view>
           <view style="display: flex">
@@ -115,7 +119,12 @@
             <view class="product-Past-price">￥1580</view>
           </view>
         </view>
-        <view v-show="recom == 2" v-for="item in 3" class="product-item">
+        <view
+          @click="GoodsDetails"
+          v-show="recom == 2"
+          v-for="item in 3"
+          class="product-item"
+        >
           <img class="product-img" src="../../static/img/1.png" alt="" />
           <view class="product-text">精品地毯</view>
           <view style="display: flex">
@@ -137,6 +146,25 @@ const tablist = reactive([{ name: "精品推荐" }, { name: "新品" }, { name: 
 function recomTab(index: number) {
   recom.value = index;
 }
+
+function goGoodSearch() {
+  uni.navigateTo({
+    url: "/pages/index/search/index",
+  });
+}
+
+//全部商品
+function goAllCommodity() {
+  uni.navigateTo({
+    url: "/pages/index/allCommodity/index",
+  });
+}
+
+function GoodsDetails() {
+  uni.navigateTo({
+    url: "/pages/index/GoodsDetails/index",
+  });
+}
 </script>
 
 <style lang="less">
@@ -152,7 +180,7 @@ function recomTab(index: number) {
     display: flex;
     justify-content: space-around;
     .navbox {
-      width: 96rpx;
+      width: 100rpx;
       height: 148rpx;
       .nav-icon {
         margin-left: 4rpx;
