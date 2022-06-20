@@ -1,46 +1,72 @@
+import { LogicDelete } from '../constant/LogicDelete'
+
 /**
- * BasisEntity
- * @author 冰凝
- * @date 2022-06-14 下午 03:55
- **/
-export interface Entity {
+ * Mongo 实体
+ */
+interface Entity {
     /**
      * mongo 的主键ID
      */
     _id: string
+}
+
+/**
+ * 创建信息
+ */
+interface CreateInfo {
     /**
      * 创建时间
      */
     createTime: number
     /**
-     * 更新时间 可选
-     */
-    updateTime?: number
-    /**
      * 创建人 可选
      */
     createBy?: string
-    /**
-     * 更新人 可选
-     */
-    updateBy?: string
-    /**
-     * 逻辑删除 可选
-     */
-    isDelete?: LogicDelete
 }
 
 /**
- * 逻辑删除
+ * 更新信息
  */
-export enum LogicDelete {
+interface UpdateInfo {
     /**
-     * 已删除
+     * 更新时间 可选
      */
-    DELETED = 0,
+    updateTime: number
     /**
-     * 正常
-     * @type {LogicDelete.NORMAL}
+     * 更新人 可选
      */
-    NORMAL = 1,
+    updateBy: string
+}
+
+/**
+ * 支持逻辑删除
+ */
+interface HasLogicDelete {
+    /**
+     * 逻辑删除
+     */
+    isDelete: LogicDelete
+}
+
+// 以上为基础定义; 以下为方便使用提供
+
+/**
+ * 可更新实体, 不需要逻辑删除, 含 {@link Entity} {@link CreateInfo} {@link UpdateInfo}
+ */
+export interface CanUpdateEntity extends Entity, CreateInfo, UpdateInfo {
+
+}
+
+/**
+ * 完整实体类型, 含 {@link Entity} {@link CreateInfo} {@link UpdateInfo} {@link HasLogicDelete}
+ */
+export interface IntegralEntity extends Entity, CreateInfo, UpdateInfo, HasLogicDelete {
+
+}
+
+/**
+ * 只读(可新增) 实体, 含 {@link Entity} {@link CreateInfo}
+ */
+export interface ReadonlyEntity extends Entity, CreateInfo {
+
 }

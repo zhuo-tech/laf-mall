@@ -1,11 +1,11 @@
-import { Entity, LogicDelete } from './Entity'
+import { CanUpdateEntity } from './Entity'
 
 /**
  * SysPermission
  * @author 冰凝
  * @date 2022-06-14 下午 03:54
  **/
-export class SysPermission implements Entity {
+export class SysPermission implements CanUpdateEntity {
 
     public static readonly NAME = 'sys_permission'
 
@@ -20,10 +20,6 @@ export class SysPermission implements Entity {
     public desc: string
     public createBy: string
     public createTime: number
-    /**
-     * @deprecated 弃用
-     */
-    public isDelete?: LogicDelete
     public updateBy: string
     public updateTime: number
 }

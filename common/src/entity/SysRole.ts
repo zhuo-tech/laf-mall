@@ -1,11 +1,11 @@
-import { Entity, LogicDelete } from './Entity'
+import { CanUpdateEntity } from './Entity'
 
 /**
  * SysRole
  * @author 冰凝
  * @date 2022-06-14 下午 03:54
  **/
-export class SysRole implements Entity {
+export class SysRole implements CanUpdateEntity {
     public static readonly NAME = 'sys_role'
 
     public _id: string
@@ -28,10 +28,6 @@ export class SysRole implements Entity {
 
     public createBy: string
     public createTime: number
-    /**
-     * @deprecated 弃用
-     */
-    public isDelete?: LogicDelete
     public updateBy: string
     public updateTime: number
 }

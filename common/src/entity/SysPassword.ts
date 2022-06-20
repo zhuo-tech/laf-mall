@@ -1,11 +1,11 @@
-import { Entity, LogicDelete } from './Entity'
+import { CanUpdateEntity } from './Entity'
 
 /**
  * SysPassword
  * @author 冰凝
  * @date 2022-06-16 下午 04:48
  **/
-export class SysPassword implements Entity {
+export class SysPassword implements CanUpdateEntity {
     public static readonly NAME = 'sys_password'
 
     public _id: string
@@ -25,10 +25,6 @@ export class SysPassword implements Entity {
 
     public createBy: string
     public createTime: number
-    /**
-     * @deprecated 不需要
-     */
-    public isDelete?: LogicDelete
     public updateBy: string
     public updateTime: number
 }
