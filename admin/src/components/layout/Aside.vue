@@ -22,7 +22,7 @@ export default defineComponent({
     },
     data() {
         return {
-            log: console
+            log: console,
         }
     },
     computed: {
@@ -33,7 +33,6 @@ export default defineComponent({
     methods: {
 
         onSelect(index: string) {
-            this.log.debug('Select => ', index)
             // this.$router.push({path: param})
             this.$emit('select', index)
         },
@@ -89,7 +88,6 @@ export default defineComponent({
         /* 独立渲染一个菜单叶子节点 */
         renderMenuNode(key: string, index: string, menu: RouteRecordRaw, isTitle: boolean = false): JSX.Element {
             const {name, path, meta} = menu
-            this.log.trace('渲染菜单', name, index)
             const Icon = meta?.icon
 
             if (!Icon) {

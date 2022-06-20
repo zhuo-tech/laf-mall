@@ -1,0 +1,11 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "云函数本地开发环境",
+    "dependencies": {
+        "laf-client-sdk": "^0.8.2",
+        "laf-db-query-wrapper": "^1.0.23",
+        "typescript-util": "^1.0.27",
+        "common": "../common"
+    }
+}

@@ -2,8 +2,8 @@
 <script lang="ts" setup>
 import Aside from '@/components/layout/Aside.vue'
 import { useUserStore } from '@/store/user'
-import { Avatar, Bell, CirclePlus, Expand } from '@element-plus/icons-vue'
-import { inject, ref } from 'vue'
+import { Expand } from '@element-plus/icons-vue'
+import { ref } from 'vue'
 
 const isOpenMenu = ref(false)
 
@@ -22,10 +22,9 @@ function exit() {
 <template>
 <div class="flex w-full h-full items-center">
     <div class="brand w-40 flex items-center justify-start ml-2">
-        <img alt="logo"
-             class="w-8 h-8 align-middle"
-             src="http://user-assets.sxlcdn.com/images/42894/FvhDgE1TIv5mVA-Y2lzouV5NhhqB.png?imageMogr2/strip/auto-orient/thumbnail/300x300%3E/quality/90!/format/png" />
-        <div class="brand-text sm:block ml-2">微草轻课</div>
+        <!--suppress HtmlUnknownTarget -->
+        <img alt="logo" class="w-8 h-8 align-middle" src="/logo.jpg" />
+        <div class="brand-text sm:block ml-2">商城</div>
     </div>
     <div class="menu flex-auto sm:flex justify-end hidden">
         <el-menu :ellipsis="false" default-active="0" mode="horizontal">

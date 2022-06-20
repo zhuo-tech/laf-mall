@@ -1,10 +1,7 @@
-<!--suppress ES6UnusedImports -->
-<script setup lang="ts">
-import Aside from '@/components/layout/Aside.vue'
-import { Location, Document, Setting } from '@element-plus/icons-vue'
-import TopHeader from './header.vue'
+<script lang="ts" setup>
 import { ref } from 'vue'
-import { DArrowLeft, DArrowRight } from '@element-plus/icons-vue'
+import Aside from './Aside.vue'
+import TopHeader from './header.vue'
 
 const isMenuCollapsed = ref(false)
 const isMenuHidden = ref(false)
@@ -21,10 +18,7 @@ window.addEventListener('resize', (ev) => {
     </div>
     <div class="main flex">
         <div class="menu hidden sm:block overflow-x-hidden">
-            <div
-                class="collapse-btn flex justify-center items-center shadow-md"
-                @click="isMenuHidden = !isMenuHidden"
-            >
+            <div class="collapse-btn flex justify-center items-center shadow-md" @click="isMenuHidden = !isMenuHidden">
                 <el-icon v-if="isMenuHidden">
                     <d-arrow-right />
                 </el-icon>
@@ -33,7 +27,7 @@ window.addEventListener('resize', (ev) => {
                 </el-icon>
             </div>
             <Transition>
-                <Aside v-if="!isMenuHidden" class="md:w-40" :collapse="isMenuCollapsed" />
+                <Aside v-if="!isMenuHidden" :collapse="isMenuCollapsed" class="md:w-40" />
             </Transition>
         </div>
         <div class="page flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 sm:p-4 p-2">
@@ -43,7 +37,7 @@ window.addEventListener('resize', (ev) => {
 </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .layout {
     height: 100vh;
 
