@@ -9,10 +9,8 @@
 </script>
 
 <template>
-<h1>
-  Home 页面
-</h1>
+
 </template>
 
-<style scoped lang="sass">
+<style lang="sass" scoped>
 </style>

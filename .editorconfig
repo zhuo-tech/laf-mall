@@ -15,12 +15,15 @@ trim_trailing_whitespace = true
 insert_final_newline = false
 trim_trailing_whitespace = false
 
-[*.vue]
-indent_size = 2
-tab_width = 2
+# [*.vue]
+# indent_size = 4
+# tab_width = 4
 
 [{*.ats,*.cts,*.mts,*.ts}]
 max_line_length = 180
 
 [{*.cjs,*.js}]
 max_line_length = 180
+
+[pnpm-lock.yaml]
+indent_size = 2

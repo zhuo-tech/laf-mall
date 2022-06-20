@@ -1,17 +1,20 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import ElementPlus from 'element-plus'
+import * as ElIconModules from '@element-plus/icons-vue'
+import * as echarts from 'echarts'
+
+import App from '@/App'
+import { RoutingProvider } from '@/config/RouterConfig'
+import '@/config/LafConfig'
+import '@/service/StorageServiceImpl'
+
 // 在 element-plus css 之前导入 tailwind css 以避免冲突
 import './index.css'
 import 'element-plus/dist/index.css'
-import App from '@/App'
-import { createVueRouterInstantiate } from '@/config/router'
-import * as ElIconModules from '@element-plus/icons-vue'
-// @ts-ignore
-import * as echarts from 'echarts'
 
 export const app = createApp(App)
-export const VueRouter = createVueRouterInstantiate()
+export const VueRouter = new RoutingProvider().instant
 
 app.config.globalProperties.$echarts = echarts
 

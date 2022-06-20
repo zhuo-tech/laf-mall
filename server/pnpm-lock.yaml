@@ -1,0 +1,100 @@
+lockfileVersion: 5.3
+
+specifiers:
+  common: ../common
+  laf-client-sdk: ^0.8.2
+  laf-db-query-wrapper: ^1.0.23
+  typescript-util: ^1.0.27
+
+dependencies:
+  common: link:../common
+  laf-client-sdk: 0.8.2
+  laf-db-query-wrapper: 1.0.23
+  typescript-util: 1.0.27
+
+packages:
+
+  /axios/0.21.4:
+    resolution: { integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg== }
+    dependencies:
+      follow-redirects: 1.15.1
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /base64-js/1.5.1:
+    resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    dev: false
+
+  /bson/4.6.4:
+    resolution: {integrity: sha512-TdQ3FzguAu5HKPPlr0kYQCyrYUYh8tFM+CMTpxjNzVzxeiJY00Rtuj3LXLHSgiGvmaWlZ8PE+4KyM2thqE38pQ==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      buffer: 5.7.1
+    dev: false
+
+  /buffer/5.7.1:
+    resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
+    dev: false
+
+  /database-ql/0.8.2:
+    resolution: {integrity: sha512-ktvWlFUpoF9bvemWL+MscodbK/4wYj0QGtQ3/Ab6T2D9hJ4jWa5OkAqF+7GdAfMIJPRmU03Uzf+Chl0LD5rs2g==}
+    dependencies:
+      bson: 4.6.4
+      lodash.clonedeep: 4.5.0
+      lodash.set: 4.3.2
+      lodash.unset: 4.5.2
+    dev: false
+
+  /follow-redirects/1.15.1:
+    resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
+  /ieee754/1.2.1:
+    resolution: { integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA== }
+    dev: false
+
+  /laf-client-sdk/0.8.2:
+    resolution: { integrity: sha512-qQiz9uvdWKt4KKj/YPRW84BYYB6CeJtCcAiV+OZL1HQeMauQ/dG17MksN85TQXa9k8rO+EZ6ACisfmDrZ6sWGw== }
+    dependencies:
+      axios: 0.21.4
+      database-ql: 0.8.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /laf-db-query-wrapper/1.0.23:
+    resolution: { integrity: sha512-/r59d+U/ogJNiLV82XHrhhM+LQlsyLFL1gtSdSX8J3Q8ZpTuhET3KBDIKUmqEr29V9nGO6iTXCkcqwE9Uh3JQA== }
+    dependencies:
+      typescript-util: 1.0.27
+    optionalDependencies:
+      database-ql: 0.8.2
+      laf-client-sdk: 0.8.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /lodash.clonedeep/4.5.0:
+    resolution: { integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ== }
+    dev: false
+
+  /lodash.set/4.3.2:
+    resolution: { integrity: sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM= }
+    dev: false
+
+  /lodash.unset/4.5.2:
+    resolution: { integrity: sha1-Nw0dPoW3Kn4bDN8tJyEhMG8j5O0= }
+    dev: false
+
+  /typescript-util/1.0.27:
+    resolution: { integrity: sha512-1iBetxxGbP66Eb/iclL16lIghyb7Gk7cirmBXwDfYZvreZ+MARMfahOh+H9rIZhaFmXF/B2xOhE52f+rPOhR+A== }
+    dev: false

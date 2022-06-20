@@ -1,3 +1,5 @@
+import { SysAdminApi } from '@/repository/SysAdminApi'
+import { Context } from 'common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -19,18 +21,18 @@ export const useUserStore = defineStore('user', {
             }
         },
         update() {
-            // TODO: 查询用户信息
-            const adminInfo = async () => ({} as any)
+            const api: SysAdminApi = Context.getBean(SysAdminApi.KEY)
+            const adminInfo = async () => await api.userInfo()
 
             adminInfo()
                 .then(info => {
-                    const {_id, username, name, avatar, roles, permissions} = info
+                    const {_id, username, nickname, avatar, roles, pers} = info
                     this._id = _id
                     this.username = username
-                    this.nickname = name
+                    this.nickname = nickname
                     this.avatar = avatar
                     this.roles = roles
-                    this.permissions = permissions
+                    this.permissions = pers
                 })
         },
     },

@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "description": "通用: entity, 类型定义, 工具方法",
     "scripts": {
-        "dev": "vite --host",
+        "dev": "update.ps1 && vite --host",
         "build": "vite build",
         "build-tsc": "vue-tsc --noEmit && vite build",
         "preview": "vite preview",
@@ -17,9 +17,9 @@
         "echarts": "^5.3.2",
         "element-plus": "^2.2.5",
         "laf-client-sdk": "^0.8.2",
-        "laf-db-query-wrapper": "^1.0.21",
+        "laf-db-query-wrapper": "^1.0.23",
         "pinia": "^2.0.14",
-        "typescript-util": "^1.0.26",
+        "typescript-util": "^1.0.27",
         "vue": "^3.2.37",
         "vue-router": "^4.0.16"
     },
@@ -36,7 +36,9 @@
         "sass": "^1.51.0",
         "tailwindcss": "^3.0.24",
         "typescript": "^4.7.3",
+        "async-validator": "^4.1.1",
         "vite": "^2.9.12",
+        "@vue/runtime-core": "^3.2.37",
         "vue-tsc": "^0.37.7"
     }
 }
