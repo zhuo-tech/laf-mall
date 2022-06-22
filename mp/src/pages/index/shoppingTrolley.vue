@@ -24,9 +24,33 @@
     <view v-for="(item, index) in 3" class="goods">
       <view style="display: flex">
         <view class="checkbox">
-          <checkbox-group @change="touch">
-            <checkbox style="transform: scale(0.7)" value="value" color="#ee5382"
-          /></checkbox-group>
+          <label style="display: flex">
+            <view
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 34rpx;
+                height: 34rpx;
+                box-sizing: border-box;
+                border-radius: 50%;
+                margin-right: 16rpx;
+                margin-top: 10rpx;
+              "
+              :style="
+                isAllSelect && cartCount > 0
+                  ? 'background-color:#EE5382;'
+                  : 'border:2rpx solid #b5b5b5;'
+              "
+              @click="changeStatusAll"
+            >
+              <image
+                v-if="isAllSelect && cartCount > 0"
+                src="../../static/icon/gouxuan.png"
+                style="width: 100%; height: 100%"
+              />
+            </view>
+          </label>
         </view>
         <img class="goods-img" src="../../static/img/3.jpg" alt="" />
         <view style="margin-left: 20rpx">
@@ -40,7 +64,33 @@
     </view>
     <view class="bottom">
       <view class="checkbox">
-        <view><checkbox style="transform: scale(0.7)" value="cb" color="#ee5382" /></view>
+        <label style="display: flex">
+          <view
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 34rpx;
+              height: 34rpx;
+              box-sizing: border-box;
+              border-radius: 50%;
+              margin-right: 16rpx;
+              margin-left: 10rpx;
+            "
+            :style="
+              isAllSelect && cartCount > 0
+                ? 'background-color:#EE5382;'
+                : 'border:2rpx solid #b5b5b5;'
+            "
+            @click="changeStatusAll"
+          >
+            <image
+              v-if="isAllSelect && cartCount > 0"
+              src="../../static/icon/gouxuan.png"
+              style="width: 100%; height: 100%"
+            />
+          </view>
+        </label>
         <view v-show="redact == false" class="checkall">全选</view>
         <view v-show="redact == true" class="checkall-in">合计:￥0</view>
       </view>
@@ -69,8 +119,10 @@ function touch(e: any) {
 .page {
   width: 100%;
   height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #f5f5f5;
+
   .head {
+    margin-top: 20rpx;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -149,12 +201,12 @@ function touch(e: any) {
       .checkall {
         font-size: 30rpx;
         color: #707070;
-        line-height: 48rpx;
+        line-height: 30rpx;
       }
       .checkall-in {
         font-size: 30rpx;
         color: #ee5382;
-        line-height: 48rpx;
+        line-height: 30rpx;
       }
     }
     .del {

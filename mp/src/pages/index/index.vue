@@ -30,11 +30,11 @@
         <img class="nav-icon" src="../../static/icon/qb.png" alt="" />
         <view class="nav-text">全部商品</view>
       </view>
-      <view class="navbox">
+      <view @click="GoGroupbooking" class="navbox">
         <img class="nav-icon" src="../../static/icon/pt.png" alt="" />
         <view class="nav-text">限时拼团</view>
       </view>
-      <view class="navbox">
+      <view @click="GoSeckill" class="navbox">
         <img class="nav-icon" src="../../static/icon/mx.png" alt="" />
         <view class="nav-text">限时秒杀</view>
       </view>
@@ -163,6 +163,18 @@ function goAllCommodity() {
 function GoodsDetails() {
   uni.navigateTo({
     url: "/pages/index/GoodsDetails/index",
+  });
+}
+
+function GoSeckill() {
+  uni.navigateTo({
+    url: "/pages/index/seckill/index",
+  });
+}
+
+function GoGroupbooking() {
+  uni.navigateTo({
+    url: "/pages/index/groupbooking/index",
   });
 }
 </script>

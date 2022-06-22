@@ -12,42 +12,44 @@
       <view class="input-box">
         <view class="input">
           <input
-            v-model="account"
+            v-model="form.phone"
             type="number"
             maxlength="11"
             placeholder="输入手机号码"
+            @clear="clearPhone()"
           />
         </view>
 
         <view class="input-bottom"></view>
 
         <view v-show="index == 0" class="input">
-          <input v-model="accounta" type="text" maxlength="6" placeholder="填写验证码" />
-          <view class="code"> 获取验证码 </view>
-        </view>
-        <view v-show="index == 1" class="input">
-          <input
-            v-model="account"
-            type="password"
-            maxlength="16"
-            placeholder="填写登录密码"
-          />
-        </view>
-        <view class="input-bottom"></view>
-      </view>
-      <view class="deal">
-        <view style="display: flex">
-          <checkbox-group @change="checkboxChange">
-            <checkbox
-              :checked="checked"
-              style="transform: scale(0.7)"
-              value="cb"
-              color="#ee5382"
+          <input v-model="form.code" type="text" maxlength="6" placeholder="填写验证码" />
+          <view v-show="!time" @click="getCode()" class="code"> 获取验证码 </view>
+          <view v-show="time" class="timeCode">{{ time }}s</view>
+          <view v-show="index == 1" class="input">
+            <input
+              v-model="form.phone"
+              type="password"
+              maxlength="16"
+              placeholder="填写登录密码"
             />
-          </checkbox-group>
-          <view class="deal-page">阅读并同意《登录注册协议》</view>
+          </view>
+          <view class="input-bottom"></view>
         </view>
-        <view @click="verification" class="login-hint"> 登录 </view>
+        <view class="deal">
+          <view style="display: flex">
+            <checkbox-group @change="checkboxChange">
+              <checkbox
+                :checked="checked"
+                style="transform: scale(0.7)"
+                value="cb"
+                color="#ee5382"
+              />
+            </checkbox-group>
+            <view class="deal-page">阅读并同意《登录注册协议》</view>
+          </view>
+          <view @click="verification" class="login-hint"> 登录 </view>
+        </view>
       </view>
     </view>
   </view>
@@ -56,8 +58,12 @@
 <script setup lang="ts">
 import { reactive, toRefs, ref } from "vue";
 import { showTip } from "../../../utils/show";
+import { login, sendLoginSmsCode } from "../../../api/user";
+import { LOGICAL_OPERATORS } from "@babel/types";
+import { loginService } from "./hooks/loginService";
+
+const { time, form, clearPhone, getCode, onsubmit } = loginService();
 let tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
-const account = ref(); //输入的号码
 const index = ref(0); //登录方式切换
 const checked = ref(false); //判断是否勾选协议
 
@@ -72,8 +78,14 @@ function checkboxChange() {
 
 //验证表单
 function verification() {
-  if (!tel.test(account.value)) showTip("请输入正确的手机号码");
+  if (!tel.test(form.value.phone)) return showTip("请输入正确的手机号码");
+  onsubmit();
 }
+
+// function getToken() {
+//   return !!uni.getStorageSync("token");
+// }
+// console.log(getToken(), "获取的时什么");
 </script>
 
 <style lang="scss" scoped>
@@ -115,6 +127,19 @@ function verification() {
         font-size: 24rpx;
         color: #fff;
         background-color: #f01d60;
+        text-align: center;
+        line-height: 50rpx;
+        border-radius: 50rpx;
+      }
+      .timeCode {
+        position: absolute;
+        right: 0rpx;
+        top: 105rpx;
+        width: 150rpx;
+        height: 50rpx;
+        font-size: 24rpx;
+        color: #fff;
+        background-color: #5c5a5b;
         text-align: center;
         line-height: 50rpx;
         border-radius: 50rpx;
