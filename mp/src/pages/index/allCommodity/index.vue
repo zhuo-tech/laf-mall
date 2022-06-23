@@ -75,6 +75,7 @@
         </view>
       </view>
     </view>
+    <view class="filler"></view>
     <view class="area">
       <view v-show="cut == true" class="centre">
         <view v-for="(item, index) in 2" class="centres">
@@ -169,8 +170,10 @@ function set_where(index: number) {
       }
     }
   }
+  .filler {
+    height: 170rpx;
+  }
   .area {
-    margin-top: 170rpx;
     .centre {
       padding-top: 20rpx;
       .centres {

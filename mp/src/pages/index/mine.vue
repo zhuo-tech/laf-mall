@@ -87,6 +87,43 @@
         </view>
       </view>
     </view>
+    <view class="cut-offrule"></view>
+    <view class="tab">
+      <view>
+        <img class="tab-ico" src="../../static/icon/zuji.png" alt="" />
+      </view>
+      <view class="tab-name">我的足迹</view>
+    </view>
+    <view class="tab">
+      <view>
+        <img class="tab-ico" src="../../static/icon/huiyuan.png" alt="" />
+      </view>
+      <view class="tab-name">会员中心</view>
+    </view>
+    <view class="tab">
+      <view>
+        <img class="tab-ico" src="../../static/icon/youhuiquan.png" alt="" />
+      </view>
+      <view class="tab-name">优惠券</view>
+    </view>
+    <view class="tab">
+      <view>
+        <img class="tab-ico" src="../../static/icon/shoucang.png" alt="" />
+      </view>
+      <view class="tab-name">我的收藏</view>
+    </view>
+    <view class="tab">
+      <view>
+        <img class="tab-ico" src="../../static/icon/dizhi.png" alt="" />
+      </view>
+      <view class="tab-name">地址管理</view>
+    </view>
+    <view class="tab">
+      <view>
+        <img class="tab-ico" src="../../static/icon/wdjifen.png" alt="" />
+      </view>
+      <view class="tab-name">我的积分</view>
+    </view>
   </view>
 </template>
 
@@ -244,6 +281,26 @@ function GoSet() {
         font-size: 26rpx;
         text-align: center;
       }
+    }
+  }
+  .cut-offrule {
+    height: 20rpx;
+    background-color: #efefef;
+  }
+
+  .tab {
+    display: flex;
+    width: 100%;
+    height: 95rpx;
+    border-bottom: 1rpx solid #eaeaea;
+    .tab-ico {
+      width: 44rpx;
+      height: 44rpx;
+      margin: 20rpx 30rpx 20rpx 20rpx;
+    }
+    .tab-name {
+      line-height: 90rpx;
+      font-size: 30rpx;
     }
   }
 }

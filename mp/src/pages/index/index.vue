@@ -38,11 +38,11 @@
         <img class="nav-icon" src="../../static/icon/mx.png" alt="" />
         <view class="nav-text">限时秒杀</view>
       </view>
-      <view class="navbox">
+      <view @click="GoIntegral" class="navbox">
         <img class="nav-icon" src="../../static/icon/jf.png" alt="" />
         <view class="nav-text">积分商城</view>
       </view>
-      <view class="navbox">
+      <view @click="GoBargain" class="navbox">
         <img class="nav-icon" src="../../static/icon/kj.png" alt="" />
         <view class="nav-text">砍价专区</view>
       </view>
@@ -177,10 +177,23 @@ function GoGroupbooking() {
     url: "/pages/index/groupbooking/index",
   });
 }
+
+function GoIntegral() {
+  uni.navigateTo({
+    url: "/pages/index/integral/index",
+  });
+}
+
+function GoBargain() {
+  uni.navigateTo({
+    url: "/pages/index/bargain/index",
+  });
+}
 </script>
 
 <style lang="less">
 .content {
+  overflow-x: hidden;
   .swiper {
     height: 430rpx;
     .slideshow {
