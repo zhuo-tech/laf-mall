@@ -47,34 +47,34 @@
     <view class="orderInfo">
       <view class="order-box">
         <view class="my-roder">我的订单</view>
-        <view @click="GoAllrders" class="all-roder">全部订单></view>
+        <view @click="GoAllrders(0)" class="all-roder">全部订单></view>
       </view>
       <view class="goodsprogress">
-        <view class="goods-box">
+        <view @click="GoAllrders(0)" class="goods-box">
           <view>
             <img class="goods-ico" src="../../static/icon/daifukuan.png" alt="" />
           </view>
           <view class="goods-name">待付款</view>
         </view>
-        <view class="goods-box">
+        <view @click="GoAllrders(1)" class="goods-box">
           <view>
             <img class="goods-ico" src="../../static/icon/daifahuo.png" alt="" />
           </view>
           <view class="goods-name">待发货</view>
         </view>
-        <view class="goods-box">
+        <view @click="GoAllrders(2)" class="goods-box">
           <view>
             <img class="goods-ico" src="../../static/icon/daishouhuo.png" alt="" />
           </view>
           <view class="goods-name">待收货</view>
         </view>
-        <view class="goods-box">
+        <view @click="GoAllrders(3)" class="goods-box">
           <view>
             <img class="goods-ico" src="../../static/icon/daipingjia.png" alt="" />
           </view>
           <view class="goods-name">待评价</view>
         </view>
-        <view class="goods-box">
+        <view @click="GoAllrders(4)" class="goods-box">
           <view>
             <img
               style="margin-left: 25rpx"
@@ -88,7 +88,7 @@
       </view>
     </view>
     <view class="cut-offrule"></view>
-    <view class="tab">
+    <view @click="GoStrack" class="tab">
       <view>
         <img class="tab-ico" src="../../static/icon/zuji.png" alt="" />
       </view>
@@ -106,7 +106,7 @@
       </view>
       <view class="tab-name">优惠券</view>
     </view>
-    <view class="tab">
+    <view @click="Gocollect" class="tab">
       <view>
         <img class="tab-ico" src="../../static/icon/shoucang.png" alt="" />
       </view>
@@ -128,23 +128,37 @@
 </template>
 
 <script setup lang="ts">
+import { onLoad } from "@dcloudio/uni-app";
 import { reactive, toRefs } from "vue";
 import tupian from "../../static/img/3.jpg";
+
 function GoLogin() {
   uni.navigateTo({
     url: "/pages/index/login/index",
   });
 }
 
-function GoAllrders() {
+function GoAllrders(item: any) {
   uni.navigateTo({
-    url: "/pages/index/allrders/index",
+    url: `/pages/index/allrders/index?id=${item}`,
   });
 }
 
 function GoSet() {
   uni.navigateTo({
     url: "/pages/index/set/index",
+  });
+}
+
+function GoStrack() {
+  uni.navigateTo({
+    url: "/pages/index/track/index",
+  });
+}
+
+function Gocollect() {
+  uni.navigateTo({
+    url: "/pages/index/collect/index",
   });
 }
 </script>

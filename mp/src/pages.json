@@ -96,6 +96,19 @@
         "navigationBarTitleText": "砍价专区"
 
       }
+    },
+    {
+      "path": "pages/index/track/index",
+      "style": {
+        "navigationBarTitleText": "我的足迹"
+
+      }
+    },
+    {
+      "path": "pages/index/collect/index",
+      "style": {
+        "navigationBarTitleText": "我的收藏"
+      }
     }
 
   ],

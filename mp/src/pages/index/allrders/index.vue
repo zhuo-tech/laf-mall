@@ -23,6 +23,8 @@
 
 <script setup lang="ts">
 import { reactive, toRefs, ref } from "vue";
+import { onLoad } from "@dcloudio/uni-app";
+import { isTemplateNode } from "@vue/compiler-core";
 
 const recom = ref(0);
 
@@ -33,6 +35,10 @@ const list = reactive([
   { name: "待评价" },
   { name: "已完成" },
 ]);
+
+onLoad((opt) => {
+  recom.value = Number(opt.id);
+});
 
 function each(index: number) {
   recom.value = index;
