@@ -115,7 +115,7 @@ export class UploadFileService {
             size,
             name,
             uid: path,
-            url: path,
+            url: this.fileService.pathCompletion(path),
             response: fileInfo,
             status: 'success',
         } as UploadUserFile & { uid: string }
@@ -129,7 +129,7 @@ export class UploadFileService {
         status: 'success',
         name: s,
         size: 0,
-        url: s,
+        url: this.fileService.pathCompletion(s),
         uid: s,
     } as UploadUserFile)
 

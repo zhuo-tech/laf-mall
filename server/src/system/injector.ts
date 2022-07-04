@@ -1,12 +1,12 @@
 import cloud from '@/cloud-sdk'
-import { SysPermission, SysRole, SysUser } from 'common'
+import { SysPermission, SysRole, SysAdmin } from 'common'
 import { LafClient, LafWrapperConfig, QueryChainWrapper } from 'laf-db-query-wrapper'
 import { CollUtil, ObjectUtil } from 'typescript-util'
 
 LafWrapperConfig.database = cloud.database
 
 const DB_NAME = {
-    SYS_USER: 'sys_user',
+    SYS_USER: 'sys_admin',
     SYS_ROLE: 'sys_role',
     SYS_PERMISSION: 'sys_permission',
 }
@@ -47,8 +47,8 @@ exports.main = async function (ctx: any) {
     }
 }
 
-async function getUserDetail(uid: string): Promise<(SysUser & { roles: Array<string>, pers: Array<string> }) | null> {
-    const user = await new LafClient<SysUser>(DB_NAME.SYS_USER).selectById(uid)
+async function getUserDetail(uid: string): Promise<(SysAdmin & { roles: Array<string>, pers: Array<string> }) | null> {
+    const user = await new LafClient<SysAdmin>(DB_NAME.SYS_USER).selectById(uid)
 
     if (ObjectUtil.isEmpty(user)) {
         return null

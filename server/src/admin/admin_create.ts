@@ -1,5 +1,5 @@
 import cloud from '@/cloud-sdk'
-import { SysPassword, SysPermission, SysRole, SysUser } from 'common'
+import { SysPassword, SysPermission, SysRole, SysAdmin } from 'common'
 // @ts-ignore
 import * as crypto from 'crypto'
 import { LafClient, LafWrapperConfig, QueryChainWrapper } from 'laf-db-query-wrapper'
@@ -8,7 +8,7 @@ import { CollUtil, ObjectUtil } from 'typescript-util'
 LafWrapperConfig.database = cloud.database
 
 const DB_NAME = {
-    SYS_USER: 'sys_user',
+    SYS_ADMIN: 'sys_admin',
     SYS_PASSWORD: 'sys_password',
     SYS_ROLE: 'sys_role',
     SYS_PERMISSION: 'sys_permission',
@@ -31,7 +31,7 @@ interface AuthPayload {
  **/
 // @ts-ignore
 exports.main = async function (ctx: FunctionContext) {
-    const body: SysUser & { password: string } = ctx.body
+    const body: SysAdmin & { password: string } = ctx.body
     const auth: AuthPayload = ctx.auth ?? {}
 
     // 权限检查
@@ -84,18 +84,16 @@ const encryptionMapping = {
  * @param body 用户信息
  * @param operatorId 操作人ID
  */
-async function createUser(body: SysUser & { password: string }, operatorId: string): Promise<string> {
-    const {username, password, nickname, role, isAdmin, freeze, avatar, basic} = body
+async function createUser(body: SysAdmin & { password: string }, operatorId: string): Promise<string> {
+    const {username, password, nickname, role, freeze, avatar} = body
 
     // 保存用户
-    const newUid: string = <string>await new LafClient<SysUser>(DB_NAME.SYS_USER).insert({
+    const newUid: string = <string>await new LafClient<SysAdmin>(DB_NAME.SYS_ADMIN).insert({
         username,
         nickname,
         role,
-        isAdmin,
         freeze,
         avatar,
-        basic,
         createBy: operatorId,
         createTime: Date.now(),
         updateTime: Date.now(),
@@ -116,8 +114,8 @@ async function createUser(body: SysUser & { password: string }, operatorId: stri
     return newUid
 }
 
-async function getUserDetail(uid: string): Promise<(SysUser & { roles: Array<string>, pers: Array<string> }) | null> {
-    const user = await new LafClient<SysUser>(DB_NAME.SYS_USER).selectById(uid)
+async function getUserDetail(uid: string): Promise<(SysAdmin & { roles: Array<string>, pers: Array<string> }) | null> {
+    const user = await new LafClient<SysAdmin>(DB_NAME.SYS_ADMIN).selectById(uid)
 
     if (ObjectUtil.isEmpty(user)) {
         return null

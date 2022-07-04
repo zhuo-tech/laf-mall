@@ -12,6 +12,7 @@ export * from './entity/SysPassword'
 export * from './entity/SysPermission'
 export * from './entity/SysRole'
 export * from './entity/SysUser'
+export * from './entity/SysAdmin'
 
 // IOC 容器
 export * from './tool/ioc/ApplicationContext'
