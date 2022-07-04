@@ -1,10 +1,11 @@
 <template>
   <view class="page">
     <view class="head">
-      <view style="margin-left: 30rpx"
+      <view style="margin-left: 40rpx"
         >购物数量 <span style="color: #ee5382">3</span></view
       >
-      <view class="but">取消</view>
+      <view @click="ChooseRedact" v-show="redact == false" class="but">取消</view>
+      <view @click="ChooseRedact" v-show="redact == true" class="but">管理</view>
     </view>
     <view class="entry">
       <view class="text">
@@ -23,8 +24,34 @@
     <view v-for="(item, index) in 3" class="goods">
       <view style="display: flex">
         <view class="checkbox">
-          <checkbox style="transform: scale(0.7)" value="cb" color="#979494"
-        /></view>
+          <label style="display: flex">
+            <view
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 34rpx;
+                height: 34rpx;
+                box-sizing: border-box;
+                border-radius: 50%;
+                margin-right: 16rpx;
+                margin-top: 10rpx;
+              "
+              :style="
+                isAllSelect && cartCount > 0
+                  ? 'background-color:#EE5382;'
+                  : 'border:2rpx solid #b5b5b5;'
+              "
+              @click="changeStatusAll"
+            >
+              <image
+                v-if="isAllSelect && cartCount > 0"
+                src="../../static/icon/gouxuan.png"
+                style="width: 100%; height: 100%"
+              />
+            </view>
+          </label>
+        </view>
         <img class="goods-img" src="../../static/img/3.jpg" alt="" />
         <view style="margin-left: 20rpx">
           <view class="goods-name">风萧萧兮</view>
@@ -36,23 +63,66 @@
       </view>
     </view>
     <view class="bottom">
-      <view class="a">
-        <checkbox style="transform: scale(0.7)" value="cb" color="#979494" />
+      <view class="checkbox">
+        <label style="display: flex">
+          <view
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 34rpx;
+              height: 34rpx;
+              box-sizing: border-box;
+              border-radius: 50%;
+              margin-right: 16rpx;
+              margin-left: 10rpx;
+            "
+            :style="
+              isAllSelect && cartCount > 0
+                ? 'background-color:#EE5382;'
+                : 'border:2rpx solid #b5b5b5;'
+            "
+            @click="changeStatusAll"
+          >
+            <image
+              v-if="isAllSelect && cartCount > 0"
+              src="../../static/icon/gouxuan.png"
+              style="width: 100%; height: 100%"
+            />
+          </view>
+        </label>
+        <view v-show="redact == false" class="checkall">全选</view>
+        <view v-show="redact == true" class="checkall-in">合计:￥0</view>
       </view>
+      <view v-show="redact == false" class="del">删除</view>
+      <view v-show="redact == true" class="order">立即下单</view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, ref } from "vue";
+
+const redact = ref(true);
+
+function ChooseRedact() {
+  redact.value = !redact.value;
+}
+
+function touch(e: any) {
+  console.log(e);
+  console.log("现在是什么");
+}
 </script>
 
 <style lang="scss" scoped>
 .page {
   width: 100%;
   height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #f5f5f5;
+
   .head {
+    margin-top: 20rpx;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -118,11 +188,48 @@ import { reactive, toRefs } from "vue";
     }
   }
   .bottom {
+    display: flex;
+    justify-content: space-between;
     position: fixed;
-    bottom: 105rpx;
+    bottom: 95rpx;
     width: 100%;
-    height: 88rpx;
+    height: 120rpx;
     background-color: #fffeff;
+    .checkbox {
+      display: flex;
+      margin: 40rpx 0 0 20rpx;
+      .checkall {
+        font-size: 30rpx;
+        color: #707070;
+        line-height: 30rpx;
+      }
+      .checkall-in {
+        font-size: 30rpx;
+        color: #ee5382;
+        line-height: 30rpx;
+      }
+    }
+    .del {
+      margin: 35rpx 20rpx 0 0;
+      width: 165rpx;
+      height: 48rpx;
+      border: 1px solid #707070;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 48rpx;
+      color: #a7a7a7;
+    }
+    .order {
+      background-color: #ee5382;
+      margin: 25rpx 20rpx 0 0;
+      width: 200rpx;
+      height: 60rpx;
+      border: 1px solid #ee5382;
+      border-radius: 20px;
+      text-align: center;
+      line-height: 60rpx;
+      color: #fff;
+    }
   }
 }
 </style>

@@ -56,7 +56,7 @@
 import { reactive, toRefs, ref } from "vue";
 const tablist = reactive([{ name: "足球" }, { name: "篮球" }, { name: "羽毛球" }]);
 const recom = ref(0);
-const name = ref("足球"); 
+const name = ref("足球");
 
 function recomTab(index: number) {
   recom.value = index;
@@ -77,6 +77,7 @@ function recomTab(index: number) {
     border-left: 10rpx solid #ee5382;
     margin-bottom: 80rpx;
     text-align: center;
+    line-height: 30rpx;
   }
   .unselected {
     text-align: center;
@@ -84,6 +85,7 @@ function recomTab(index: number) {
     width: 150rpx;
     height: 30rpx;
     margin-left: 10rpx;
+    line-height: 30rpx;
   }
   .tab-img {
     width: 560rpx;

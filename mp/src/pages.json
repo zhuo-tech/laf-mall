@@ -2,27 +2,115 @@
   "pages": [{
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "首页"
+        "navigationBarTitleText": "首页",
+        "navigationStyle": "custom"
       }
+
     },
     {
       "path": "pages/index/classify",
       "style": {
-        "navigationBarTitleText": "分类"
+        "navigationBarTitleText": "分类",
+
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/index/shoppingTrolley",
       "style": {
-        "navigationBarTitleText": "购物车"
+        "navigationBarTitleText": "购物车",
+        "navigationStyle": "custom"
+
       }
     },
     {
       "path": "pages/index/mine",
       "style": {
-        "navigationBarTitleText": "我的"
+        "navigationBarTitleText": "我的",
+        "navigationStyle": "custom"
+
+      }
+    },
+    {
+      "path": "pages/index/login/index",
+      "style": {
+        "navigationBarTitleText": ""
+      }
+    },
+    {
+      "path": "pages/index/search/index",
+      "style": {
+        "navigationBarTitleText": ""
+      }
+    },
+    {
+      "path": "pages/index/allCommodity/index",
+      "style": {
+        "navigationBarTitleText": ""
+      }
+    },
+    {
+      "path": "pages/index/GoodsDetails/index",
+      "style": {
+        "navigationBarTitleText": ""
+      }
+    },
+    {
+      "path": "pages/index/set/index",
+      "style": {
+        "navigationBarTitleText": ""
+
+      }
+    },
+    {
+      "path": "pages/index/allrders/index",
+      "style": {
+        "navigationBarTitleText": ""
+
+      }
+    },
+    {
+      "path": "pages/index/seckill/index",
+      "style": {
+        "navigationBarTitleText": "限时秒杀"
+
+      }
+    },
+    {
+      "path": "pages/index/groupbooking/index",
+      "style": {
+        "navigationBarTitleText": "限时拼团"
+
+      }
+    },
+    {
+      "path": "pages/index/integral/index",
+      "style": {
+        "navigationBarTitleText": "积分商城"
+
+      }
+    },
+    {
+      "path": "pages/index/bargain/index",
+      "style": {
+        "navigationBarTitleText": "砍价专区"
+
+      }
+    },
+    {
+      "path": "pages/index/track/index",
+      "style": {
+        "navigationBarTitleText": "我的足迹"
+
+      }
+    },
+    {
+      "path": "pages/index/collect/index",
+      "style": {
+        "navigationBarTitleText": "我的收藏"
       }
     }
+
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
