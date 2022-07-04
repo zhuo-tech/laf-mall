@@ -2,6 +2,8 @@ import Admin from '@/pages/Admin/Router'
 import Error from '@/pages/Error/Router'
 import Home from '@/pages/Home/Router'
 import Login from '@/pages/Login/Router'
+import Basic from '@/pages/Basic/Router'
+import Order from '@/pages/Order/Router'
 import { StorageService, StorageServiceKey } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
 import { Inject } from 'common'
@@ -20,6 +22,8 @@ import {
 
 const routes: RouteRecordRaw[] = [
     Home,
+    Basic,
+    Order,
     Admin,
     Login,
     ...Error,

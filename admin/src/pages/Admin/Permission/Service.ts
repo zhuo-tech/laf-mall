@@ -3,7 +3,7 @@ import BasisCrud from '@/service/BasisCrud'
 import { CrudRequest } from '@/service/CrudRequest'
 import { computed } from '@vue/runtime-core'
 import { RuleItem } from 'async-validator'
-import { Inject, KeyValue, SysPermission, SysRole, SysUser } from 'common'
+import { BasicProduct, BasicProductCategory, Inject, KeyValue, MallConfig, MallOrder, MallRechargeRecord, MallShopCart, SysPermission, SysRole, SysUser } from 'common'
 import { ObjectUtil } from 'typescript-util'
 import { reactive, ref } from 'vue'
 
@@ -12,6 +12,12 @@ export const defaultPermissionsTableName: Array<KeyValue> = [
     new KeyValue('系统用户', SysUser.NAME),
     new KeyValue('系统角色', SysRole.NAME),
     new KeyValue('系统权限', SysPermission.NAME),
+    new KeyValue('商品', BasicProduct.NAME),
+    new KeyValue('商品分类', BasicProductCategory.NAME),
+    new KeyValue('配置', MallConfig.NAME),
+    new KeyValue('订单', MallOrder.NAME),
+    new KeyValue('充值记录', MallRechargeRecord.NAME),
+    new KeyValue('购物车', MallShopCart.NAME),
 ]
 // 预设动作
 export const defaultAction: Array<KeyValue> = [

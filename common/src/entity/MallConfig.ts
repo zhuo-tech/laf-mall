@@ -44,5 +44,17 @@ export interface MallConfigKeyMapping {
  * 轮播图
  */
 export class HomePageCarousel {
-    // TODO: 未定义
+    /**
+     * 排序优先级
+     */
+    public sort: number
+    /**
+     * 图片地址
+     */
+    public href: string
+    /**
+     * 跳转目标地址
+     */
+    public target: string
+
 }

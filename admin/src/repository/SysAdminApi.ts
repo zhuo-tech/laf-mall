@@ -1,4 +1,4 @@
-import { cloud } from '@/config/LafConfig'
+import { invoke } from '@/util/Tool'
 import { Component, Response, SysUser } from 'common'
 
 /**
@@ -27,17 +27,13 @@ export class SysAdminApi {
         return Response.getDate(await invoke('admin_info', {}))
     }
 
+    /**
+     * 创建管理员
+     */
     public async createUser(data: SysUser & { password: string }): Promise<string> {
         return Response.getDate(await invoke('admin_create', data))
     }
 
-}
-
-/**
- * 使用 HTTP POST 方式调用云函数
- */
-function invoke(url: string, body: any) {
-    return cloud.invoke(url, body)
 }
 
 export interface LoginResponse {

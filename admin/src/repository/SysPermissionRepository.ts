@@ -1,4 +1,5 @@
 import { CrudRequest } from '@/service/CrudRequest'
+import { useUserStore } from '@/store/user'
 import { Component, SelectOption, SysPermission } from 'common'
 import { LafClient, Page } from 'laf-db-query-wrapper'
 import { CollUtil } from 'typescript-util'
@@ -13,10 +14,11 @@ export class SysPermissionRepository implements CrudRequest<SysPermission> {
     public static readonly KEY = 'SysPermissionRepository'
 
     private readonly client = new LafClient<SysPermission>(SysPermission.NAME)
+    private readonly userStore = useUserStore()
 
     public createRequest = async (data: Partial<SysPermission>): Promise<any> => {
         data.createTime = Date.now()
-        data.createBy = '2333333'
+        data.createBy = this.userStore._id
         data.updateTime = Date.now()
         return await this.client.insert(data)
     }
@@ -35,7 +37,7 @@ export class SysPermissionRepository implements CrudRequest<SysPermission> {
 
     public updateRequest = async (data: Partial<SysPermission>): Promise<any> => {
         data.updateTime = Date.now()
-        data.updateBy = '23333333'
+        data.updateBy = this.userStore._id
         return await this.client.updateById(data._id!, data, '_id')
     }
 

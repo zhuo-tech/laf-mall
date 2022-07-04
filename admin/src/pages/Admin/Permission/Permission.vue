@@ -107,9 +107,13 @@ const editFormTabs = ref<string>('preset')
         <el-tabs v-if="formIsAdd" v-model="editFormTabs" stretch style="min-height: 300px">
             <el-tab-pane v-loading="bulkSaveIsLoading" label="预设" name="preset">
                 <el-table :data="defaultPermissions" class="data-table" fit show-header stripe>
-                    <el-table-column align="center" fixed="left" label="表名" prop="tableName" width="240">
+                    <el-table-column align="center" fixed="left" label="表名" min-width="100" prop="tableName">
                         <template v-slot="{row}">
                             <span style="padding-right: 25px">{{ row.tableName.key }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="left" fixed="left" label="" width="90">
+                        <template v-slot="{row}">
                             <el-checkbox v-model="selectAllButton[row.tableName.value]"
                                          label="全选"
                                          @change="(select) => lineChange(row.tableName, select)" />
@@ -119,7 +123,7 @@ const editFormTabs = ref<string>('preset')
                                      :key="actionKv.value"
                                      :label="actionKv.key"
                                      :prop="actionKv.value"
-                                     align="center"
+                                     align="left"
                                      min-width="100">
                         <template v-slot="{row}">
                             <el-checkbox v-model="batchSelection[row[actionKv.value].value]"

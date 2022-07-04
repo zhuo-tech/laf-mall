@@ -12,7 +12,19 @@ const {srcArr} = new ShowImage(props)
 
 <template>
 <div class="show-image-wrapper" v-bind="$attrs">
-    <img v-for="(src, index) in srcArr" :key="index" :alt="src" :src="src" v-bind="$attrs">
+    <el-image v-for="(src, index) in srcArr"
+              :key="index"
+              :alt="src"
+              :previewSrcList="srcArr"
+              :src="src"
+              preview-teleported
+              v-bind="$attrs">
+        <div class="image-slot">
+            <el-icon>
+                <Picture />
+            </el-icon>
+        </div>
+    </el-image>
 </div>
 </template>
 <style lang="sass" scoped>

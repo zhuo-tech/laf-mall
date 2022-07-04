@@ -2,7 +2,8 @@
 
 declare module '@/cloud-sdk' {
     import { Cloud } from 'laf-client-sdk'
-    export default new Cloud()
+    const cloud = new Cloud()
+    export default cloud as typeof cloud & { env: Record<string, string> }
 }
 
 
