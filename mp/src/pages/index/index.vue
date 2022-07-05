@@ -198,6 +198,7 @@ function GoBargain() {
     height: 430rpx;
     .slideshow {
       width: 100%;
+      height: 430rpx;
     }
   }
   .nav {

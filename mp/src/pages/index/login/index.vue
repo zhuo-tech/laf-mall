@@ -19,21 +19,22 @@
             @clear="clearPhone()"
           />
         </view>
-
         <view class="input-bottom"></view>
 
         <view v-show="index == 0" class="input">
           <input v-model="form.code" type="text" maxlength="6" placeholder="填写验证码" />
           <view v-show="!time" @click="getCode()" class="code"> 获取验证码 </view>
           <view v-show="time" class="timeCode">{{ time }}s</view>
-          <view v-show="index == 1" class="input">
-            <input
-              v-model="form.phone"
-              type="password"
-              maxlength="16"
-              placeholder="填写登录密码"
-            />
-          </view>
+          <view class="input-bottom"></view>
+        </view>
+
+        <view v-show="index == 1" class="input">
+          <input
+            v-model="form.phone"
+            type="password"
+            maxlength="16"
+            placeholder="填写登录密码"
+          />
           <view class="input-bottom"></view>
         </view>
         <view class="deal">
@@ -70,6 +71,7 @@ const checked = ref(false); //判断是否勾选协议
 //切换登录方式
 function cut(e: number) {
   index.value = e;
+  console.log(index.value, "dengy");
 }
 //判断是否勾选协议
 function checkboxChange() {
@@ -143,6 +145,11 @@ function verification() {
         text-align: center;
         line-height: 50rpx;
         border-radius: 50rpx;
+      }
+      .input-bottom {
+        margin-top: 20rpx;
+        width: 100%;
+        border-top: 1rpx solid #dddcdc;
       }
     }
     .input-bottom {
