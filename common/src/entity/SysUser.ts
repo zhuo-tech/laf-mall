@@ -6,6 +6,7 @@ import { IntegralEntity } from './Entity'
  * SysUser
  * @author 冰凝
  * @date 2022-06-14 下午 03:53
+ * @deprecated 暂时弃用
  **/
 export class SysUser implements IntegralEntity {
     public static readonly NAME = 'sys_user'
@@ -14,10 +15,6 @@ export class SysUser implements IntegralEntity {
     public username: string
     public nickname: string
     public avatar: string
-    /**
-     * 是否可以登录后台管理
-     */
-    public isAdmin: boolean
     /**
      * 账号冻结 默认 false
      */

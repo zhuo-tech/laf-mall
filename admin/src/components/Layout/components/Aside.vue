@@ -33,7 +33,6 @@ export default defineComponent({
     methods: {
 
         onSelect(index: string) {
-            // this.$router.push({path: param})
             this.$emit('select', index)
         },
 

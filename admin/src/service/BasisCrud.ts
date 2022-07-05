@@ -1,6 +1,6 @@
 import { CrudRequest } from '@/service/CrudRequest'
 import { RuleItem } from 'async-validator'
-import { FormInstance } from 'element-plus'
+import { FormInstance, ElMessage } from 'element-plus'
 import { Page } from 'laf-db-query-wrapper'
 import { CollUtil, ObjectUtil } from 'typescript-util'
 import { reactive, Ref, ref, watch } from 'vue'
@@ -130,7 +130,7 @@ export default abstract class BasisCrud<E> {
         const submitAction = async () => {
             const valid = await this.formRef?.value?.validate()
                 .catch((err: Record<string, Array<any>>) => {
-                    CollUtil.flatMap(ObjectUtil.toArray(err), i => i.value)
+                    ObjectUtil.toArray(err).flatMap(i => i.value)
                         .forEach(i => this.basisLog.warn('验证失败', i))
                 })
             this.basisLog.debug('验证结果:', valid)
@@ -149,7 +149,10 @@ export default abstract class BasisCrud<E> {
 
         this.formIsLoading.value = true
         submitAction()
-            .catch(err => this.basisLog.warn('表单提交错误', err))
+            .catch(err => {
+                this.basisLog.warn('表单提交错误', err)
+                ElMessage.warning('表单提交错误: ' + err?.message ?? '')
+            })
             .finally(() => this.formIsLoading.value = false)
     }
 
@@ -167,7 +170,7 @@ export default abstract class BasisCrud<E> {
      * @param {E} data 一行数据
      */
     public readyEdit = (data: E) => {
-        this.formData = Object.assign(this.formData, data)
+        this.formData = Object.assign(this.formData, ObjectUtil.copy(data))
         this.formIsAdd.value = false
         this.show()
     }

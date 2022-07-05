@@ -1,4 +1,4 @@
-import Layout from '@/components/layout/main.vue'
+import Layout from '@/components/Layout/index.vue'
 import { DataAnalysis } from '@element-plus/icons-vue'
 import { RouteRecordRaw } from 'vue-router'
 

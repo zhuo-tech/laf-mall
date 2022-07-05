@@ -1,5 +1,5 @@
 import cloud from '@/cloud-sdk'
-import { SysPassword, SysUser } from 'common'
+import { SysPassword, SysAdmin } from 'common'
 // @ts-ignore
 import * as crypto from 'crypto'
 import { LafWrapperConfig, QueryChainWrapper } from 'laf-db-query-wrapper'
@@ -8,7 +8,7 @@ import { TimeUnit } from 'typescript-util'
 LafWrapperConfig.database = cloud.database
 
 const DB_NAME = {
-    SYS_USER: 'sys_user',
+    SYS_USER: 'sys_admin',
     SYS_PASSWORD: 'sys_password',
     SYS_ROLE: 'sys_role',
     SYS_PERMISSION: 'sys_permission',
@@ -35,9 +35,8 @@ exports.main = async function (ctx: FunctionContext): Promise<Response<any>> {
     //     return Response.error('UNSUPPORTED_REQUEST_METHOD')
     // }
 
-    const user = await new QueryChainWrapper<SysUser>(DB_NAME.SYS_USER)
+    const user = await new QueryChainWrapper<SysAdmin>(DB_NAME.SYS_USER)
         .eq('username', username)
-        .eq('isAdmin', true)
         .one()
 
     if (!user) {

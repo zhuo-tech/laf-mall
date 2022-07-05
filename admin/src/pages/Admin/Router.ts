@@ -1,5 +1,5 @@
-import Layout from '@/components/layout/main.vue'
-import { Check, Collection, Cpu, User } from '@element-plus/icons-vue'
+import Layout from '@/components/Layout/index.vue'
+import { Check, Collection, Setting, User } from '@element-plus/icons-vue'
 import { RouteRecordRaw } from 'vue-router'
 
 /**
@@ -12,7 +12,7 @@ const RouterConfig: RouteRecordRaw = {
     path: '/admin',
     meta: {
         title: '系统管理',
-        icon: Cpu,
+        icon: Setting,
     },
     children: [
         {

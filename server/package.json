@@ -6,6 +6,10 @@
         "laf-client-sdk": "^0.8.2",
         "laf-db-query-wrapper": "^1.0.23",
         "typescript-util": "^1.0.27",
+        "minio": "^7.0.28",
         "common": "../common"
+    },
+    "devDependencies": {
+        "@types/minio": "^7.0.13"
     }
 }

@@ -7,11 +7,12 @@ export * from './entity/BasicProductCategory'
 export * from './entity/MallConfig'
 export * from './entity/MallOrder'
 export * from './entity/MallRechargeRecord'
-export * from './entity/MallShoppingCart'
+export * from './entity/MallShopCart'
 export * from './entity/SysPassword'
 export * from './entity/SysPermission'
 export * from './entity/SysRole'
 export * from './entity/SysUser'
+export * from './entity/SysAdmin'
 
 // IOC 容器
 export * from './tool/ioc/ApplicationContext'

@@ -1,8 +1,9 @@
-<!--suppress ES6UnusedImports -->
 <script lang="ts" setup>
-import Aside from '@/components/layout/Aside.vue'
+import Aside from '@/components/Layout/components/Aside.vue'
+import { StorageService, StorageServiceKey } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
 import { Expand } from '@element-plus/icons-vue'
+import { Context } from 'common'
 import { ref } from 'vue'
 
 const isOpenMenu = ref(false)
@@ -14,7 +15,8 @@ function switchOpenMenu() {
 const user = useUserStore()
 
 function exit() {
-    localStorage.clear()
+    const service: StorageService = Context.getBean(StorageServiceKey)
+    service.removeAttribute('token')
     location.reload()
 }
 </script>
@@ -22,30 +24,11 @@ function exit() {
 <template>
 <div class="flex w-full h-full items-center">
     <div class="brand w-40 flex items-center justify-start ml-2">
-        <!--suppress HtmlUnknownTarget -->
         <img alt="logo" class="w-8 h-8 align-middle" src="/logo.jpg" />
         <div class="brand-text sm:block ml-2">商城</div>
     </div>
     <div class="menu flex-auto sm:flex justify-end hidden">
         <el-menu :ellipsis="false" default-active="0" mode="horizontal">
-            <!--<el-sub-menu index="create">-->
-            <!--    <template #title>-->
-            <!--        <el-icon>-->
-            <!--            <circle-plus />-->
-            <!--        </el-icon>-->
-            <!--        <span>新建</span>-->
-            <!--    </template>-->
-            <!--    <el-menu-item index="create-material">添加素材</el-menu-item>-->
-            <!--    <el-menu-item index="create-work">创建作品</el-menu-item>-->
-            <!--    <el-menu-item index="create-album">创建专辑</el-menu-item>-->
-            <!--</el-sub-menu>-->
-            <!--<el-menu-item index="message">-->
-            <!--    <el-icon>-->
-            <!--        <bell />-->
-            <!--    </el-icon>-->
-            <!--    <span>消息</span>-->
-            <!--</el-menu-item>-->
-
             <el-sub-menu index="quit">
                 <template #title>
                     <el-avatar :size="50" :src="user.avatar" fit="cover" shape="square"></el-avatar>

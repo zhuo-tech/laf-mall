@@ -1,7 +1,7 @@
 import { SysAdminApi } from '@/repository/SysAdminApi'
 import { CrudRequest } from '@/service/CrudRequest'
-import { Component, Inject, SysRole, SysUser } from 'common'
-import { LogicDelete } from 'common/lib/entity/Entity'
+import { useUserStore } from '@/store/user'
+import { Component, Inject, LogicDelete, SysRole, SysUser } from 'common'
 import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
 import { CollUtil } from 'typescript-util'
 
@@ -17,6 +17,7 @@ export class SysUserRepository implements CrudRequest<SysUserInfo> {
     public static readonly KEY = 'SysUserRepository'
 
     private readonly client = new LafClient<SysUserInfo>(SysUser.NAME)
+    private readonly userStore = useUserStore()
 
     @Inject(SysAdminApi.KEY)
     private get adminApi(): SysAdminApi {
@@ -57,7 +58,7 @@ export class SysUserRepository implements CrudRequest<SysUserInfo> {
 
     public updateRequest = async (data: Partial<SysUserInfo>): Promise<any> => {
         data.updateTime = Date.now()
-        data.updateBy = '23333333'
+        data.updateBy = this.userStore._id
         return await this.client.updateById(data._id!, data, '_id')
     }
 

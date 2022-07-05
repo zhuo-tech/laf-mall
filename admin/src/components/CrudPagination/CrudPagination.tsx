@@ -20,8 +20,7 @@ export default defineComponent({
                             v-model:page-size={ page.pageSize }
                             page-sizes={ [10, 20, 50, 100] }
                             total={ page.total }
-                            layout="total, sizes, prev, pager, next">
-                        </el-pagination>
+                            layout="total, sizes, prev, pager, next" />
                     </el-row>
                 </el-col>
             </el-row>
