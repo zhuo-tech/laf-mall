@@ -23,7 +23,7 @@ specifiers:
   sass: ^1.51.0
   tailwindcss: ^3.0.24
   typescript: ^4.7.3
-  typescript-util: ^1.0.27
+  typescript-util: ^1.0.28
   vite: ^2.9.12
   vue: ^3.2.37
   vue-router: ^4.0.16
@@ -38,7 +38,7 @@ dependencies:
   laf-client-sdk: 0.8.2
   laf-db-query-wrapper: 1.0.23
   pinia: 2.0.14_vcmyupim4cga7k7f5hngmth5py
-  typescript-util: 1.0.27
+  typescript-util: registry.npmjs.org/typescript-util/1.0.28
   vue: 3.2.37
   vue-router: 4.0.16_vue@3.2.37
 
@@ -1140,7 +1140,7 @@ packages:
   /laf-db-query-wrapper/1.0.23:
     resolution: { integrity: sha512-/r59d+U/ogJNiLV82XHrhhM+LQlsyLFL1gtSdSX8J3Q8ZpTuhET3KBDIKUmqEr29V9nGO6iTXCkcqwE9Uh3JQA== }
     dependencies:
-      typescript-util: 1.0.27
+      typescript-util: registry.npmjs.org/typescript-util/1.0.28
     optionalDependencies:
       database-ql: registry.npmjs.org/database-ql/0.8.2
       laf-client-sdk: registry.npmjs.org/laf-client-sdk/0.8.2
@@ -1551,10 +1551,6 @@ packages:
   /tslib/2.4.0:
     resolution: { integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ== }
     dev: true
-
-  /typescript-util/1.0.27:
-    resolution: { integrity: sha512-1iBetxxGbP66Eb/iclL16lIghyb7Gk7cirmBXwDfYZvreZ+MARMfahOh+H9rIZhaFmXF/B2xOhE52f+rPOhR+A== }
-    dev: false
 
   /typescript/4.7.3:
     resolution: { integrity: sha512-WOkT3XYvrpXx4vMMqlD+8R8R37fZkjyLGlxavMc4iB8lrl8L0DeTcHbYgw/v0N/z9wAFsgBhcsF0ruoySS22mA== }
@@ -2007,3 +2003,9 @@ packages:
     name: to-fast-properties
     version: 2.0.0
     engines: { node: '>=4' }
+
+  registry.npmjs.org/typescript-util/1.0.28:
+    resolution: { integrity: sha512-sN2YyuYgShv35EMog2ARfha0Y8o2IlG30Y9cM1C771inHwtAS4QhRAnGmu2uM0Jr+KOr5ZbdsTYFRf6gqyz3LQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/typescript-util/-/typescript-util-1.0.28.tgz }
+    name: typescript-util
+    version: 1.0.28
+    dev: false

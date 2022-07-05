@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
 import ShowImage from '@/components/Show/ShowImage.vue'
+import UploadFile from '@/components/Upload/UploadFile.vue'
 import { formatDate } from '@/util/Format'
 import { CirclePlusFilled, Delete, Edit, Refresh, Search, Warning } from '@element-plus/icons-vue'
 import { UserService } from './Service'
@@ -10,7 +11,7 @@ const {
     formData,
     formIsAdd,
     formIsLoading,
-    formRef,
+    setFormRef,
     formRule,
     formSubmit,
     isShow,
@@ -125,7 +126,7 @@ listUpdate()
         modal
         title=""
         width="45%">
-        <el-form :ref="el => formRef = el"
+        <el-form :ref="setFormRef"
                  v-loading="formIsLoading"
                  :model="formData"
                  :rules="formRule"
@@ -145,14 +146,9 @@ listUpdate()
             </el-form-item>
 
             <el-form-item label="头像" prop="avatar">
-                <!--<UploadFile v-model:href="formData.avatar"-->
-                <!--            :drag="true"-->
-                <!--            :limit="1"-->
-                <!--            listType="picture" />-->
-            </el-form-item>
-
-            <el-form-item label="管理员" prop="isAdmin">
-                <el-switch v-model="formData.isAdmin" :active-value="true" :inactive-value="false"></el-switch>
+                <UploadFile v-model:href="formData.avatar"
+                            :limit="1"
+                            listType="picture-card" />
             </el-form-item>
 
             <el-form-item v-if="!formIsAdd" label="锁定" prop="freeze">

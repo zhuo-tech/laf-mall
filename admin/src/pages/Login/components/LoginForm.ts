@@ -27,7 +27,13 @@ export class LoginForm {
         return null as any
     }
 
-    public form = ref<FormInstance>({} as any)
+    private formRef = ref<FormInstance>({} as any)
+
+    public setFormRef = (el: any) => {
+        if (el) {
+            this.formRef.value = el
+        }
+    }
     public refs = reactive<Record<'username' | 'password' | 'code', InputInstance>>({
         username: null as any,
         password: null as any,
@@ -80,7 +86,7 @@ export class LoginForm {
      */
     public submit = () => {
         const asyncOperation = async () => {
-            const ok = await this.form.value.validate?.()
+            const ok = await this.formRef.value.validate?.()
                 .catch(err => console.warn(err))
             if (!ok) {
                 throw new Error('表单验证失败')

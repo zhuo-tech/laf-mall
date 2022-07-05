@@ -9,7 +9,7 @@ const {
     formData,
     formIsAdd,
     formIsLoading,
-    formRef,
+    setFormRef,
     formRule,
     formSubmit,
     isShow,
@@ -107,7 +107,7 @@ listUpdate()
         modal
         title=""
         width="45%">
-        <el-form :ref="el => formRef = el"
+        <el-form :ref="setFormRef"
                  v-loading="formIsLoading"
                  :model="formData"
                  :rules="formRule"

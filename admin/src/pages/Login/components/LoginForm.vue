@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import { LoginForm } from '@/pages/Login/components/LoginForm'
 
-const {isLoading, formData, submit, form, formRule, showNext, next, refs} = new LoginForm()
+const {isLoading, formData, submit, setFormRef, formRule, showNext, next, refs} = new LoginForm()
 </script>
 
 <template>
 <div>
     <h1 style="font-size: 30px; margin-bottom: 20px">用户登录</h1>
-    <el-form :ref="el => {if(el) {form = el}}" v-loading="isLoading" :model="formData" :rules="formRule">
+    <el-form :ref="setFormRef" v-loading="isLoading" :model="formData" :rules="formRule">
         <el-form-item prop="username">
             <el-input :ref="el => refs.username = el"
                       v-model="formData.username"

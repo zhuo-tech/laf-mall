@@ -10,7 +10,6 @@ const {
     formData,
     formIsAdd,
     formIsLoading,
-    formRef,
     formRule,
     formSubmit,
     isShow,
@@ -30,6 +29,7 @@ const {
     bulkSave,
     bulkSaveIsLoading,
     selectAllButton,
+    setFormRef,
 } = new PermissionService()
 listUpdate()
 
@@ -130,7 +130,7 @@ const editFormTabs = ref<string>('preset')
                                          :false-label="''"
                                          :label="row[actionKv.value].key"
                                          :true-label="row[actionKv.value].key"
-                                         @change="lineChange"></el-checkbox>
+                                         @change="lineChange" />
                         </template>
                     </el-table-column>
                 </el-table>
@@ -140,7 +140,7 @@ const editFormTabs = ref<string>('preset')
             </el-tab-pane>
 
             <el-tab-pane label="自定义" name="customize">
-                <el-form :ref="el => formRef = el"
+                <el-form :ref="setFormRef"
                          v-loading="formIsLoading"
                          :model="formData"
                          :rules="formRule"
@@ -163,7 +163,7 @@ const editFormTabs = ref<string>('preset')
         </el-tabs>
         <!-- 和楼上的自定义表单重复, 懒 -->
         <el-form v-else
-                 :ref="el => formRef = el"
+                 :ref="setFormRef"
                  v-loading="formIsLoading"
                  :model="formData"
                  :rules="formRule"

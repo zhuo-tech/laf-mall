@@ -1,9 +1,9 @@
 import { SysRoleRepository } from '@/repository/SysRoleRepository'
-import { SysUserInfo, SysUserRepository } from '@/repository/SysUserRepository'
+import { SysUserInfo, SysAdminRepository } from '@/repository/SysAdminRepository'
 import BasisCrud from '@/service/BasisCrud'
 import { CrudRequest } from '@/service/CrudRequest'
 import { RuleItem } from 'async-validator'
-import { Inject, SelectOption, SysUser } from 'common'
+import { Inject, SelectOption, SysAdmin } from 'common'
 import { Ref, ref } from 'vue'
 
 /**
@@ -21,8 +21,8 @@ export class UserService extends BasisCrud<SysUserInfo> {
         this.roleRepository.selectOptions().then(list => this.roleSelectOption.value = list)
     }
 
-    @Inject(SysUserRepository.KEY)
-    public get repository(): SysUserRepository {
+    @Inject(SysAdminRepository.KEY)
+    public get repository(): SysAdminRepository {
         return null as any
     }
 
@@ -32,7 +32,7 @@ export class UserService extends BasisCrud<SysUserInfo> {
     }
 
     protected get formDataDefault(): Partial<SysUserInfo> {
-        return Object.assign(new SysUser(), {
+        return Object.assign(new SysAdmin(), {
             isAdmin: true,
             freeze: false,
             role: [],
@@ -44,7 +44,6 @@ export class UserService extends BasisCrud<SysUserInfo> {
         avatar: [{type: 'string', message: '请选择文件上传', required: false}],
         username: [{type: 'string', message: '必填', required: true}],
         nickname: [{type: 'string', message: '必填', required: true}],
-        isAdmin: [{type: 'boolean', message: '必填', required: true}],
         freeze: [{type: 'boolean', message: '必填', required: true}],
         password: [{type: 'string', message: '必填', required: true}],
         role: [{type: 'array', message: '请选择', required: true}],

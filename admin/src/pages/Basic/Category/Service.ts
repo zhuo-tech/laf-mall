@@ -10,7 +10,7 @@ import { BasicProductCategory, Inject } from 'common'
  **/
 export class CategoryService extends BasisCrud<BasicProductCategory> {
 
-    protected readonly request = this.repository
+    protected readonly request = this.repository as any
 
     @Inject(BasicCategoryRepository.KEY)
     private get repository(): BasicCategoryRepository {
@@ -18,6 +18,7 @@ export class CategoryService extends BasisCrud<BasicProductCategory> {
     }
 
     public formRule: Partial<Record<keyof BasicProductCategory, Array<RuleItem>>> = {
+        parentId: [{type: 'string', required: false, message: '请选择上一级', trigger: 'blur'}],
         cover: [{type: 'string', required: true, message: '请选择文件上传', trigger: 'blur'}],
         name: [{type: 'string', required: true, message: '请输入', trigger: 'blur'}],
         isShow: [{type: 'boolean', required: true, message: '请选择', trigger: 'blur'}],
@@ -27,6 +28,11 @@ export class CategoryService extends BasisCrud<BasicProductCategory> {
         const category = new BasicProductCategory()
         category.sort = 1
         return category
+    }
+
+    public prepareToAddChildNodes = (row: BasicProductCategory) => {
+        this.readyAdd()
+        this.formData.parentId = row._id
     }
 
 }
