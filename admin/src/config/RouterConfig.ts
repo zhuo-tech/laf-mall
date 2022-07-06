@@ -1,8 +1,9 @@
 import Admin from '@/pages/Admin/Router'
+import Basic from '@/pages/Basic/Router'
+import MallConfig from '@/pages/Config/Router'
 import Error from '@/pages/Error/Router'
 import Home from '@/pages/Home/Router'
 import Login from '@/pages/Login/Router'
-import Basic from '@/pages/Basic/Router'
 import Order from '@/pages/Order/Router'
 import { StorageService, StorageServiceKey } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
@@ -26,17 +27,13 @@ const routes: RouteRecordRaw[] = [
     Order,
     Admin,
     Login,
+    MallConfig,
     ...Error,
 ]
 
 export class RoutingProvider {
     public instant: Router
     private log = console
-
-    @Inject(StorageServiceKey)
-    private get storageService(): StorageService {
-        return null as any
-    }
 
     constructor() {
         const instantiate = createRouter({
@@ -50,6 +47,11 @@ export class RoutingProvider {
         instantiate.beforeResolve(this.beforeResolve)
 
         this.instant = instantiate
+    }
+
+    @Inject(StorageServiceKey)
+    private get storageService(): StorageService {
+        return null as any
     }
 
     /**

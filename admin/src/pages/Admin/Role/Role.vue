@@ -133,7 +133,7 @@ listUpdate()
 
         </el-form>
 
-        <div slot="footer" class="drawer-body-footer" style="padding-left: 30px">
+        <div slot="footer" class="drawer-body-footer" style="padding-left: 30px;text-align: right">
             <el-button @click="close">取 消</el-button>
             <el-button :loading="formIsLoading" type="primary" @click="formSubmit">
                 {{ formIsLoading ? '提交中 ...' : '确 定' }}

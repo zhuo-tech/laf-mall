@@ -30,6 +30,9 @@ export class MallConfig implements CanUpdateEntity {
 export enum MallConfigKey {
     HOMEPAGE_CAROUSEL = '首页轮播图',
     HOMEPAGE_ADVERTISING = '首页广告图',
+    HOMEPAGE_MENU = '首页菜单',
+    HOMEPAGE_HOT = '热门搜索',
+    PERSONAL_CENTER = '个人中心'
 }
 
 /**
@@ -37,7 +40,10 @@ export enum MallConfigKey {
  */
 export interface MallConfigKeyMapping {
     [MallConfigKey.HOMEPAGE_CAROUSEL]: HomePageCarousel,
-    [MallConfigKey.HOMEPAGE_ADVERTISING]: HomePageCarousel
+    [MallConfigKey.HOMEPAGE_ADVERTISING]: HomePageCarousel,
+    [MallConfigKey.HOMEPAGE_MENU]: Menu,
+    [MallConfigKey.HOMEPAGE_HOT]: Hot,
+    [MallConfigKey.PERSONAL_CENTER]: Personal
 }
 
 /**
@@ -57,4 +63,95 @@ export class HomePageCarousel {
      */
     public target: string
 
+}
+
+/**
+ * 首页菜单
+ */
+export class Menu {
+    /**
+     * 菜单名称
+     * @type {string}
+     */
+    public name: string
+    /**
+     * 封面图
+     * @type {string}
+     */
+    public cover: string
+    /**
+     * uniapp地址
+     * @type {string}
+     */
+    public uniUrl: string
+    /**
+     * pc端地址
+     * @type {string}
+     */
+    public pcUrl: string
+    /**
+     * 排序
+     * @type {number}
+     */
+    public sort: number
+    /**
+     * 状态
+     * @type {boolean}
+     */
+    public status: boolean
+}
+
+/**
+ * 热门搜索
+ */
+export class Hot {
+    /**
+     * 标签
+     * @type {string}
+     */
+    public tag: string
+    /**
+     * 排序
+     * @type {number}
+     */
+    public sort: number
+    /**
+     * 状态
+     * @type {boolean}
+     */
+    public status: boolean
+}
+
+/**
+ * 个人中心
+ */
+export class Personal {
+    /**
+     * 菜单名称
+     */
+    public name: string
+    /**
+     * 移动端图标
+     */
+    public uniIcon: string
+    /**
+     * 网页端图标
+     */
+    public pcIcon: string
+    /**
+     * uniapp 地址
+     */
+    public uniUrl: string
+    /**
+     * pc端地址
+     */
+    public pcUrl: string
+    /**
+     * 排序
+     */
+    public sort: number
+    /**
+     * 状态
+     */
+    public status: boolean
 }
