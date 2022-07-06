@@ -142,6 +142,7 @@
 import { ref, reactive } from "vue";
 const recom = ref(0);
 const tablist = reactive([{ name: "精品推荐" }, { name: "新品" }, { name: "优惠" }]);
+const lastname = localStorage.getItem("token");
 
 function recomTab(index: number) {
   recom.value = index;

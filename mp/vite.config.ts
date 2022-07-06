@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target: 'http://localhost:8000',
+        target: 'https://3dgrfj.lafyun.com',
         changeOrigin: true,
         rewrite: path => path.replace(new RegExp('^' + process.env.VUE_APP_BASE_API), '')
       },

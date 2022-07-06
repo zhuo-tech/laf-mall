@@ -3,7 +3,7 @@ import { getCurrentBaseURL } from './utils/url'
 /**
  * HTTP 接口请求入口地址
  */
-export const API_BASE_URL = process.env.VUE_APP_BASE_API
+export const API_BASE_URL = 'https://3dgrfj.lafyun.com'
 
 /**
  * 当前站部署地址，主要用于授权等场景

@@ -1,11 +1,10 @@
 <template>
   <view class="box">
-    <view v-show="true" class="login">
+    <view v-show="!getToken()" class="login">
       <view class="hint"> 为了提供更好的服务，请先登录 </view>
       <view @click="GoLogin" class="login-hint"> 去登录 </view>
     </view>
-
-    <view v-show="false">
+    <view v-show="getToken()">
       <view class="bgc">
         <img class="bgc-img" src="../../static/icon/paopao.png" alt="" />
         <view @click="GoSet" class="set"
@@ -131,8 +130,9 @@
 
 <script setup lang="ts">
 import { onLoad } from "@dcloudio/uni-app";
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, ref } from "vue";
 import tupian from "../../static/img/3.jpg";
+import { getToken } from "./login/hooks/loginService";
 
 function GoLogin() {
   uni.navigateTo({

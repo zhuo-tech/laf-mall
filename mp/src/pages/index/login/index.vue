@@ -12,25 +12,24 @@
       <view class="input-box">
         <view class="input">
           <input
-            v-model="form.phone"
+            v-model="phone"
             type="number"
             maxlength="11"
             placeholder="输入手机号码"
-            @clear="clearPhone()"
           />
         </view>
         <view class="input-bottom"></view>
 
         <view v-show="index == 0" class="input">
-          <input v-model="form.code" type="text" maxlength="6" placeholder="填写验证码" />
-          <view v-show="!time" @click="getCode()" class="code"> 获取验证码 </view>
+          <input v-model="code" type="text" maxlength="6" placeholder="填写验证码" />
+          <view v-show="!time" class="code"> 获取验证码 </view>
           <view v-show="time" class="timeCode">{{ time }}s</view>
           <view class="input-bottom"></view>
         </view>
 
         <view v-show="index == 1" class="input">
           <input
-            v-model="form.phone"
+            v-model="password"
             type="password"
             maxlength="16"
             placeholder="填写登录密码"
@@ -58,20 +57,20 @@
 
 <script setup lang="ts">
 import { reactive, toRefs, ref } from "vue";
-import { showTip } from "../../../utils/show";
-import { login, sendLoginSmsCode } from "../../../api/user";
-import { LOGICAL_OPERATORS } from "@babel/types";
-import { loginService } from "./hooks/loginService";
+import { showTip, showSuccess } from "../../../utils/show";
+import { cloud } from "../../../api/cloud";
 
-const { time, form, clearPhone, getCode, onsubmit } = loginService();
 let tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
 const index = ref(0); //登录方式切换
 const checked = ref(false); //判断是否勾选协议
+const phone = ref("");
+const password = ref("");
+const code = ref();
+const time = ref();
 
 //切换登录方式
 function cut(e: number) {
   index.value = e;
-  console.log(index.value, "dengy");
 }
 //判断是否勾选协议
 function checkboxChange() {
@@ -79,15 +78,49 @@ function checkboxChange() {
 }
 
 //验证表单
-function verification() {
-  if (!tel.test(form.value.phone)) return showTip("请输入正确的手机号码");
-  onsubmit();
+async function verification() {
+  if (!tel.test(phone.value)) {
+    return showTip("请输入正确的手机号码");
+  }
+  if (password.value.length <= 0) {
+    return showTip("请输入密码");
+  }
+  if (checked.value == false) {
+    return showTip("请勾选用户协议");
+  }
+  const r = await cloud.invokeFunction("app-login-password", {
+    username: phone.value,
+    password: password.value,
+  });
+  if (r.code == 1) {
+    return showTip("用户名或密码错误");
+  }
+  if (r.code == 0) {
+    showSuccess("登录成功");
+  }
+  localStorage.setItem("token", r.data.access_token);
+  let user = JSON.stringify(r.data.user);
+  localStorage.setItem("user", user);
+  localStorage.setItem("expire", r.data.expire);
+  Gomine();
 }
 
-// function getToken() {
-//   return !!uni.getStorageSync("token");
-// }
-// console.log(getToken(), "获取的时什么");
+function Gomine() {
+  uni.reLaunch({
+    url: `/pages/index/mine`,
+  });
+}
+
+const countdown = () => {
+  time.value = 60;
+  const timing = setInterval(() => {
+    if (time.value <= 0) {
+      clearInterval(timing);
+    } else {
+      time.value--;
+    }
+  }, 1000);
+};
 </script>
 
 <style lang="scss" scoped>

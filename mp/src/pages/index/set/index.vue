@@ -40,12 +40,27 @@
     </view>
 
     <view class="save">保存修改</view>
-    <view class="logout">退出登录</view>
+    <view @click="exit()" class="logout">退出登录</view>
   </view>
 </template>
 
 <script setup lang="ts">
 import { reactive, toRefs } from "vue";
+
+
+//退出登录
+function exit() {
+  localStorage.clear();
+  Gomine();
+}
+
+
+//跳转登录页面
+function Gomine() {
+  uni.reLaunch({
+    url: `/pages/index/mine`,
+  });
+}
 </script>
 
 <style lang="scss" scoped>
