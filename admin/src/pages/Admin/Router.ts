@@ -35,7 +35,7 @@ const RouterConfig: RouteRecordRaw = {
         },
         {
             path: 'user',
-            component: () => import('./User/User.vue'),
+            component: () => import('./User/Admin.vue'),
             meta: {
                 isMenu: true,
                 title: '用户管理',

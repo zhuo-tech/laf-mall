@@ -10,23 +10,29 @@ import { BasicProductCategory, Inject } from 'common'
  **/
 export class CategoryService extends BasisCrud<BasicProductCategory> {
 
-    protected readonly request = this.repository
+    public formRule: Partial<Record<keyof BasicProductCategory, Array<RuleItem>>> = {
+        parentId: [{type: 'string', required: false, message: '请选择上一级', trigger: 'blur'}],
+        cover: [{type: 'string', required: true, message: '请选择文件上传', trigger: 'blur'}],
+        name: [{type: 'string', required: true, message: '请输入', trigger: 'blur'}],
+        isShow: [{type: 'boolean', required: true, message: '请选择', trigger: 'blur'}],
+    }
 
     @Inject(BasicCategoryRepository.KEY)
     private get repository(): BasicCategoryRepository {
         return null as any
     }
 
-    public formRule: Partial<Record<keyof BasicProductCategory, Array<RuleItem>>> = {
-        cover: [{type: 'string', required: true, message: '请选择文件上传', trigger: 'blur'}],
-        name: [{type: 'string', required: true, message: '请输入', trigger: 'blur'}],
-        isShow: [{type: 'boolean', required: true, message: '请选择', trigger: 'blur'}],
-    }
+    protected readonly request = this.repository as any
 
     protected get formDataDefault(): Partial<BasicProductCategory> {
         const category = new BasicProductCategory()
         category.sort = 1
         return category
+    }
+
+    public prepareToAddChildNodes = (row: BasicProductCategory) => {
+        this.readyAdd()
+        this.formData.parentId = row._id
     }
 
 }

@@ -1,8 +1,8 @@
 import { CrudRequest } from '@/service/CrudRequest'
 import { RuleItem } from 'async-validator'
-import { FormInstance, ElMessage } from 'element-plus'
+import { ElMessage, FormInstance } from 'element-plus'
 import { Page } from 'laf-db-query-wrapper'
-import { CollUtil, ObjectUtil } from 'typescript-util'
+import { ObjectUtil } from 'typescript-util'
 import { reactive, Ref, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -31,7 +31,7 @@ export default abstract class BasisCrud<E> {
      */
     public readonly rowKey: string = '_id'
     /**
-     * 搜索表单的显隐状态
+     * 搜索表单地显隐状态
      */
     public showQuery: Ref<boolean> = ref(false)
     /**
@@ -72,7 +72,13 @@ export default abstract class BasisCrud<E> {
      */
     public formRule: Partial<Record<keyof E, Array<RuleItem>>> = {}
 
-    public formRef: Ref<FormInstance | undefined> = ref<FormInstance>()
+    private formRef: Ref<FormInstance | undefined> = ref<FormInstance>()
+
+    public setFormRef = (ref: any) => {
+        if (ref) {
+            this.formRef.value = ref
+        }
+    }
 
     private basisLog = console
 

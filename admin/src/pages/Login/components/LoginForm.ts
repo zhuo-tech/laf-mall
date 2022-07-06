@@ -2,7 +2,6 @@ import { HOME_PATH } from '@/pages/Home/Router'
 import { SysAdminApi } from '@/repository/SysAdminApi'
 import { StorageLevel, StorageService, StorageServiceKey } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
-import { RuleItem } from 'async-validator'
 import { Inject } from 'common'
 import { FormInstance, InputInstance } from 'element-plus'
 import { StrUtil } from 'typescript-util'
@@ -27,7 +26,13 @@ export class LoginForm {
         return null as any
     }
 
-    public form = ref<FormInstance>({} as any)
+    private formRef = ref<FormInstance>({} as any)
+
+    public setFormRef = (el: any) => {
+        if (el) {
+            this.formRef.value = el
+        }
+    }
     public refs = reactive<Record<'username' | 'password' | 'code', InputInstance>>({
         username: null as any,
         password: null as any,
@@ -80,7 +85,7 @@ export class LoginForm {
      */
     public submit = () => {
         const asyncOperation = async () => {
-            const ok = await this.form.value.validate?.()
+            const ok = await this.formRef.value.validate?.()
                 .catch(err => console.warn(err))
             if (!ok) {
                 throw new Error('表单验证失败')

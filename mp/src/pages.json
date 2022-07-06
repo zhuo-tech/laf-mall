@@ -99,18 +99,40 @@
     },
     {
       "path": "pages/index/track/index",
-      "style": {
-        "navigationBarTitleText": "我的足迹"
-
-      }
+        "style": {
+            "navigationBarTitleText": "我的足迹"
+        }
     },
-    {
-      "path": "pages/index/collect/index",
-      "style": {
-        "navigationBarTitleText": "我的收藏"
+      {
+          "path": "pages/index/collect/index",
+          "style": {
+              "navigationBarTitleText": "我的收藏"
+          }
+      },
+      {
+          "path": "pages/index/membership/index",
+          "style": {
+              "navigationBarTitleText": "会员中心"
+          }
+      },
+      {
+          "path": "pages/index/discounts/index",
+          "style": {
+              "navigationBarTitleText": "优惠券"
+          }
+      },
+      {
+          "path": "pages/index/location/index",
+          "style": {
+              "navigationBarTitleText": "地址管理"
+          }
+      },
+      {
+          "path": "pages/index/location/addlocation",
+          "style": {
+              "navigationBarTitleText": ""
+          }
       }
-    }
-
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",

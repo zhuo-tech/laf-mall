@@ -1,22 +1,22 @@
 import { SysAdminApi } from '@/repository/SysAdminApi'
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { Component, Inject, LogicDelete, SysRole, SysUser } from 'common'
+import { Component, Inject, LogicDelete, SysAdmin, SysRole } from 'common'
 import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
 import { CollUtil } from 'typescript-util'
 
-export type SysUserInfo = SysUser & { password: string, roleInfo: Array<Partial<SysRole>> }
+export type SysUserInfo = SysAdmin & { password: string, roleInfo: Array<Partial<SysRole>> }
 
 /**
- * SysUserRepository
+ * SysAdminRepository
  * @author 冰凝
  * @date 2022-06-15 下午 12:23
  **/
-@Component(SysUserRepository.KEY)
-export class SysUserRepository implements CrudRequest<SysUserInfo> {
-    public static readonly KEY = 'SysUserRepository'
+@Component(SysAdminRepository.KEY)
+export class SysAdminRepository implements CrudRequest<SysUserInfo> {
+    public static readonly KEY = 'SysAdminRepository'
 
-    private readonly client = new LafClient<SysUserInfo>(SysUser.NAME)
+    private readonly client = new LafClient<SysUserInfo>(SysAdmin.NAME)
     private readonly userStore = useUserStore()
 
     @Inject(SysAdminApi.KEY)
@@ -36,7 +36,6 @@ export class SysUserRepository implements CrudRequest<SysUserInfo> {
         const userInfoPage = await this.client.queryWrapper()
             .likeNotEmpty('username', query?.username)
             .likeNotEmpty('nickname', query?.nickname)
-            .eqNotNull('isAdmin', query?.isAdmin)
             .eq('isDelete', LogicDelete.NORMAL)
             .eqNotNull('freeze', query?.freeze)
             .inNotEmpty('role', query?.role)

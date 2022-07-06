@@ -1,136 +1,138 @@
 <template>
   <view class="box">
-    <view v-show="false" class="login">
-      <view class="hint"> 为了提供更好的服务，请先登录 </view>
-      <view @click="GoLogin" class="login-hint"> 去登录 </view>
-    </view>
+      <view v-show="true" class="login">
+          <view class="hint"> 为了提供更好的服务，请先登录</view>
+          <view @click="GoLogin" class="login-hint"> 去登录</view>
+      </view>
 
-    <view class="bgc">
-      <img class="bgc-img" src="../../static/icon/paopao.png" alt="" />
-      <view @click="GoSet" class="set"
-        ><img class="set-img" src="../../static/icon/shezhi.png" alt="" />
-      </view>
-      <view class="datum">
-        <view class="sort">
-          <view class="head-portrait">
-            <image
-              style="
-                width: 150rpx;
-                height: 150rpx;
-                border-radius: 100rpx;
-                background-color: #eeeeee;
-              "
-              mode="aspectFill"
-              :src="tupian"
-            ></image
-          ></view>
-          <view class="name">有时候有时候</view>
-        </view>
-        <view class="wire"></view>
-        <view class="usable">
-          <view class="balance">
-            <view class="balance-name">我的余额</view>
-            <view class="balance-number">0</view>
+      <view v-show="false">
+          <view class="bgc">
+              <img alt="" class="bgc-img" src="../../static/icon/paopao.png" />
+              <view class="set" @click="GoSet"
+              >
+                  <img alt="" class="set-img" src="../../static/icon/shezhi.png" />
+              </view>
+              <view class="datum">
+                  <view class="sort">
+                      <view class="head-portrait">
+                          <image
+                              :src="tupian"
+                              mode="aspectFill"
+                              style="
+                  width: 150rpx;
+                  height: 150rpx;
+                  border-radius: 100rpx;
+                  background-color: #eeeeee;
+                "
+                          ></image
+                          >
+                      </view>
+                      <view class="name">有时候有时候</view>
+                  </view>
+                  <view class="wire"></view>
+                  <view class="usable">
+                      <view class="balance">
+                          <view class="balance-name">我的余额</view>
+                          <view class="balance-number">0</view>
+                      </view>
+                      <view class="balance">
+                          <view class="balance-name">当前积分</view>
+                          <view class="balance-number">0</view>
+                      </view>
+                      <view class="balance">
+                          <view class="balance-name">优惠券</view>
+                          <view class="balance-number">0</view>
+                      </view>
+                  </view>
+              </view>
           </view>
-          <view class="balance">
-            <view class="balance-name">当前积分</view>
-            <view class="balance-number">0</view>
-          </view>
-          <view class="balance">
-            <view class="balance-name">优惠券</view>
-            <view class="balance-number">0</view>
-          </view>
-        </view>
-      </view>
-    </view>
 
-    <view class="orderInfo">
-      <view class="order-box">
-        <view class="my-roder">我的订单</view>
-        <view @click="GoAllrders(0)" class="all-roder">全部订单></view>
-      </view>
-      <view class="goodsprogress">
-        <view @click="GoAllrders(0)" class="goods-box">
-          <view>
-            <img class="goods-ico" src="../../static/icon/daifukuan.png" alt="" />
+          <view class="orderInfo">
+              <view class="order-box">
+                  <view class="my-roder">我的订单</view>
+                  <view class="all-roder" @click="GoAllrders(0)">全部订单></view>
+              </view>
+              <view class="goodsprogress">
+                  <view class="goods-box" @click="GoAllrders(0)">
+                      <view>
+                          <img alt="" class="goods-ico" src="../../static/icon/daifukuan.png" />
+                      </view>
+                      <view class="goods-name">待付款</view>
+                  </view>
+                  <view class="goods-box" @click="GoAllrders(1)">
+                      <view>
+                          <img alt="" class="goods-ico" src="../../static/icon/daifahuo.png" />
+                      </view>
+                      <view class="goods-name">待发货</view>
+                  </view>
+                  <view class="goods-box" @click="GoAllrders(2)">
+                      <view>
+                          <img alt="" class="goods-ico" src="../../static/icon/daishouhuo.png" />
+                      </view>
+                      <view class="goods-name">待收货</view>
+                  </view>
+                  <view class="goods-box" @click="GoAllrders(3)">
+                      <view>
+                          <img alt="" class="goods-ico" src="../../static/icon/daipingjia.png" />
+                      </view>
+                      <view class="goods-name">待评价</view>
+                  </view>
+                  <view class="goods-box" @click="GoAllrders(4)">
+                      <view>
+                          <img
+                              alt=""
+                              class="goods-ico"
+                              src="../../static/icon/shouhou.png"
+                              style="margin-left: 25rpx"
+                          />
+                      </view>
+                      <view class="goods-name">售后/退款</view>
+                  </view>
+              </view>
           </view>
-          <view class="goods-name">待付款</view>
-        </view>
-        <view @click="GoAllrders(1)" class="goods-box">
-          <view>
-            <img class="goods-ico" src="../../static/icon/daifahuo.png" alt="" />
+          <view class="cut-offrule"></view>
+          <view class="tab" @click="GoStrack">
+              <view>
+                  <img alt="" class="tab-ico" src="../../static/icon/zuji.png" />
+              </view>
+              <view class="tab-name">我的足迹</view>
           </view>
-          <view class="goods-name">待发货</view>
-        </view>
-        <view @click="GoAllrders(2)" class="goods-box">
-          <view>
-            <img class="goods-ico" src="../../static/icon/daishouhuo.png" alt="" />
+          <view class="tab" @click="GoMembership">
+              <view>
+                  <img alt="" class="tab-ico" src="../../static/icon/huiyuan.png" />
+              </view>
+              <view class="tab-name">会员中心</view>
           </view>
-          <view class="goods-name">待收货</view>
-        </view>
-        <view @click="GoAllrders(3)" class="goods-box">
-          <view>
-            <img class="goods-ico" src="../../static/icon/daipingjia.png" alt="" />
+          <view class="tab" @click="GoDiscounts">
+              <view>
+                  <img alt="" class="tab-ico" src="../../static/icon/youhuiquan.png" />
+              </view>
+              <view class="tab-name">优惠券</view>
           </view>
-          <view class="goods-name">待评价</view>
-        </view>
-        <view @click="GoAllrders(4)" class="goods-box">
-          <view>
-            <img
-              style="margin-left: 25rpx"
-              class="goods-ico"
-              src="../../static/icon/shouhou.png"
-              alt=""
-            />
+          <view class="tab" @click="GoCollect">
+              <view>
+                  <img alt="" class="tab-ico" src="../../static/icon/shoucang.png" />
+              </view>
+              <view class="tab-name">我的收藏</view>
           </view>
-          <view class="goods-name">售后/退款</view>
-        </view>
+          <view class="tab" @click="GoLocation">
+              <view>
+                  <img alt="" class="tab-ico" src="../../static/icon/dizhi.png" />
+              </view>
+              <view class="tab-name">地址管理</view>
+          </view>
+          <view class="tab">
+              <view>
+                  <img alt="" class="tab-ico" src="../../static/icon/wdjifen.png" />
+              </view>
+              <view class="tab-name">我的积分</view>
+          </view>
       </view>
-    </view>
-    <view class="cut-offrule"></view>
-    <view @click="GoStrack" class="tab">
-      <view>
-        <img class="tab-ico" src="../../static/icon/zuji.png" alt="" />
-      </view>
-      <view class="tab-name">我的足迹</view>
-    </view>
-    <view class="tab">
-      <view>
-        <img class="tab-ico" src="../../static/icon/huiyuan.png" alt="" />
-      </view>
-      <view class="tab-name">会员中心</view>
-    </view>
-    <view class="tab">
-      <view>
-        <img class="tab-ico" src="../../static/icon/youhuiquan.png" alt="" />
-      </view>
-      <view class="tab-name">优惠券</view>
-    </view>
-    <view @click="Gocollect" class="tab">
-      <view>
-        <img class="tab-ico" src="../../static/icon/shoucang.png" alt="" />
-      </view>
-      <view class="tab-name">我的收藏</view>
-    </view>
-    <view class="tab">
-      <view>
-        <img class="tab-ico" src="../../static/icon/dizhi.png" alt="" />
-      </view>
-      <view class="tab-name">地址管理</view>
-    </view>
-    <view class="tab">
-      <view>
-        <img class="tab-ico" src="../../static/icon/wdjifen.png" alt="" />
-      </view>
-      <view class="tab-name">我的积分</view>
-    </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { onLoad } from "@dcloudio/uni-app";
-import { reactive, toRefs } from "vue";
-import tupian from "../../static/img/3.jpg";
+import tupian from '../../static/img/3.jpg'
 
 function GoLogin() {
   uni.navigateTo({
@@ -151,15 +153,33 @@ function GoSet() {
 }
 
 function GoStrack() {
-  uni.navigateTo({
-    url: "/pages/index/track/index",
-  });
+    uni.navigateTo({
+        url: '/pages/index/track/index',
+    })
 }
 
-function Gocollect() {
-  uni.navigateTo({
-    url: "/pages/index/collect/index",
-  });
+function GoCollect() {
+    uni.navigateTo({
+        url: '/pages/index/collect/index',
+    })
+}
+
+function GoMembership() {
+    uni.navigateTo({
+        url: '/pages/index/membership/index',
+    })
+}
+
+function GoDiscounts() {
+    uni.navigateTo({
+        url: '/pages/index/discounts/index',
+    })
+}
+
+function GoLocation() {
+    uni.navigateTo({
+        url: '/pages/index/location/index',
+    })
 }
 </script>
 

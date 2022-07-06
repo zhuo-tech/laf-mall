@@ -11,7 +11,7 @@ const {
     formData,
     formIsAdd,
     formIsLoading,
-    formRef,
+    setFormRef,
     formRule,
     formSubmit,
     isShow,
@@ -74,8 +74,10 @@ listUpdate()
 
         <el-table-column :formatter="formatDate()" align="center" label="创建时间" prop="createTime" width="180" />
         <el-table-column :formatter="formatDate()" align="center" label="更新时间" prop="updateTime" width="180" />
-        <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="180">
+        <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="280">
             <template v-slot="{row}">
+                <el-button :icon="CirclePlusFilled" link @click="readyEdit(row)">新增子节点</el-button>
+                <el-divider direction="vertical" />
                 <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
                 <el-divider direction="vertical" />
                 <el-popconfirm :icon="Warning"
@@ -105,12 +107,21 @@ listUpdate()
         lock-scroll
         modal
         title="">
-        <el-form :ref="el => formRef = el"
+        <el-form :ref="setFormRef"
                  v-loading="formIsLoading"
                  :model="formData"
                  :rules="formRule"
                  label-width="140px"
                  style="max-width: 1000px">
+
+            <el-form-item label="父级" prop="parentId">
+                <el-tree-select v-model="formData.parentId"
+                                :data="page.list"
+                                :props="{label: 'name', value: '_id'}"
+                                check-strictly
+                                style="width: 100%;" />
+            </el-form-item>
+
             <el-form-item label="分类名" prop="name">
                 <el-input v-model="formData.name" clearable placeholder="请输入分类名称" />
             </el-form-item>

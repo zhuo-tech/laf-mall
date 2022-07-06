@@ -16,7 +16,7 @@ const {
     formData,
     formIsAdd,
     formIsLoading,
-    formRef,
+    setFormRef,
     formRule,
     formSubmit,
     isShow,
@@ -50,15 +50,15 @@ listUpdate()
         </el-row>
 
         <el-row :gutter="20">
-            <el-col :span="12">
-                <el-carousel :interval="4000" direction="vertical" height="30vh">
+            <el-col :md="24" :xl="12">
+                <el-carousel :interval="4000" direction="vertical" height="40vh">
                     <el-carousel-item v-for="(item, index) in page.list" :key="index">
                         <ShowImage :previewSrcList="[]" :src="item?.value?.href" fit="cover" style="width: 100%;height: 100%;" />
                     </el-carousel-item>
                 </el-carousel>
             </el-col>
             <!-- 表格 -->
-            <el-col :span="12">
+            <el-col :md="24" :xl="12">
                 <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
                     <el-table-column align="center" label="序号" type="index" width="60" />
                     <el-table-column align="left" label="排序" min-width="100" prop="value.sort" />
@@ -103,7 +103,7 @@ listUpdate()
             modal
             title="">
 
-            <el-form :ref="el => formRef = el"
+            <el-form :ref="setFormRef"
                      v-loading="formIsLoading"
                      :model="formData"
                      :rules="formRule"
