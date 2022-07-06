@@ -1,7 +1,7 @@
 import { SysAdminApi } from '@/repository/SysAdminApi'
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { Component, Inject, LogicDelete, SysAdmin, SysRole } from 'common'
+import { Component, Inject, LogicDelete, SysRole, SysAdmin } from 'common'
 import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
 import { CollUtil } from 'typescript-util'
 

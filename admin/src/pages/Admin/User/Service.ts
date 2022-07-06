@@ -1,5 +1,5 @@
-import { SysAdminRepository, SysUserInfo } from '@/repository/SysAdminRepository'
 import { SysRoleRepository } from '@/repository/SysRoleRepository'
+import { SysUserInfo, SysAdminRepository } from '@/repository/SysAdminRepository'
 import BasisCrud from '@/service/BasisCrud'
 import { CrudRequest } from '@/service/CrudRequest'
 import { RuleItem } from 'async-validator'

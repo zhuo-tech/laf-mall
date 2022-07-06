@@ -12,39 +12,39 @@
       <view class="input-box">
         <view class="input">
           <input
-              v-model="form.phone"
-              type="number"
-              maxlength="11"
-              placeholder="输入手机号码"
-              @clear="clearPhone()"
+            v-model="form.phone"
+            type="number"
+            maxlength="11"
+            placeholder="输入手机号码"
+            @clear="clearPhone()"
           />
         </view>
+        <view class="input-bottom"></view>
+
+        <view v-show="index == 0" class="input">
+          <input v-model="form.code" type="text" maxlength="6" placeholder="填写验证码" />
+          <view v-show="!time" @click="getCode()" class="code"> 获取验证码 </view>
+          <view v-show="time" class="timeCode">{{ time }}s</view>
           <view class="input-bottom"></view>
+        </view>
 
-          <view v-show="index == 0" class="input">
-              <input v-model="form.code" type="text" maxlength="6" placeholder="填写验证码" />
-              <view v-show="!time" @click="getCode()" class="code"> 获取验证码</view>
-              <view v-show="time" class="timeCode">{{ time }}s</view>
-              <view class="input-bottom"></view>
-          </view>
-
-          <view v-show="index == 1" class="input">
-              <input
-                  v-model="form.phone"
-                  maxlength="16"
-                  placeholder="填写登录密码"
-                  type="password"
-              />
-              <view class="input-bottom"></view>
-          </view>
-          <view class="deal">
-              <view style="display: flex">
-                  <checkbox-group @change="checkboxChange">
-                      <checkbox
-                          :checked="checked"
-                          style="transform: scale(0.7)"
-                          value="cb"
-                          color="#ee5382"
+        <view v-show="index == 1" class="input">
+          <input
+            v-model="form.phone"
+            type="password"
+            maxlength="16"
+            placeholder="填写登录密码"
+          />
+          <view class="input-bottom"></view>
+        </view>
+        <view class="deal">
+          <view style="display: flex">
+            <checkbox-group @change="checkboxChange">
+              <checkbox
+                :checked="checked"
+                style="transform: scale(0.7)"
+                value="cb"
+                color="#ee5382"
               />
             </checkbox-group>
             <view class="deal-page">阅读并同意《登录注册协议》</view>
@@ -57,19 +57,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { showTip } from '../../../utils/show'
-import { loginService } from './hooks/loginService'
+import { reactive, toRefs, ref } from "vue";
+import { showTip } from "../../../utils/show";
+import { login, sendLoginSmsCode } from "../../../api/user";
+import { LOGICAL_OPERATORS } from "@babel/types";
+import { loginService } from "./hooks/loginService";
 
-const {time, form, clearPhone, getCode, onsubmit} = loginService()
-let tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
-const index = ref(0) //登录方式切换
-const checked = ref(false) //判断是否勾选协议
+const { time, form, clearPhone, getCode, onsubmit } = loginService();
+let tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
+const index = ref(0); //登录方式切换
+const checked = ref(false); //判断是否勾选协议
 
 //切换登录方式
 function cut(e: number) {
-    index.value = e
-    console.log(index.value, 'dengy')
+  index.value = e;
+  console.log(index.value, "dengy");
 }
 //判断是否勾选协议
 function checkboxChange() {
@@ -134,22 +136,21 @@ function verification() {
       .timeCode {
         position: absolute;
         right: 0rpx;
-          top: 105 rpx;
-          width: 150 rpx;
-          height: 50 rpx;
-          font-size: 24 rpx;
-          color: #fff;
-          background-color: #5c5a5b;
-          text-align: center;
-          line-height: 50 rpx;
-          border-radius: 50 rpx;
+        top: 105rpx;
+        width: 150rpx;
+        height: 50rpx;
+        font-size: 24rpx;
+        color: #fff;
+        background-color: #5c5a5b;
+        text-align: center;
+        line-height: 50rpx;
+        border-radius: 50rpx;
       }
-
-        .input-bottom {
-            margin-top: 20 rpx;
-            width: 100%;
-            border-top: 1 rpx solid #dddcdc;
-        }
+      .input-bottom {
+        margin-top: 20rpx;
+        width: 100%;
+        border-top: 1rpx solid #dddcdc;
+      }
     }
     .input-bottom {
       margin-top: 5rpx;

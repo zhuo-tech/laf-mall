@@ -139,17 +139,16 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-
-const recom = ref(0)
-const tablist = reactive([{name: '精品推荐'}, {name: '新品'}, {name: '优惠'}])
+import { ref, reactive } from "vue";
+const recom = ref(0);
+const tablist = reactive([{ name: "精品推荐" }, { name: "新品" }, { name: "优惠" }]);
 
 function recomTab(index: number) {
-    recom.value = index
+  recom.value = index;
 }
 
 function goGoodSearch() {
-    uni.navigateTo({
+  uni.navigateTo({
     url: "/pages/index/search/index",
   });
 }
@@ -198,8 +197,8 @@ function GoBargain() {
   .swiper {
     height: 430rpx;
     .slideshow {
-        width: 100%;
-        height: 430 rpx;
+      width: 100%;
+      height: 430rpx;
     }
   }
   .nav {
