@@ -96,7 +96,7 @@ listUpdate()
                 <el-form-item label="封面图" prop="cover">
                     <UploadFile v-model:href="formData.cover"
                                 :limit="1"
-                                listType="picture-card" />
+                                :show-file-list="false" />
                 </el-form-item>
 
                 <el-form-item label="uniapp URL" prop="uniUrl">

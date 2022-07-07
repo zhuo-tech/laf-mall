@@ -2,7 +2,7 @@ import { UniversalConfigRepository } from '@/repository/UniversalConfigRepositor
 import BasisCrud from '@/service/BasisCrud'
 import { CrudRequest } from '@/service/CrudRequest'
 import { RuleItem } from 'async-validator'
-import { MallConfigKey, Menu, Personal } from 'common'
+import { MallConfigKey, Personal } from 'common'
 
 type PersonalAndId = Personal & { _id: string }
 
@@ -18,8 +18,8 @@ export class PersonalService extends BasisCrud<PersonalAndId> {
 
     protected readonly request: CrudRequest<PersonalAndId> = new UniversalConfigRepository<Personal>(MallConfigKey.PERSONAL_CENTER)
 
-    protected get formDataDefault(): Partial<Menu> {
-        return Object.assign(new Menu(), {
+    protected get formDataDefault(): Partial<PersonalAndId> {
+        return Object.assign(new Personal(), {
             sort: 1,
             status: true,
         })
