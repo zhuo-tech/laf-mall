@@ -41,6 +41,12 @@ export class BasicProduct implements IntegralEntity {
      */
     public channelId: string
     /**
+     * 二级栏目ID
+     * @see HomePageChannel
+     */
+    public channelValue: string
+
+    /**
      * 商品名称
      */
     public name: string
