@@ -29,8 +29,8 @@ export const useUserStore = defineStore('user', {
                     const {_id, username, nickname, avatar, roles, pers} = info
                     this._id = _id
                     this.username = username
-                    this.nickname = nickname
-                    this.avatar = avatar
+                    this.nickname = nickname!
+                    this.avatar = avatar!
                     this.roles = roles
                     this.permissions = pers
                 })
