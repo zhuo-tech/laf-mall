@@ -170,9 +170,14 @@ export class HomePageChannel {
      */
     public sort: number
     /**
-     * 显示用名称
+     * 栏目名称
      */
     public name: string
+    /**
+     * 二级栏目 <br>
+     * **id 必须唯一 不能修改**
+     */
+    public children: Array<{id: string, name: string}>
 }
 
 /**
