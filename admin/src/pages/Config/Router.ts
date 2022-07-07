@@ -26,6 +26,15 @@ const RouterConfig: RouteRecordRaw = {
             },
         },
         {
+            path: 'channel',
+            component: () => import('./Channel/Channel.vue'),
+            meta: {
+                isMenu: true,
+                title: '首页栏目',
+                icon: FolderOpened,
+            },
+        },
+        {
             path: 'hot',
             component: () => import('./Hot/Hot.vue'),
             meta: {
