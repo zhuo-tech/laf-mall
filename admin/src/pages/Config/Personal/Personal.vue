@@ -54,7 +54,7 @@ listUpdate()
             <el-table-column align="center" label="uniapp URL" min-width="350" prop="uniUrl" />
             <el-table-column align="center" label="URL" min-width="350" prop="pcUrl" />
             <el-table-column align="left" label="排序" min-width="60" prop="sort" />
-            <el-table-column align="left" label="状态" min-width="60" prop="status">
+            <el-table-column align="left" label="状态" min-width="100" prop="status">
                 <template v-slot="{row}">
                     <span>{{ row.status ? '显示' : '不显示' }}</span>
                 </template>

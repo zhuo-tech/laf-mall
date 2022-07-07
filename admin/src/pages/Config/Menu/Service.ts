@@ -1,10 +1,12 @@
-import { MenuRepository } from '@/repository/MenuRepository'
+import { ConfigRepository } from '@/repository/ConfigRepository'
 import BasisCrud from '@/service/BasisCrud'
 import { CrudRequest } from '@/service/CrudRequest'
 import { RuleItem } from 'async-validator'
-import { Menu } from 'common'
+import { MallConfigKey, Menu } from 'common'
 
-export class MenuService extends BasisCrud<Menu> {
+type MenuAndId = Menu & { _id: string }
+
+export class MenuService extends BasisCrud<MenuAndId> {
 
     public formRule: Partial<Record<keyof Menu, Array<RuleItem>>> = {
         name: [{type: 'string', message: '必填', required: true}],
@@ -12,7 +14,7 @@ export class MenuService extends BasisCrud<Menu> {
         uniUrl: [{type: 'string', message: '必填', required: true}],
         pcUrl: [{type: 'string', message: '必填', required: true}],
     }
-    protected readonly request: CrudRequest<Menu> = new MenuRepository()
+    protected readonly request: CrudRequest<MenuAndId> = new ConfigRepository(MallConfigKey.HOMEPAGE_MENU)
 
     protected get formDataDefault(): Partial<Menu> {
         return Object.assign(new Menu(), {
