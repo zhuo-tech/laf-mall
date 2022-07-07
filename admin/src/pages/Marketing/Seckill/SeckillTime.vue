@@ -20,37 +20,16 @@ class SpikeTime extends BasisCrud<SeckillTimePeriodEntity> {
 
     public formRule: Partial<Record<keyof SeckillTimePeriodEntity, Array<RuleItem>>> = {
         start: [{type: 'number', min: 0, max: 23, message: '请选择开始时间', trigger: 'blur'}],
-        length: [
-            {type: 'number', min: 1, max: 23, message: '请选择开始时间', trigger: 'blur'},
-            {
-                validator: (rule, value, callback, source, option) => {
-                    console.debug('验证结束时间', {rule, value, callback, source, option})
-                },
-            },
-        ],
+        length: [{type: 'number', min: 1, max: 23, message: '请选择开始时间', trigger: 'blur'}],
     }
 }
 
 const {
-    close,
-    formData,
-    formIsAdd,
-    formIsLoading,
-    setFormRef,
-    formRule,
-    formSubmit,
-    isShow,
-    listUpdate,
-    page,
-    queryData,
-    queryFormSubmit,
-    readyAdd,
-    readyDelete,
-    readyEdit,
-    rowKey,
-    showQuery,
-    tableIsLoading,
+    formData, formIsAdd, formIsLoading, formRule, isShow, page, queryData, rowKey, showQuery, tableIsLoading,
+    close, formSubmit, listUpdate, queryFormSubmit, readyAdd, readyDelete, readyEdit, setFormRef,
 } = new SpikeTime()
+
+// TODO: 时间格式化, SeckillTimePeriod 存储格式不确定
 
 </script>
 
@@ -102,37 +81,31 @@ const {
         <!--  编辑抽屉 -->
         <el-dialog
             v-model="isShow"
-            :width="formIsAdd ? '60%' : '40%'"
             append-to-body
             close-on-click-modal
             destroy-on-close
             draggable
             lock-scroll
             modal
-            title="">
+            title=""
+            width="40%">
 
             <el-form :ref="setFormRef"
                      v-loading="formIsLoading"
                      :model="formData"
                      :rules="formRule"
-                     label-width="140px"
-                     style="max-width: 1000px">
-                <el-form-item label="开始时间" prop="start">
-                    <el-time-select v-model="formData.startTime"
-                                    :max-time="formData.endTime"
-                                    class="mr-4"
-                                    end="23:00"
-                                    placeholder="开始时间"
-                                    start="00:00"
-                                    step="01:00" />
-                </el-form-item>
-                <el-form-item label="结束时间" prop="length">
-                    <el-time-select v-model="formData.endTime"
-                                    :min-time="formData.startTime"
-                                    end="24:00"
-                                    placeholder="结束时间"
-                                    start="00:00"
-                                    step="01:00" />
+                     style="max-width: 1000px; min-height: 300px">
+                <el-form-item label="" prop="start">
+                    <el-time-picker
+                        v-model="formData.per"
+                        arrow-control
+                        editable
+                        end-placeholder="结束时间"
+                        format="HH:mm"
+                        is-range
+                        start-placeholder="开始时间"
+                        value-format="HH:mm"
+                    />
                 </el-form-item>
             </el-form>
 
