@@ -30,24 +30,29 @@ export class MallConfig implements CanUpdateEntity {
 export enum MallConfigKey {
     HOMEPAGE_CAROUSEL = '首页轮播图',
     HOMEPAGE_ADVERTISING = '首页广告图',
+    HOMEPAGE_CHANNEL = '首页栏目',
     HOMEPAGE_MENU = '首页菜单',
     HOMEPAGE_HOT = '热门搜索',
-    PERSONAL_CENTER = '个人中心'
+    PERSONAL_CENTER = '个人中心',
+    SECKILL_TIME_PERIOD = '秒杀时间段'
 }
 
 /**
  * 系统配置值类型映射
  */
 export interface MallConfigKeyMapping {
-    [MallConfigKey.HOMEPAGE_CAROUSEL]: HomePageCarousel,
-    [MallConfigKey.HOMEPAGE_ADVERTISING]: HomePageCarousel,
-    [MallConfigKey.HOMEPAGE_MENU]: Menu,
-    [MallConfigKey.HOMEPAGE_HOT]: Hot,
+    [MallConfigKey.HOMEPAGE_CAROUSEL]: HomePageCarousel
+    [MallConfigKey.HOMEPAGE_ADVERTISING]: HomePageCarousel
+    [MallConfigKey.HOMEPAGE_CHANNEL]: HomePageChannel
+    [MallConfigKey.HOMEPAGE_ADVERTISING]: HomePageCarousel
+    [MallConfigKey.HOMEPAGE_MENU]: Menu
+    [MallConfigKey.HOMEPAGE_HOT]: Hot
     [MallConfigKey.PERSONAL_CENTER]: Personal
+    [MallConfigKey.SECKILL_TIME_PERIOD]: SeckillTimePeriod
 }
 
 /**
- * 轮播图
+ * 轮播图 / 广告图
  */
 export class HomePageCarousel {
     /**
@@ -154,4 +159,32 @@ export class Personal {
      * 状态
      */
     public status: boolean
+}
+
+/**
+ * 首页栏目
+ */
+export class HomePageChannel {
+    /**
+     * 排序优先级
+     */
+    public sort: number
+    /**
+     * 显示用名称
+     */
+    public name: string
+}
+
+/**
+ * 秒杀时间段
+ */
+export class SeckillTimePeriod {
+    /**
+     * 开始时间: 时 分 秒
+     */
+    public start: string
+    /**
+     * 持续时间: 时分秒
+     */
+    public length: string
 }

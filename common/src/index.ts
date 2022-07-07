@@ -2,12 +2,23 @@
 export * from './constant/LogicDelete'
 
 // 实体类包
+export * from './entity/Entity'
 export * from './entity/BasicProduct'
 export * from './entity/BasicProductCategory'
+export * from './entity/BasicSpec'
+export * from './entity/BasicSpecProduct'
+
+export * from './entity/MallActivityBargain'
+export * from './entity/MallActivityGroup'
+export * from './entity/MallActivitySeckill'
+export * from './entity/MallActivityRecord'
 export * from './entity/MallConfig'
 export * from './entity/MallOrder'
+export * from './entity/MallProductMark'
+export * from './entity/MallProductReply'
 export * from './entity/MallRechargeRecord'
 export * from './entity/MallShopCart'
+
 export * from './entity/SysPassword'
 export * from './entity/SysPermission'
 export * from './entity/SysRole'

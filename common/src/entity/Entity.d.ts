@@ -3,7 +3,7 @@ import { LogicDelete } from '../constant/LogicDelete'
 /**
  * Mongo 实体
  */
-interface Entity {
+export interface Entity {
     /**
      * mongo 的主键ID
      */

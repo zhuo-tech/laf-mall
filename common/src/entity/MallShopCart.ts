@@ -1,4 +1,4 @@
-import { MoneyType } from '../type/Financial'
+import { BasicSpecProduct } from './BasicSpecProduct'
 import { CanUpdateEntity } from './Entity'
 
 /**
@@ -9,42 +9,32 @@ import { CanUpdateEntity } from './Entity'
 export class MallShopCart implements CanUpdateEntity {
     public static readonly NAME = 'mall_shop_cart'
     public _id: string
-    public createBy: string
-    public createTime: number
-    public updateBy: string
-    public updateTime: number
-
     /**
-     * 商品列表
+     * 用户ID
+     * @see SysUser._id
      */
-    public list: Array<MallShopCartItem>
-    /**
-     * 选中的商品ID列表
-     */
-    public selected: Array<string>
-}
-
-/**
- * 购物车商品
- */
-export class MallShopCartItem {
+    public userId: string
     /**
      * 商品ID
      * @see BasicProduct._id
      */
     public productId: string
     /**
-     * 加入时的价格
+     * 规格ID
+     * @see BasicSpecProduct._id
      */
-    public priceOnCreate: MoneyType
+    public specId: string
     /**
      * 数量, 最小1
      */
     public amount: number
     /**
-     * 有效, 默认 true
-     * 明确置为 false 时, 此项不可用
+     * 加入购物车时的商品规格信息
      */
-    public isEffective: boolean
+    public specInfo: BasicSpecProduct
 
+    public createBy: string
+    public createTime: number
+    public updateBy: string
+    public updateTime: number
 }

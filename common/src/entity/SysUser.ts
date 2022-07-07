@@ -6,39 +6,28 @@ import { IntegralEntity } from './Entity'
  * SysUser
  * @author 冰凝
  * @date 2022-06-14 下午 03:53
- * @deprecated 暂时弃用
  **/
 export class SysUser implements IntegralEntity {
     public static readonly NAME = 'sys_user'
 
     public _id: string
+    /**
+     * 用户名
+     */
     public username: string
-    public nickname: string
-    public avatar: string
     /**
-     * 账号冻结 默认 false
+     * 昵称
      */
-    public freeze: boolean
+    public nickname?: string
     /**
-     * 拥有的角色
-     * @see SysRole.key
+     * 头像
      */
-    public role: Array<string>
+    public avatar?: string
     /**
-     * 其他用户信息: 手机号, 地址, 等
+     * 会员等级
+     * TODO: 关联等级信息
      */
-    public basic: SysUserInfo
-    public createBy: string
-    public createTime: number
-    public isDelete: LogicDelete
-    public updateBy: string
-    public updateTime: number
-}
-
-/**
- * 用户其他信息
- */
-export class SysUserInfo {
+    public level?: string
     /**
      * 地址列表
      */
@@ -51,14 +40,39 @@ export class SysUserInfo {
      * 用户钱包: 余额, 支付密码, 积分 等
      */
     public wallet?: SysUserWallet
+    /**
+     * 分销信息
+     */
+    public mlm?: MlmInfo
+
+    /**
+     * 微信 openId
+     */
+    public wxOpenId: string
+    /**
+     * 是主播
+     */
+    public isLiver?: boolean
+    /**
+     * 经纬度
+     */
+    public longitude?: number
+    public latitude?: number
+
+    public createBy: string
+    public createTime: number
+    public isDelete: LogicDelete
+    public updateBy: string
+    public updateTime: number
 }
+
 
 /**
  * 用户地址信息
  */
 export class SysUserAddress {
     /**
-     * 地址排序, "隐式索引"
+     * 地址排序
      */
     public sort: number
     /**
@@ -75,19 +89,39 @@ export class SysUserAddress {
     public phone: string
 
     /**
-     * 省市区 详细地址, 邮政编码
+     * 省
      */
     public province: string
+    /**
+     * 市
+     */
     public city: string
+    /**
+     * 区
+     */
     public area: string
+    /**
+     * 详细地址
+     */
     public detailed: string
+    /**
+     * 邮政编码
+     */
     public postCode: string
-
+    /**
+     * 经度
+     */
+    public longitude?: number
+    /**
+     * 纬度
+     */
+    public latitude?: number
     /**
      * 是默认地址?
      * 一个用户, 仅能设置一个默认地址,更新时注意同步; 意外设置多个 行为未定义;
      */
     public isDefault: boolean
+    public createTime: number
 }
 
 /**
@@ -106,4 +140,31 @@ export class SysUserWallet {
      * 积分余额
      */
     public pointBalance: string
+    /**
+     * 佣金余额
+     */
+    public commission: MoneyType
+}
+
+/**
+ * 分销信息
+ * TODO: 分销记录 未定义
+ */
+export class MlmInfo {
+    /**
+     * 上级推广员ID {@link SysUser._id}
+     */
+    public upperLevelUid: string
+    /**
+     * 上 上级推广员ID {@link SysUser._id}
+     */
+    public topUid: string
+    /**
+     * 推广时间
+     */
+    public spreadTime: number
+    /**
+     * 下一级用户UID {@link SysUser._id}
+     */
+    public nextLevel: Array<string>
 }
