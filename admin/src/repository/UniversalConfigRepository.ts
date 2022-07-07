@@ -1,21 +1,28 @@
 import { cloud } from '@/config/LafConfig'
 import { CrudRequest } from '@/service/CrudRequest'
-import { MallConfig } from 'common'
+import { MallConfig, MallConfigKey } from 'common'
 import { Page } from 'laf-db-query-wrapper'
 
 const DB = cloud.database()
 
-export class ConfigRepository<E> implements CrudRequest<E & { _id: string }> {
-    public MainName: string
+export class UniversalConfigRepository<E> implements CrudRequest<E & { _id: string }> {
+    /**
+     * @see MallConfig.key
+     */
+    private readonly key: MallConfigKey
 
-    constructor(props: string) {
-        this.MainName = props
+    constructor(props: MallConfigKey) {
+        this.key = props
     }
 
     public createRequest = async (data: Partial<E & { _id: string }>): Promise<any> => {
-        console.log('mainName====>>>>', this)
         return await DB.collection(MallConfig.NAME)
-            .add({value: {...data}, key: this.MainName})
+            .add({
+                key: this.key,
+                value: {...data},
+                createTime: Date.now(),
+                updateTime: Date.now(),
+            })
     }
 
     public deleteByIdRequest = async (id: string | number): Promise<any> => {
@@ -24,11 +31,12 @@ export class ConfigRepository<E> implements CrudRequest<E & { _id: string }> {
             .remove()
     }
 
+    // noinspection JSUnusedLocalSymbols
     public pageRequest = async (page: Page<E & { _id: string }>, query: Partial<E & { _id: string }>): Promise<Page<E & { _id: string }>> => {
         const andIdPage = new Page<E & { _id: string }>(page.currentPage, page.pageSize)
 
         const whereFlag = {
-            key: this.MainName,
+            key: this.key,
         }
         const totalRes = await DB.collection(MallConfig.NAME)
             .where(whereFlag)
@@ -43,12 +51,14 @@ export class ConfigRepository<E> implements CrudRequest<E & { _id: string }> {
                 current: page.currentPage,
                 size: page.pageSize,
             })
+            .orderBy('createTime', 'desc')
+            .orderBy('updateTime', 'desc')
             .get<MallConfig>()
 
         andIdPage.total = totalRes.total
-        andIdPage.list = pageRes.data.map(item => ({...item.value, _id: item._id} as any)).sort((a, b) => (a.sort - b.sort))
-        console.log('pageRes=====>', pageRes)
-        console.log('andIdPage=====>', andIdPage.list)
+        andIdPage.list = pageRes.data
+            .map(item => ({...item.value, _id: item._id} as any))
+            .sort((a, b) => (a.sort - b.sort))
 
         return andIdPage
     }

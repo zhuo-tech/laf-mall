@@ -51,9 +51,9 @@ listUpdate()
 
         <el-row :gutter="20">
             <el-col :md="24" :xl="12">
-                <el-carousel :interval="4000" direction="vertical" height="40vh">
+                <el-carousel :interval="4000" height="40vh">
                     <el-carousel-item v-for="(item, index) in page.list" :key="index">
-                        <ShowImage :previewSrcList="[]" :src="item?.value?.href" fit="cover" style="width: 100%;height: 100%;" />
+                        <ShowImage :previewSrcList="[]" :src="item.href" fit="cover" style="width: 100%;height: 100%;" />
                     </el-carousel-item>
                 </el-carousel>
             </el-col>
@@ -61,13 +61,13 @@ listUpdate()
             <el-col :md="24" :xl="12">
                 <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
                     <el-table-column align="center" label="序号" type="index" width="60" />
-                    <el-table-column align="left" label="排序" min-width="100" prop="value.sort" />
-                    <el-table-column align="left" label="图片地址" min-width="100" prop="value.href">
+                    <el-table-column align="left" label="排序" min-width="100" prop="sort" />
+                    <el-table-column align="left" label="图片地址" min-width="100" prop="href">
                         <template v-slot="{row}">
-                            <ShowImage :src="row.value?.href" style="width: 50px;" />
+                            <ShowImage :src="row.href" style="width: 50px;" />
                         </template>
                     </el-table-column>
-                    <el-table-column align="left" label="目标地址" min-width="100" prop="value.target" />
+                    <el-table-column align="left" label="目标地址" min-width="100" prop="target" />
                     <el-table-column :formatter="formatDate()" align="center" label="创建时间" prop="createTime" width="180" />
                     <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="180">
                         <template v-slot="{row}">
@@ -109,16 +109,16 @@ listUpdate()
                      :rules="formRule"
                      label-width="140px"
                      style="max-width: 1000px">
-                <el-form-item label="图片地址" prop="value.href">
-                    <UploadFile v-model:href="formData.value.href" :dray="false" list-type="picture-card" />
+                <el-form-item label="图片地址" prop="href">
+                    <UploadFile v-model:href="formData.href" :dray="false" list-type="picture-card" />
                 </el-form-item>
 
-                <el-form-item label="排序" prop="value.sort">
-                    <el-input-number v-model="formData.value.sort" clearable />
+                <el-form-item label="排序" prop="sort">
+                    <el-input-number v-model="formData.sort" clearable />
                 </el-form-item>
 
-                <el-form-item label="跳转地址" prop="value.target">
-                    <el-input v-model="formData.value.target" clearable placeholder="跳转地址"></el-input>
+                <el-form-item label="跳转地址" prop="target">
+                    <el-input v-model="formData.target" clearable placeholder="跳转地址"></el-input>
                 </el-form-item>
 
                 <el-form-item>
