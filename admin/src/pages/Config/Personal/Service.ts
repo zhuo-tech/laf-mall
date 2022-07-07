@@ -1,8 +1,10 @@
-import { PersonalAndId, PersonalRepository } from '@/repository/PersonalRepository'
+import { UniversalConfigRepository } from '@/repository/UniversalConfigRepository'
 import BasisCrud from '@/service/BasisCrud'
 import { CrudRequest } from '@/service/CrudRequest'
 import { RuleItem } from 'async-validator'
-import { Menu, Personal } from 'common'
+import { MallConfigKey, Menu, Personal } from 'common'
+
+type PersonalAndId = Personal & { _id: string }
 
 export class PersonalService extends BasisCrud<PersonalAndId> {
 
@@ -14,7 +16,7 @@ export class PersonalService extends BasisCrud<PersonalAndId> {
         pcUrl: [{type: 'string', message: '必填', required: true}],
     }
 
-    protected readonly request: CrudRequest<PersonalAndId> = new PersonalRepository()
+    protected readonly request: CrudRequest<PersonalAndId> = new UniversalConfigRepository<Personal>(MallConfigKey.PERSONAL_CENTER)
 
     protected get formDataDefault(): Partial<Menu> {
         return Object.assign(new Menu(), {
