@@ -51,6 +51,7 @@ export class BasicProductRepository implements CrudRequest<BasicProductDetail> {
             .eqNotEmpty('categoryId', query.categoryId)
             .inNotEmpty('keyword', query.keyword)
             .eqNotEmpty('specType', query.specType as any)
+            .eq('isDelete', LogicDelete.NORMAL)
             .withOne(BasicProductRepository.withCategory)
             .orderByDesc('createTime')
             .page(page)
@@ -67,8 +68,9 @@ export class BasicProductRepository implements CrudRequest<BasicProductDetail> {
      * - 含 商品分类名
      * - 含 规格信息列表 specArr
      * @param id {@link BasicProduct._id}
+     * @param selectSpec 关联查询商品规格信息, 默认 true
      */
-    public async detail(id: string): Promise<BasicProductDetail & { specArr: Array<BasicSpecProductDetail> } | null> {
+    public async detail(id: string, selectSpec: boolean = true): Promise<BasicProductDetail & { specArr: Array<BasicSpecProductDetail> } | null> {
         if (!id) {
             return null
         }
