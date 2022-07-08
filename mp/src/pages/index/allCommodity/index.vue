@@ -8,6 +8,7 @@
           cancelButton="none"
           radius="100"
           placeholder="搜索商品信息"
+          v-model="key"
         />
         <view class="layout-box">
           <view class="layout-cut" @click="layout">
@@ -76,12 +77,12 @@
       </view>
     </view>
     <view class="filler"></view>
-    <view class="area">
+    <view v-show="key" class="area">
       <view v-show="cut == true" class="centre">
-        <view v-for="(item, index) in 2" class="centres">
-          <img class="centre-img" src="../../../static/img/1.png" alt="" />
+        <view v-for="item in data" class="centres">
+          <img class="centre-img" :src="item.cover" />
           <view class="centre-box">
-            <view class="centre-name">这是一个名字</view>
+            <view class="centre-name">{{ item.name }}</view>
             <view class="centre-price-box">
               <view class="centre-price">￥1580</view>
               <view class="work">已售100件</view>
@@ -90,9 +91,34 @@
         </view>
       </view>
       <view v-show="cut == false" class="sort-centre">
-        <view v-for="(item, index) in 4" class="sort-height">
-          <img class="sort-centre-img" src="../../../static/img/2.jpg" alt="" />
-          <view class="sort-centre-name">这是一个</view>
+        <view v-for="item in data" class="sort-height">
+          <img class="sort-centre-img" :src="item.cover" />
+          <view class="sort-centre-name">{{ item.name }}</view>
+          <view class="sort-centre-price">
+            <view class="sort-price"> ￥1580 </view>
+            <view class="sort-work"> 已售100件 </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view v-show="!key" class="area">
+      <view v-show="cut == true" class="centre">
+        <view v-for="item in database" class="centres">
+          <img class="centre-img" :src="item.cover" />
+          <view class="centre-box">
+            <view class="centre-name">{{ item.name }}</view>
+            <view class="centre-price-box">
+              <view class="centre-price">￥1580</view>
+              <view class="work">已售100件</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view v-show="cut == false" class="sort-centre">
+        <view v-for="item in database" class="sort-height">
+          <img class="sort-centre-img" :src="item.cover" />
+          <view class="sort-centre-name">{{ item.name }}</view>
           <view class="sort-centre-price">
             <view class="sort-price"> ￥1580 </view>
             <view class="sort-work"> 已售100件 </view>
@@ -104,15 +130,55 @@
 </template>
 
 <script setup lang="ts">
+import { onLoad } from "@dcloudio/uni-app";
 import { reactive, toRefs, ref } from "vue";
+import { cloud } from "../../../api/cloud";
+const db = cloud.database();
+//排版样式
 const cut = ref(true);
+//价格排序
 const price = ref(0);
+//销量排序
 const stock = ref(0);
+//搜索带来的参数
+const key = ref();
+//搜索的数据
+const data = ref();
+//全部商品
+const database = ref();
 
+getdatabase();
+
+//上个页面带来的搜索参数
+onLoad((opt) => {
+  getdata(opt.id);
+  key.value = opt.id;
+});
+
+//模糊搜索
+async function getdata(key: any) {
+  const r = await db
+    .collection("basic_product")
+    .where({
+      onTheShelf: true,
+      name: eval("/" + key + "/i"),
+    })
+    .get();
+  data.value = r.data;
+}
+
+//获取全部商品
+async function getdatabase() {
+  const res = await db.collection("basic_product").get();
+  database.value = res.data;
+}
+
+//排版
 function layout() {
   cut.value = !cut.value;
 }
 
+//排序
 function set_where(index: number) {
   switch (index) {
     case 0:

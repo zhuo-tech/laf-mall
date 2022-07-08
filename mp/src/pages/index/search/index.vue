@@ -1,7 +1,13 @@
 <template>
   <view class="page">
     <view>
-      <uni-search-bar clearButton="always" radius="100" placeholder="请输入关键词" />
+      <uni-search-bar
+        v-model="search"
+        clearButton="always"
+        radius="100"
+        placeholder="请输入关键词"
+        @search="GoAllCommodity(search)"
+      />
     </view>
     <view class="hot-seek">
       <view class="seekbox">
@@ -15,7 +21,15 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, ref } from "vue";
+import { cloud } from "../../../api/cloud";
+const search = ref("");
+
+function GoAllCommodity(key: any) {
+  uni.navigateTo({
+    url: `/pages/index/allCommodity/index?id=${key}`,
+  });
+}
 </script>
 
 <style lang="scss" scoped>
