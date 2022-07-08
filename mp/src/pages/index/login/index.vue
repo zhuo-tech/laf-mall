@@ -46,7 +46,11 @@
                 color="#ee5382"
               />
             </checkbox-group>
-            <view class="deal-page">阅读并同意《登录注册协议》</view>
+            <view class="deal-page"
+              >阅读并同意<a href="" style="text-decoration: none"
+                >《登录注册协议》</a
+              ></view
+            >
           </view>
           <view @click="verification" class="login-hint"> 登录 </view>
         </view>
@@ -60,12 +64,19 @@ import { reactive, toRefs, ref } from "vue";
 import { showTip, showSuccess } from "../../../utils/show";
 import { cloud } from "../../../api/cloud";
 
+//验证手机号
 let tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
-const index = ref(0); //登录方式切换
-const checked = ref(false); //判断是否勾选协议
+//登录方式切换
+const index = ref(0);
+//判断是否勾选协议
+const checked = ref(false);
+//手机号
 const phone = ref("");
+//密码
 const password = ref("");
+//验证码
 const code = ref();
+//验证码倒计时
 const time = ref();
 
 //切换登录方式
@@ -88,6 +99,7 @@ async function verification() {
   if (checked.value == false) {
     return showTip("请勾选用户协议");
   }
+  //获取云函数验证
   const r = await cloud.invokeFunction("app-login-password", {
     username: phone.value,
     password: password.value,
@@ -98,13 +110,15 @@ async function verification() {
   if (r.code == 0) {
     showSuccess("登录成功");
   }
-  localStorage.setItem("token", r.data.access_token);
-  let user = JSON.stringify(r.data.user);
+
+  localStorage.setItem("access_token", r.data.access_token);
+  const user = JSON.stringify(r.data.user);
   localStorage.setItem("user", user);
   localStorage.setItem("expire", r.data.expire);
   Gomine();
 }
 
+//登录成功跳转
 function Gomine() {
   uni.reLaunch({
     url: `/pages/index/mine`,

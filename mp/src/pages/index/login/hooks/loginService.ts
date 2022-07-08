@@ -4,11 +4,11 @@ import { ref } from "vue";
 
 
 export function setToken(token: any) {
-  uni.setStorageSync('token', token)
+  uni.setStorageSync('access_token', token)
 }
 
 export function getToken() {
-  return !!uni.getStorageSync('token')
+  return !!uni.getStorageSync('access_token')
 
 }
 

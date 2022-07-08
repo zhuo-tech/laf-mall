@@ -96,11 +96,11 @@
         <view
           @click="GoodsDetails"
           v-show="recom == 0"
-          v-for="item in 5"
+          v-for="item in data"
           class="product-item"
         >
-          <img class="product-img" src="../../static/img/3.jpg" alt="" />
-          <view class="product-text">精品地毯</view>
+          <img class="product-img" :src="item.cover" alt="" />
+          <view class="product-text">{{ item.name }}</view>
           <view style="display: flex">
             <view class="product-price">￥1280</view>
             <view class="product-Past-price">￥1580</view>
@@ -140,14 +140,26 @@
 
 <script setup lang="ts">
 import { ref, reactive } from "vue";
+import { cloud } from "../../api/cloud";
 const recom = ref(0);
 const tablist = reactive([{ name: "精品推荐" }, { name: "新品" }, { name: "优惠" }]);
 const lastname = localStorage.getItem("token");
 
+const db = cloud.database();
+const data = ref();
+
+getdata();
+async function getdata() {
+  const r = await db.collection("basic_product").get();
+  data.value = r.data;
+}
+
+//精品推荐
 function recomTab(index: number) {
   recom.value = index;
 }
 
+//搜索跳转
 function goGoodSearch() {
   uni.navigateTo({
     url: "/pages/index/search/index",
@@ -161,30 +173,33 @@ function goAllCommodity() {
   });
 }
 
+//新品 优惠切换
 function GoodsDetails() {
   uni.navigateTo({
     url: "/pages/index/GoodsDetails/index",
   });
 }
 
+//跳转秒杀
 function GoSeckill() {
   uni.navigateTo({
     url: "/pages/index/seckill/index",
   });
 }
-
+//跳转拼团
 function GoGroupbooking() {
   uni.navigateTo({
     url: "/pages/index/groupbooking/index",
   });
 }
 
+//跳转积分商城
 function GoIntegral() {
   uni.navigateTo({
     url: "/pages/index/integral/index",
   });
 }
-
+//跳转砍价
 function GoBargain() {
   uni.navigateTo({
     url: "/pages/index/bargain/index",

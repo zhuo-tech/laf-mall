@@ -24,7 +24,7 @@
                 :src="tupian"
               ></image
             ></view>
-            <view class="name">有时候有时候</view>
+            <view class="name">{{ name }}</view>
           </view>
           <view class="wire"></view>
           <view class="usable">
@@ -131,51 +131,70 @@
 <script setup lang="ts">
 import { onLoad } from "@dcloudio/uni-app";
 import { reactive, toRefs, ref } from "vue";
+import { cloud } from "../../api/cloud";
 import tupian from "../../static/img/3.jpg";
 import { getToken } from "./login/hooks/loginService";
 
+const name = ref("");
+
+if (getToken()) {
+  //获取localStorage缓存
+  const e = localStorage.getItem("user");
+  //转对象
+  const obj = JSON.parse(e!);
+  name.value = obj.nickname;
+}
+
+//登录
 function GoLogin() {
   uni.navigateTo({
     url: "/pages/index/login/index",
   });
 }
 
+//跳转我的订单
 function GoAllrders(item: any) {
   uni.navigateTo({
     url: `/pages/index/allrders/index?id=${item}`,
   });
 }
 
+//跳转到设置
 function GoSet() {
   uni.navigateTo({
     url: "/pages/index/set/index",
   });
 }
 
+//跳转到我的足迹
 function GoStrack() {
   uni.navigateTo({
     url: "/pages/index/track/index",
   });
 }
 
+//跳转到我的收藏
 function GoCollect() {
   uni.navigateTo({
     url: "/pages/index/collect/index",
   });
 }
 
+//跳转到会员中心
 function GoMembership() {
   uni.navigateTo({
     url: "/pages/index/membership/index",
   });
 }
 
+//跳转到优惠券
 function GoDiscounts() {
   uni.navigateTo({
     url: "/pages/index/discounts/index",
   });
 }
 
+//跳转地址管理
 function GoLocation() {
   uni.navigateTo({
     url: "/pages/index/location/index",

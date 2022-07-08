@@ -24,33 +24,16 @@
     <view v-for="(item, index) in 3" class="goods">
       <view style="display: flex">
         <view class="checkbox">
-          <label style="display: flex">
-            <view
-              style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 34rpx;
-                height: 34rpx;
-                box-sizing: border-box;
-                border-radius: 50%;
-                margin-right: 16rpx;
-                margin-top: 10rpx;
-              "
-              :style="
-                isAllSelect && cartCount > 0
-                  ? 'background-color:#EE5382;'
-                  : 'border:2rpx solid #b5b5b5;'
-              "
-              @click="changeStatusAll"
-            >
-              <image
-                v-if="isAllSelect && cartCount > 0"
-                src="../../static/icon/gouxuan.png"
-                style="width: 100%; height: 100%"
+          <checkbox-group @change="checkboxChange(index)">
+            <label>
+              <checkbox
+                :checked="checked"
+                style="transform: scale(0.7)"
+                :value="item"
+                color="#ee5382"
               />
-            </view>
-          </label>
+            </label>
+          </checkbox-group>
         </view>
         <img class="goods-img" src="../../static/img/3.jpg" alt="" />
         <view style="margin-left: 20rpx">
@@ -64,33 +47,14 @@
     </view>
     <view class="bottom">
       <view class="checkbox">
-        <label style="display: flex">
-          <view
-            style="
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              width: 34rpx;
-              height: 34rpx;
-              box-sizing: border-box;
-              border-radius: 50%;
-              margin-right: 16rpx;
-              margin-left: 10rpx;
-            "
-            :style="
-              isAllSelect && cartCount > 0
-                ? 'background-color:#EE5382;'
-                : 'border:2rpx solid #b5b5b5;'
-            "
-            @click="changeStatusAll"
-          >
-            <image
-              v-if="isAllSelect && cartCount > 0"
-              src="../../static/icon/gouxuan.png"
-              style="width: 100%; height: 100%"
-            />
-          </view>
-        </label>
+        <checkbox-group @change="all">
+          <checkbox
+            :checked="checkedall"
+            style="transform: scale(0.7)"
+            value="cb"
+            color="#ee5382"
+          />
+        </checkbox-group>
         <view v-show="redact == false" class="checkall">全选</view>
         <view v-show="redact == true" class="checkall-in">合计:￥0</view>
       </view>
@@ -103,15 +67,21 @@
 <script setup lang="ts">
 import { reactive, toRefs, ref } from "vue";
 
+const checked = ref(false);
+const checkedall = ref(false);
 const redact = ref(true);
 
 function ChooseRedact() {
   redact.value = !redact.value;
 }
 
-function touch(e: any) {
-  console.log(e);
-  console.log("现在是什么");
+function checkboxChange(index: any) {
+  console.log(index, "现在点击的");
+}
+
+function all() {
+  checked.value = !checked.value;
+  checkedall.value = !checkedall.value;
 }
 </script>
 
@@ -201,12 +171,12 @@ function touch(e: any) {
       .checkall {
         font-size: 30rpx;
         color: #707070;
-        line-height: 30rpx;
+        line-height: 45rpx;
       }
       .checkall-in {
         font-size: 30rpx;
         color: #ee5382;
-        line-height: 30rpx;
+        line-height: 45rpx;
       }
     }
     .del {
