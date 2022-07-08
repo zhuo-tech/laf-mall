@@ -59,11 +59,11 @@ const handleInputConfirm = () => {
         ref="InputRef"
         v-model="inputValue"
         class="ml-1 w-20"
-        size="small"
+        size="large"
         @blur="handleInputConfirm"
         @keyup.enter="handleInputConfirm"
     />
-    <el-button v-else class="button-new-tag ml-1" size="small" @click="showInput">
+    <el-button v-else class="button-new-tag ml-1" size="large" @click="showInput">
         + 新栏目
     </el-button>
 </template>
