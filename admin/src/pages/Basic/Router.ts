@@ -69,6 +69,14 @@ const RouterConfig: RouteRecordRaw = {
                 title: '编辑商品',
             },
         },
+        {
+            path: 'product/detail/:id',
+            component: () => import('./Product/ProductDetails.vue'),
+            meta: {
+                isMenu: false,
+                title: '商品详情',
+            },
+        },
     ],
 }
 
@@ -88,6 +96,13 @@ export class BasicRouterControl {
      */
     public static toProductUpdate(id: string) {
         VueRouter.push('/basic/product/edit/' + id)
+    }
+
+    /**
+     * @param id {@link BasicProduct._id}
+     */
+    public static toProductDetail(id: string) {
+        VueRouter.push('/basic/product/detail/' + id)
     }
 }
 

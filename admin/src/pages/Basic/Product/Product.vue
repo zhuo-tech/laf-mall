@@ -22,6 +22,10 @@ import { BasicRouterControl } from '@/pages/Basic/Router'
     <el-button @click="BasicRouterControl.toProductUpdate('2333')">
         去编辑页面
     </el-button>
+
+    <el-button @click="BasicRouterControl.toProductDetail('23333')">
+        去详情页面
+    </el-button>
 </el-card>
 </template>
 
