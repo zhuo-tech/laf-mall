@@ -2,7 +2,7 @@ import { FileService, FileServiceKey } from '@/service/FileService'
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
 import { Inject } from 'common'
 import { ElMessage } from 'element-plus'
-import { ExtractPropTypes, onBeforeUnmount, ref, shallowRef } from 'vue'
+import { ExtractPropTypes, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
 
 /**
  * RichTextEditor
@@ -57,6 +57,8 @@ export class RichTextEditor {
         // 自定义 Alert
         this.editorConfig.customAlert = this.customAlert
 
+        // 迟到的回显: 组件已经创建之后, 外部需要替换数据
+        watch(() => this.props.value, () => this.htmlValue.value = this.props.value)
         onBeforeUnmount(() => this.editorRef.value?.destroy?.())
     }
 
@@ -96,8 +98,15 @@ export class RichTextEditor {
 
     public handleCreated = (editor: IDomEditor) => {
         this.editorRef.value = editor
-        // 默认值 / 回显
-        this.editorRef.value.setHtml(this.props.value)
+        // 静态默认值
+        this.echo()
+    }
+
+    /**
+     * 默认值 / 回显
+     */
+    private echo() {
+        this.editorRef.value!.setHtml(this.props.value)
     }
 
     public onChange = (editor: IDomEditor) => this.emits('update:value', editor.getHtml())
