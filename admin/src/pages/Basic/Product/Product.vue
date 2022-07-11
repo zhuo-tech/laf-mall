@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import CrudPagination from '@/components/CrudPagination/CrudPagination'
+import ShowImage from '@/components/Show/ShowImage.vue'
 import { ProductService } from '@/pages/Basic/Product/Service'
 import { BasicRouterControl } from '@/pages/Basic/Router'
 import { CirclePlusFilled, Delete, Edit, Refresh, Search, Warning } from '@element-plus/icons-vue'
@@ -20,6 +22,7 @@ const {
     readyAdd,
     queryFormSubmit,
 } = new ProductService()
+listUpdate()
 </script>
 
 <template>
@@ -54,13 +57,21 @@ const {
     <!-- 表格 -->
     <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
         <el-table-column align="center" label="序号" type="index" width="60" />
-        <el-table-column align="left" label="所属分类" min-width="100" prop="categoryId" />
+        <el-table-column align="left" label="所属分类" min-width="150" prop="categoryId">
+            <template v-slot="{row}">
+                <span>{{ row.category.name }}</span>
+            </template>
+        </el-table-column>
         <el-table-column align="left" label="商品名称" prop="name" width="130" />
         <el-table-column align="left" label="商品价格" min-width="100" prop="nickname" />
         <el-table-column align="left" label="会员价" min-width="200" prop="roleInfo" />
-        <el-table-column align="left" label="销量" min-width="200" prop="roleInfo" />
+        <el-table-column align="left" label="销量" min-width="200" prop="virtualSales" />
         <el-table-column align="left" label="库存" min-width="200" prop="roleInfo" />
-        <el-table-column align="left" label="状态" min-width="200" prop="status" />
+        <el-table-column align="left" label="状态" min-width="200" prop="status">
+            <template v-slot="{row}">
+                <span>{{ row.status ? '已启动' : '关闭' }}</span>
+            </template>
+        </el-table-column>
         <el-table-column align="left" label="排序" min-width="200" prop="sort" />
         <el-table-column align="left" label="移动端封面图" min-width="200" prop="uniUrl">
             <template v-slot="{row}">
