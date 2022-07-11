@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { BasicSpecProduct, SpecType } from 'common'
-import { reactive, watch } from 'vue'
+import { ref, watch } from 'vue'
+import PriceForm from '../PriceForm/PriceForm.vue'
 
 const props = defineProps<{
     specType: SpecType
@@ -9,15 +10,16 @@ const props = defineProps<{
 
 const emits = defineEmits<{
     (event: 'update', value: Partial<BasicSpecProduct>): void
-    (event: 'update:value', value: Partial<BasicSpecProduct>): void
 }>()
 
-const formData = reactive<Partial<BasicSpecProduct>>(props.value ?? new BasicSpecProduct())
+let formData = ref<Partial<BasicSpecProduct>>()
 
-watch(() => formData, () => {
-    emits('update', formData)
-    emits('update:value', formData)
+watch(() => props.value, (newValue) => {
+    console.log('监听', newValue)
+    newValue ? formData.value = newValue : formData.value = new BasicSpecProduct()
+    emits('update', formData.value)
 }, {
+    immediate: true,
     deep: true,
 })
 
@@ -42,9 +44,7 @@ const {SingleSpec, MultipleSpec} = SpecType
             </el-row>
             <el-row :gutter="10">
                 <el-col :span="12">
-                    <el-form-item label="价格" prop="price">
-                        <el-input-number v-model="formData.price" :controls="true" :min="0" placeholder="请输入价格"></el-input-number>
-                    </el-form-item>
+                    <PriceForm v-model:value="formData.price" label="价格" placeholder="请输入商品价格" />
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="成本价" prop="cost">
