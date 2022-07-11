@@ -134,7 +134,7 @@ export class EditorService {
                 })
         } else {
             this.specData.value = new BasicSpecProduct()
-            Object.assign(this.formData, new BasicProduct())
+            Object.assign(this.formData, this.formDataDefault)
         }
     }
 
