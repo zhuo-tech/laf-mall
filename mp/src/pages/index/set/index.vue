@@ -17,8 +17,8 @@
           <img class="nick-img" src="../../../static/icon/alter.png" alt="" />
         </view>
         <view class="nikename-phone">
-          <view class="nick">有时候有时候</view>
-          <view class="phone">绑定手机号:18888888888</view>
+          <view class="nick">{{ nickname }}</view>
+          <view class="phone">绑定手机号:{{ phone }}</view>
         </view>
       </view>
     </view>
@@ -26,7 +26,13 @@
       <view class="mid-nick">
         <view class="nick">昵称</view>
         <view>
-          <input class="now-nick" type="text" maxlength="9" placeholder="有时候有时候" />
+          <input
+            v-model="changenikename"
+            class="now-nick"
+            type="text"
+            maxlength="9"
+            :placeholder="nickname"
+          />
         </view>
       </view>
     </view>
@@ -34,26 +40,65 @@
       <view class="mid-nick-p">
         <view class="nick-p">密码</view>
         <view>
-          <input class="now-nick-p" type="password" maxlength="12" placeholder="******" />
+          <input
+            @click="ChangeHint()"
+            v-model="cipher"
+            class="now-nick-p"
+            type="password"
+            maxlength="12"
+            placeholder="******"
+          />
         </view>
       </view>
     </view>
 
-    <view class="save">保存修改</view>
+    <view @click="changepassword" class="save">保存修改</view>
     <view @click="exit()" class="logout">退出登录</view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, ref } from "vue";
+import { cloud } from "../../../api/cloud";
+import { showSuccess, showTip } from "../../../utils/show";
 
+const cipher = ref("");
+//更改昵称
+const changenikename = ref("");
+
+//获取localStorage缓存
+const e = localStorage.getItem("user");
+
+//转对象
+const obj = JSON.parse(e!);
+
+//昵称
+const nickname = obj.nickname;
+
+//手机号
+const phone = obj.username;
 
 //退出登录
 function exit() {
   localStorage.clear();
+  showSuccess("退出成功");
   Gomine();
 }
 
+function ChangeHint() {
+  return showTip("密码长度在6~12位");
+}
+
+async function changepassword() {
+  const r = await cloud.invokeFunction("app-change-password", {
+    username: obj._id,
+    cipher: cipher.value,
+    nickname: changenikename.value,
+  });
+  if (r.code == 0) {
+    showSuccess("修改成功");
+  }
+}
 
 //跳转登录页面
 function Gomine() {
