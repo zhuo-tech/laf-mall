@@ -30,7 +30,7 @@ import { ElInput } from 'element-plus'
 import { nextTick, ref, watch } from 'vue'
 
 const props = defineProps<{
-    value: ProductTag[]
+    value?: ProductTag[]
 }>()
 
 const emits = defineEmits<{

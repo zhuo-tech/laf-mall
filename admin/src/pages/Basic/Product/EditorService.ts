@@ -49,10 +49,7 @@ export class EditorService {
         this.mallConfigRepository.productChannel()
             .then(list => this.channelList.value = list)
 
-        onActivated(() => {
-            this.editFormDefault()
-        })
-
+        onActivated(() => this.formDateInit())
     }
 
     /**
@@ -60,13 +57,20 @@ export class EditorService {
      */
     public formSubmit = () => {
         const asyncSave = async () => {
+            let productId = this.formData._id
             if (this.isEdit.value) {
-                this.specData.value.productId = await this.productRepository.updateRequest(this.formData)
+                await this.productRepository.updateRequest(this.formData)
+            } else {
+                productId = await this.productRepository.createRequest(this.formData)
+            }
+
+            if (this.specData.value._id) {
                 await this.specProductRepository.updateRequest(this.specData.value)
             } else {
-                this.specData.value.productId = await this.productRepository.createRequest(this.formData)
+                this.specData.value.productId = productId
                 await this.specProductRepository.createRequest(this.specData.value)
             }
+
             ElMessage.success(this.isEdit ? '编辑成功' : '添加成功')
             BasicRouterControl.toProduct()
             this.formIsLoading.value = true
@@ -114,7 +118,7 @@ export class EditorService {
     /**
      * 编辑页面初始化数据
      */
-    private editFormDefault = () => {
+    private formDateInit = () => {
         if (this.isEdit.value) {
             this.productRepository.detail(this.productId.value)
                 .then(productDetail => {
@@ -128,6 +132,9 @@ export class EditorService {
                     }
                     Object.assign(this.formData, productDetail)
                 })
+        } else {
+            this.specData.value = new BasicSpecProduct()
+            Object.assign(this.formData, new BasicProduct())
         }
     }
 
