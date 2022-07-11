@@ -4,6 +4,7 @@ import ShowImage from '@/components/Show/ShowImage.vue'
 import { ProductService } from '@/pages/Basic/Product/Service'
 import { BasicRouterControl } from '@/pages/Basic/Router'
 import { CirclePlusFilled, Delete, Edit, Refresh, Search, Warning } from '@element-plus/icons-vue'
+import { onUpdated } from '@vue/runtime-core'
 
 /**
  * Product
@@ -22,7 +23,11 @@ const {
     readyAdd,
     queryFormSubmit,
 } = new ProductService()
+onUpdated(() => {
+    listUpdate()
+})
 listUpdate()
+
 </script>
 
 <template>

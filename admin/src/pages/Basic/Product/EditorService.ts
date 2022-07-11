@@ -1,3 +1,4 @@
+import { BasicRouterControl } from '@/pages/Basic/Router'
 import { BasicCategoryRepository, ProductCategoryTreeNode } from '@/repository/BasicCategoryRepository'
 import { BasicProductRepository } from '@/repository/BasicProductRepository'
 import { BasicSpecProductRepository } from '@/repository/BasicSpecProductRepository'
@@ -47,7 +48,7 @@ export class EditorService {
 
         this.mallConfigRepository.productChannel()
             .then(list => this.channelList.value = list)
-
+        console.log('是否是编辑页', this.isEdit.value)
         if (this.isEdit.value) {
             this.productRepository.detail(this.productId.value)
                 .then(productDetail => {
@@ -104,18 +105,29 @@ export class EditorService {
         const asyncSave = async () => {
             this.specData.value.productId = await this.productRepository.createRequest(this.formData)
             await this.specProductRepository.createRequest(this.specData.value)
-
-            ElMessage.success('success')
             // TODO: ...
         }
-
+        const asyncEdit = async () => {
+            this.specData.value.productId = await this.productRepository.updateRequest(this.formData)
+            await this.specProductRepository.updateRequest(this.specData.value)
+        }
+        ElMessage.success(this.isEdit ? '编辑成功' : '添加成功')
+        BasicRouterControl.toProduct()
         this.formIsLoading.value = true
-        asyncSave()
-            .catch(err => {
-                console.log('保存失败', err)
-                ElMessage.error(err?.message)
-            })
-            .finally(() => this.formIsLoading.value = false)
+        if (this.isEdit.value) {
+            asyncEdit().catch(err => {
+                    console.log('保存失败', err)
+                    ElMessage.error(err?.message)
+                })
+                .finally(() => this.formIsLoading.value = false)
+        } else {
+            asyncSave()
+                .catch(err => {
+                    console.log('保存失败', err)
+                    ElMessage.error(err?.message)
+                })
+                .finally(() => this.formIsLoading.value = false)
+        }
     }
 
     public changeChannel = () => {
@@ -127,10 +139,4 @@ export class EditorService {
             this.formRef.value = ref
         }
     }
-
-    /**
-     * 初始化表单
-     * */
-    private resetForm = () => this.formData = Object.assign(this.formData, this.formDataDefault)
-
 }
