@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout/index.vue'
-import {VueRouter} from '@/main'
-import {ShoppingCartFull, Ticket, Timer, TrendCharts} from '@element-plus/icons-vue'
-import {RouteRecordRaw} from 'vue-router'
+import { VueRouter } from '@/main'
+import { ShoppingCartFull, Ticket, Timer, TrendCharts } from '@element-plus/icons-vue'
+import { RouteRecordRaw } from 'vue-router'
 
 /**
  * Router
@@ -88,7 +88,7 @@ const RouterConfig: RouteRecordRaw = {
         },
         {
             path: 'bargain/create',
-            component: () => import('./Seckill/Seckill.vue'),
+            component: () => import('./Bargain/BargainEditor.vue'),
             meta: {
                 isMenu: false,
                 title: '新增砍价活动',
@@ -96,7 +96,7 @@ const RouterConfig: RouteRecordRaw = {
         },
         {
             path: 'bargain/update/:id',
-            component: () => import('./Seckill/Seckill.vue'),
+            component: () => import('./Bargain/BargainEditor.vue'),
             meta: {
                 isMenu: false,
                 title: '编辑砍价活动',
