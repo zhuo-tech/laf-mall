@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout/index.vue'
-import { VueRouter } from '@/main'
-import { Document, Film, FolderOpened, PictureFilled, ShoppingBag } from '@element-plus/icons-vue'
-import { RouteRecordRaw } from 'vue-router'
+import {VueRouter} from '@/main'
+import {Document, Film, FolderOpened, PictureFilled, ShoppingBag} from '@element-plus/icons-vue'
+import {RouteRecordRaw} from 'vue-router'
 
 /**
  * Router
@@ -62,7 +62,7 @@ const RouterConfig: RouteRecordRaw = {
             },
         },
         {
-            path: 'product/edit/:id',
+            path: 'product/update/:id',
             component: () => import('./Product/ProductEditor.vue'),
             meta: {
                 isMenu: false,
@@ -95,7 +95,7 @@ export class BasicRouterControl {
      * @param id {@link BasicProduct._id}
      */
     public static toProductUpdate(id: string) {
-        VueRouter.push('/basic/product/edit/' + id)
+        VueRouter.push('/basic/product/update/' + id)
     }
 
     /**
