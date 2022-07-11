@@ -69,4 +69,5 @@ const handleInputConfirm = () => {
     inputVisible.value = false
     inputValue.value = ''
 }
+console.log('编辑的tags', props.value)
 </script>

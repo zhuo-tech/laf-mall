@@ -46,7 +46,7 @@ export class BasicProductRepository implements CrudRequest<BasicProductDetail> {
     }
 
     public pageRequest = async (page: Page<BasicProductDetail>, query: Partial<BasicProductDetail>): Promise<Page<BasicProductDetail>> => {
-        return await this.client.queryWrapper()
+        const res = await this.client.queryWrapper()
             .likeNotEmpty('name', query.name)
             .eqNotEmpty('categoryId', query.categoryId)
             .inNotEmpty('keyword', query.keyword)
@@ -55,6 +55,8 @@ export class BasicProductRepository implements CrudRequest<BasicProductDetail> {
             .withOne(BasicProductRepository.withCategory)
             .orderByDesc('createTime')
             .page(page)
+        console.log('商品', res)
+        return res
     }
 
     public updateRequest = async (data: Partial<BasicProductDetail>): Promise<any> => {

@@ -75,8 +75,7 @@ const {
                         filterable
                         multiple
                         placeholder="请输入关键字"
-                        style="width: 100%"
-                    >
+                        style="width: 100%">
                         <el-option v-for="item in formData.keyword" :key="item.value" :label="item" :value="item" />
                     </el-select>
                 </el-form-item>
@@ -118,19 +117,19 @@ const {
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="虚拟销量" prop="virtualSales">
-                            <el-input-number v-model="formData.virtualSales"></el-input-number>
+                            <el-input-number v-model="formData.virtualSales" :min="0"></el-input-number>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="浏览量" prop="browseCount">
-                            <el-input-number v-model="formData.browseCount"></el-input-number>
+                            <el-input-number v-model="formData.browseCount" :min="0"></el-input-number>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="排序" prop="sort">
-                            <el-input-number v-model="formData.sort"></el-input-number>
+                            <el-input-number v-model="formData.sort" :min="0"></el-input-number>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">

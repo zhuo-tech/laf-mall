@@ -55,7 +55,11 @@ export class EditorService {
                         ElMessage.error('商品ID无效: ' + this.productId.value)
                         return
                     }
-                    console.log('edit => ', productDetail)
+                    if (productDetail.specType === SpecType.SingleSpec) {
+                        this.specData.value = productDetail.specArr[0]
+                    }
+                    Object.assign(this.formData, productDetail)
+                    console.log('formData ===>', this.formData)
                 })
         }
     }
@@ -97,8 +101,6 @@ export class EditorService {
      * 表单提交
      */
     public formSubmit = () => {
-        console.log('规格表单', this.specData.value)
-
         const asyncSave = async () => {
             this.specData.value.productId = await this.productRepository.createRequest(this.formData)
             await this.specProductRepository.createRequest(this.specData.value)
