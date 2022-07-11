@@ -7,7 +7,7 @@ import { computed } from '@vue/runtime-core'
 import { RuleItem } from 'async-validator'
 import { BasicProduct, BasicSpecProduct, Entity, HomePageChannel, Inject, ProductTag, SpecType } from 'common'
 import { ElMessage, FormInstance } from 'element-plus'
-import { reactive, Ref, ref } from 'vue'
+import { onActivated, reactive, ref, Ref } from 'vue'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 
 export class EditorService {
@@ -48,21 +48,34 @@ export class EditorService {
 
         this.mallConfigRepository.productChannel()
             .then(list => this.channelList.value = list)
-        console.log('是否是编辑页', this.isEdit.value)
-        if (this.isEdit.value) {
-            this.productRepository.detail(this.productId.value)
-                .then(productDetail => {
-                    if (!productDetail) {
-                        ElMessage.error('商品ID无效: ' + this.productId.value)
-                        return
-                    }
-                    if (productDetail.specType === SpecType.SingleSpec) {
-                        this.specData.value = productDetail.specArr[0]
-                    }
-                    Object.assign(this.formData, productDetail)
-                    console.log('formData ===>', this.formData)
-                })
+
+        onActivated(() => {
+            this.editFormDefault()
+        })
+
+    }
+
+    /**
+     * 表单提交
+     */
+    public formSubmit = () => {
+        const asyncSave = async () => {
+            if (this.isEdit.value) {
+                this.specData.value.productId = await this.productRepository.updateRequest(this.formData)
+                await this.specProductRepository.updateRequest(this.specData.value)
+            } else {
+                this.specData.value.productId = await this.productRepository.createRequest(this.formData)
+                await this.specProductRepository.createRequest(this.specData.value)
+            }
+            ElMessage.success(this.isEdit ? '编辑成功' : '添加成功')
+            BasicRouterControl.toProduct()
+            this.formIsLoading.value = true
         }
+        asyncSave().catch(err => {
+                console.log('保存失败', err)
+                ElMessage.error(err?.message)
+            })
+            .finally(() => this.formIsLoading.value = false)
     }
 
     /**
@@ -99,34 +112,22 @@ export class EditorService {
     }
 
     /**
-     * 表单提交
+     * 编辑页面初始化数据
      */
-    public formSubmit = () => {
-        const asyncSave = async () => {
-            this.specData.value.productId = await this.productRepository.createRequest(this.formData)
-            await this.specProductRepository.createRequest(this.specData.value)
-            // TODO: ...
-        }
-        const asyncEdit = async () => {
-            this.specData.value.productId = await this.productRepository.updateRequest(this.formData)
-            await this.specProductRepository.updateRequest(this.specData.value)
-        }
-        ElMessage.success(this.isEdit ? '编辑成功' : '添加成功')
-        BasicRouterControl.toProduct()
-        this.formIsLoading.value = true
+    private editFormDefault = () => {
         if (this.isEdit.value) {
-            asyncEdit().catch(err => {
-                    console.log('保存失败', err)
-                    ElMessage.error(err?.message)
+            this.productRepository.detail(this.productId.value)
+                .then(productDetail => {
+                    if (!productDetail) {
+                        ElMessage.error('商品ID无效: ' + this.productId.value)
+                        return
+                    }
+                    if (productDetail.specType === SpecType.SingleSpec) {
+                        console.log('商品详情', productDetail)
+                        this.specData.value = productDetail?.specArr[0]
+                    }
+                    Object.assign(this.formData, productDetail)
                 })
-                .finally(() => this.formIsLoading.value = false)
-        } else {
-            asyncSave()
-                .catch(err => {
-                    console.log('保存失败', err)
-                    ElMessage.error(err?.message)
-                })
-                .finally(() => this.formIsLoading.value = false)
         }
     }
 
