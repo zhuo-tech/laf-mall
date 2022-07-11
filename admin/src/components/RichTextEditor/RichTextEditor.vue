@@ -44,7 +44,7 @@ const {
 </script>
 
 <template>
-<div style="border: 1px solid #ccc">
+<div class="rich-text-editor-wrapper">
     <Toolbar v-if="!readonly"
              :defaultConfig="toolbarConfig"
              :editor="editorRef"
@@ -64,8 +64,12 @@ const {
 </template>
 
 <style lang="sass" scoped>
-.editor-content
+.rich-text-editor-wrapper
     --rich-text-editor-height: v-bind('height')
+
+.rich-text-editor-wrapper
+    border: 1px solid #ccc
+    width: 100%
 
 .toolbar
     border-bottom: 1px solid #ccc
