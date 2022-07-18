@@ -97,7 +97,10 @@ export default abstract class BasisCrud<E> {
                 this.page.total = page.total
                 this.page.list = page.list
             })
-            .catch(err => this.basisLog.debug(err))
+            .catch(err => {
+                this.basisLog.debug(err)
+                ElMessage.error(err?.message)
+            })
             .finally(() => this.tableIsLoading.value = false)
     }
 

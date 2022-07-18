@@ -5,6 +5,7 @@ import Error from '@/pages/Error/Router'
 import Home from '@/pages/Home/Router'
 import Login from '@/pages/Login/Router'
 import Order from '@/pages/Order/Router'
+import Marketing from '@/pages/Marketing/Router'
 import { StorageService, StorageServiceKey } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
 import { Inject } from 'common'
@@ -22,12 +23,18 @@ import {
 } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
+    // 无需授权页面
+    Login,
+
+    // 需要登录
     Home,
     Basic,
     Order,
-    Admin,
-    Login,
+    Marketing,
     MallConfig,
+    Admin,
+
+    // 兜底
     ...Error,
 ]
 

@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import ShowImage from '@/components/Show/ShowImage.vue'
-import UploadFile from '@/components/Upload/UploadFile.vue'
-import { MenuService } from '@/pages/Config/Menu/Service'
-import { CirclePlusFilled, Delete, Refresh, Warning } from '@element-plus/icons-vue'
+import FormTags from '@/pages/Config/Channel/components/FormTags/FormTags.vue'
+import { ChannelService } from '@/pages/Config/Channel/Service'
+import { CirclePlusFilled, Delete, Edit, Refresh, Warning } from '@element-plus/icons-vue'
 
 const {
     setFormRef,
     close,
+    update,
     formData,
     formIsAdd,
     formIsLoading,
@@ -22,12 +22,12 @@ const {
     readyEdit,
     rowKey,
     tableIsLoading,
-} = new MenuService()
+} = new ChannelService()
 listUpdate()
 </script>
 
 <template>
-    <el-card class="box-card" header="首页菜单">
+    <el-card class="box-card" header="主页栏目">
         <!--新建和刷新-->
         <el-row>
             <el-col :offset="12" :span="12">
@@ -38,24 +38,27 @@ listUpdate()
             </el-col>
         </el-row>
         <!--表格-->
-        <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
+        <el-table v-loading="tableIsLoading"
+                  :data="page.list"
+                  :row-key="rowKey"
+                  :tree-props="{children: '__'}"
+                  class="data-table"
+                  fit
+                  show-header
+                  stripe>
             <el-table-column align="center" label="序号" type="index" width="60" />
-            <el-table-column align="left" label="菜单名" min-width="100" prop="name" />
-            <el-table-column align="left" label="封面图" prop="cover" width="130">
+            <el-table-column align="center" label="一级菜单" min-width="200" prop="name" />
+            <el-table-column align="left" label="二级菜单" min-width="200">
                 <template v-slot="{row}">
-                    <ShowImage :src="row.cover" style="width: 70px;" />
+                    <el-tag v-for="item in row.children" :key="item.label" :type="item.type" class="mx-1" effect="dark">
+                        {{ item.name }}
+                    </el-tag>
                 </template>
             </el-table-column>
-            <el-table-column align="center" label="uniapp URL" min-width="400" prop="uniUrl" />
-            <el-table-column align="center" label="URL" min-width="400" prop="pcUrl" />
-            <el-table-column align="left" label="排序" min-width="200" prop="sort" />
-            <el-table-column align="left" label="状态" min-width="200" prop="status">
-                <template v-slot="{row}">
-                    <span>{{ row.status ? '显示' : '不显示' }}</span>
-                </template>
-            </el-table-column>
+            <el-table-column align="left" label="排序" min-width="60" prop="sort" />
             <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="180">
                 <template v-slot="{row}">
+                    <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
                     <el-popconfirm :icon="Warning"
                                    cancel-button-text="手滑了"
                                    confirm-button-text="确认删除"
@@ -89,31 +92,18 @@ listUpdate()
                      label-width="140px"
                      style="max-width: 1000px">
 
-                <el-form-item label="菜单名称" prop="name">
-                    <el-input v-model="formData.name" clearable placeholder="请输入菜单名"></el-input>
+                <el-form-item label="一级菜单" prop="name">
+                    <el-input v-model="formData.name" clearable placeholder="请输入一级菜单"></el-input>
                 </el-form-item>
 
-                <el-form-item label="封面图" prop="cover">
-                    <UploadFile v-model:href="formData.cover"
-                                :limit="1"
-                                :show-file-list="false" />
-                </el-form-item>
-
-                <el-form-item label="uniapp URL" prop="uniUrl">
-                    <el-input v-model="formData.uniUrl" clearable placeholder="请输入uniapp URL"></el-input>
-                </el-form-item>
-
-                <el-form-item label="URL" prop="pcUrl">
-                    <el-input v-model="formData.pcUrl" clearable placeholder="请输入URL"></el-input>
+                <el-form-item label="二级菜单" prop="children">
+                    <FormTags v-model:value="formData.children"></FormTags>
                 </el-form-item>
 
                 <el-form-item label="排序" prop="sort">
                     <el-input-number v-model="formData.sort" :min="0" :step="1" step-strictly />
                 </el-form-item>
 
-                <el-form-item label="状态" prop="status">
-                    <el-switch v-model="formData.status" :active-value="true" :inactive-value="false"></el-switch>
-                </el-form-item>
             </el-form>
 
             <el-row>

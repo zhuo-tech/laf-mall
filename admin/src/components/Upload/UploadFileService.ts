@@ -1,6 +1,6 @@
 import { FileService, FileServiceKey, UploadFileInfo } from '@/service/FileService'
 import { Inject } from 'common'
-import { UploadFile, UploadFiles, UploadRequestOptions, UploadUserFile } from 'element-plus'
+import { ElMessage, UploadFile, UploadFiles, UploadProps, UploadRequestOptions, UploadUserFile } from 'element-plus'
 import { CollUtil, ObjectUtil, StrUtil } from 'typescript-util'
 import { ref, watchEffect } from 'vue'
 
@@ -56,6 +56,14 @@ export class UploadFileService {
         action().catch(err => options.onError(err))
     }
 
+    public beforeUpload: UploadProps['beforeUpload'] = (rawFile) => {
+        if (rawFile.size / 1024 / 1024 > 5) {
+            ElMessage.error('文件大小不能超过 5 MB！')
+            return false
+        }
+        return true
+    }
+
     /**
      * 内部状态变化后, 抛出变化后的数据
      */
@@ -73,9 +81,10 @@ export class UploadFileService {
             .map(i => (i.response) as UploadFileInfo)
         const value = fileInfo.map(i => i.path)
 
-        emits('update:href', value[0] ?? StrUtil.EMPTY)
+        // 取最后一个 (最新), 用于 avatar 模式 替换
+        emits('update:href', value[value.length - 1] ?? StrUtil.EMPTY)
         emits('update:hrefs', value)
-        emits('update:fileInfo', fileInfo[0])
+        emits('update:fileInfo', fileInfo[value.length - 1])
         emits('update:fileInfoList', fileInfo)
         emits('input', fileList)
     }
@@ -125,13 +134,13 @@ export class UploadFileService {
      * 格式化工具: src -> {@link UploadUserFile}
      */
     private strToUploadFile = (s: any): UploadUserFile => ({
-        response: {href: s},
+        response: {path: s} as UploadFileInfo,
         status: 'success',
         name: s,
         size: 0,
         url: this.fileService.pathCompletion(s),
         uid: s,
-    } as UploadUserFile)
+    })
 
 }
 

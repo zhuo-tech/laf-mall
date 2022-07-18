@@ -1,15 +1,14 @@
 <script lang="ts" setup>
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
 import ShowImage from '@/components/Show/ShowImage.vue'
-import { ProductService } from '@/pages/Basic/Product/Service'
-import { BasicRouterControl } from '@/pages/Basic/Router'
+import { BargainService } from '@/pages/Marketing/Bargain/BargainService'
+import { MarketingRouterControl } from '@/pages/Marketing/Router'
 import { CirclePlusFilled, Delete, Edit, Refresh, Search, Warning } from '@element-plus/icons-vue'
-import { onActivated } from 'vue'
 
 /**
- * Product
+ * Bargain
  * @author 冰凝
- * @date 2022-06-20 下午 04:38
+ * @date 2022-07-07 下午 01:16
  **/
 const {
     rowKey,
@@ -22,10 +21,9 @@ const {
     listUpdate,
     readyAdd,
     queryFormSubmit,
-} = new ProductService()
-onActivated(() => {
-    listUpdate()
-})
+} = new BargainService()
+
+listUpdate()
 </script>
 
 <template>
@@ -50,7 +48,7 @@ onActivated(() => {
         </el-collapse-transition>
         <el-col :span="12">
             <el-row justify="end" type="flex">
-                <el-button :icon="CirclePlusFilled" type="primary" @click="BasicRouterControl.toProductCreate()">新增</el-button>
+                <el-button :icon="CirclePlusFilled" type="primary" @click="MarketingRouterControl.toBargainCreate()">新增</el-button>
                 <el-button :icon="Search" type="primary" @click="showQuery = !showQuery" />
                 <el-button v-loading="formIsLoading" :disabled="formIsLoading" :icon="Refresh" type="primary" @click="listUpdate" />
             </el-row>
@@ -60,21 +58,13 @@ onActivated(() => {
     <!-- 表格 -->
     <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
         <el-table-column align="center" label="序号" type="index" width="60" />
-        <el-table-column align="left" label="所属分类" min-width="150" prop="categoryId">
-            <template v-slot="{row}">
-                <span>{{ row.category.name }}</span>
-            </template>
-        </el-table-column>
+        <el-table-column align="left" label="所属分类" min-width="100" prop="categoryId" />
         <el-table-column align="left" label="商品名称" prop="name" width="130" />
         <el-table-column align="left" label="商品价格" min-width="100" prop="nickname" />
         <el-table-column align="left" label="会员价" min-width="200" prop="roleInfo" />
-        <el-table-column align="left" label="销量" min-width="200" prop="virtualSales" />
+        <el-table-column align="left" label="销量" min-width="200" prop="roleInfo" />
         <el-table-column align="left" label="库存" min-width="200" prop="roleInfo" />
-        <el-table-column align="left" label="状态" min-width="200" prop="status">
-            <template v-slot="{row}">
-                <span>{{ row.status ? '已启动' : '关闭' }}</span>
-            </template>
-        </el-table-column>
+        <el-table-column align="left" label="状态" min-width="200" prop="status" />
         <el-table-column align="left" label="排序" min-width="200" prop="sort" />
         <el-table-column align="left" label="移动端封面图" min-width="200" prop="uniUrl">
             <template v-slot="{row}">
@@ -89,9 +79,7 @@ onActivated(() => {
 
         <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="380">
             <template v-slot="{row}">
-                <el-button :icon="Edit" link @click="BasicRouterControl.toProductDetail(row._id)">详情</el-button>
-                <el-divider direction="vertical" />
-                <el-button :icon="Edit" link @click="BasicRouterControl.toProductUpdate(row._id)">编辑</el-button>
+                <el-button :icon="Edit" link @click="MarketingRouterControl.toBargainUpdate(row._id)">编辑</el-button>
                 <el-divider direction="vertical" />
                 <el-popconfirm :icon="Warning"
                                cancel-button-text="手滑了"

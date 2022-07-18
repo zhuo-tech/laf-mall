@@ -16,7 +16,7 @@ import { CanUpdateEntity } from './Entity'
  * @date 2022-07-06 下午 12:25
  **/
 export class BasicSpecProduct implements CanUpdateEntity {
-    public static readonly NAME = 'mall_spec_product'
+    public static readonly NAME = 'basic_spec_product'
     public _id: string
     /**
      * 关联商品ID

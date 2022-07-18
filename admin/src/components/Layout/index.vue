@@ -29,9 +29,9 @@ window.addEventListener('resize', (ev) => {
         <!-- 路由视图 -->
         <el-col :lg="21" :sm="21" :xl="22" :xs="21" class="page flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 sm:p-4 p-2">
             <router-view v-slot="{ Component }">
-                <transition mode="out-in" name="el-fade-in">
+                <transition appear mode="out-in" name="el-fade-in">
                     <keep-alive>
-                        <component :is="Component" />
+                        <component :is="Component"/>
                     </keep-alive>
                 </transition>
             </router-view>

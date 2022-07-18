@@ -18,6 +18,12 @@ export class BasicCategoryRepository implements CrudRequest<BasicProductCategory
 
     private readonly client = new LafClient<BasicProductCategoryTree>(BasicProductCategory.NAME)
 
+    private static buildTree<E extends BasicProductCategory>(list: Array<E>): Array<E> {
+        return CollUtil.buildTree(list, i => !i.parentId || i.parentId === '0',
+            // @ts-ignore
+            '_id', 'parentId', 'children')
+    }
+
     public createRequest = async (data: Partial<BasicProductCategoryTree>): Promise<any> => {
         data.createTime = Date.now()
         data.updateTime = Date.now()
@@ -39,12 +45,8 @@ export class BasicCategoryRepository implements CrudRequest<BasicProductCategory
         if (CollUtil.isEmpty(categoryPage.list)) {
             return categoryPage
         }
-        categoryPage.list = CollUtil.buildTree(
-            categoryPage.list.sort(i => i.sort),
-            i => !i.parentId || i.parentId === '0',
-            '_id',
-            'parentId',
-            'children')
+        const list = categoryPage.list.sort((a, b) => a.sort - b.sort)
+        categoryPage.list = BasicCategoryRepository.buildTree(list)
 
         return categoryPage
     }
@@ -55,4 +57,22 @@ export class BasicCategoryRepository implements CrudRequest<BasicProductCategory
         return await this.client.updateById(data._id!, data, '_id')
     }
 
+    /**
+     * 商品分类 树形数据
+     * 仅有有限的树形: id name 等
+     * @return Promise<Array<ProductCategoryTreeNode>>
+     */
+    public categoryTree = async (): Promise<Array<ProductCategoryTreeNode>> => {
+        const list = await this.client.queryWrapper()
+            .show('_id', 'name', 'parentId')
+            .orderByAsc('sort')
+            .list(1000)
+
+        return BasicCategoryRepository.buildTree(list) as any
+    }
+
+}
+
+export type ProductCategoryTreeNode = Pick<BasicProductCategory, '_id' | 'name' | 'parentId'> & {
+    children?: Array<ProductCategoryTreeNode>
 }

@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout/index.vue'
-import { Document, FolderOpened, ShoppingBag, Film, PictureFilled } from '@element-plus/icons-vue'
-import { RouteRecordRaw } from 'vue-router'
+import {VueRouter} from '@/main'
+import {Document, Film, FolderOpened, PictureFilled, ShoppingBag} from '@element-plus/icons-vue'
+import {RouteRecordRaw} from 'vue-router'
 
 /**
  * Router
@@ -52,7 +53,57 @@ const RouterConfig: RouteRecordRaw = {
                 title: '首页广告',
             },
         },
+        {
+            path: 'product/create',
+            component: () => import('./Product/ProductEditor.vue'),
+            meta: {
+                isMenu: false,
+                title: '新增商品',
+            },
+        },
+        {
+            path: 'product/update/:id',
+            component: () => import('./Product/ProductEditor.vue'),
+            meta: {
+                isMenu: false,
+                title: '编辑商品',
+            },
+        },
+        {
+            path: 'product/detail/:id',
+            component: () => import('./Product/ProductDetails.vue'),
+            meta: {
+                isMenu: false,
+                title: '商品详情',
+            },
+        },
     ],
+}
+
+// noinspection JSIgnoredPromiseFromCall
+export class BasicRouterControl {
+
+    public static toProduct() {
+        VueRouter.push('/basic/product')
+    }
+
+    public static toProductCreate() {
+        VueRouter.push('/basic/product/create')
+    }
+
+    /**
+     * @param id {@link BasicProduct._id}
+     */
+    public static toProductUpdate(id: string) {
+        VueRouter.push('/basic/product/update/' + id)
+    }
+
+    /**
+     * @param id {@link BasicProduct._id}
+     */
+    public static toProductDetail(id: string) {
+        VueRouter.push('/basic/product/detail/' + id)
+    }
 }
 
 export default RouterConfig
