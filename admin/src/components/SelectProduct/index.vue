@@ -3,6 +3,7 @@
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
 import ShowProduct from '@/components/SelectProduct/components/ShowProduct.vue'
 import { SelectProduct } from '@/components/SelectProduct/SelectProduct'
+// @ts-ignore
 import { Search } from '@element-plus/icons-vue'
 import { BasicProduct } from 'common'
 

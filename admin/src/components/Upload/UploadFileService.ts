@@ -84,7 +84,7 @@ export class UploadFileService {
         // 取最后一个 (最新), 用于 avatar 模式 替换
         emits('update:href', value[value.length - 1] ?? StrTool.EMPTY)
         emits('update:hrefs', value)
-        emits('update:fileInfo', fileInfo[value.length - 1])
+        emits('update:fileInfo', fileInfo[value.length - 1] as UploadFileInfo)
         emits('update:fileInfoList', fileInfo)
         emits('input', fileList)
     }

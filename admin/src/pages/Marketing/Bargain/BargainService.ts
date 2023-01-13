@@ -10,7 +10,7 @@ import { Inject, MallActivityBargain } from 'common'
  **/
 export class BargainService extends BasisCrud<MallActivityBargain> {
 
-    protected readonly request: CrudRequest<MallActivityBargain> = this.repository
+    protected override readonly request: CrudRequest<MallActivityBargain> = this.repository
 
     @Inject(MallActivityBargainRepository.KEY)
     private get repository(): MallActivityBargainRepository {

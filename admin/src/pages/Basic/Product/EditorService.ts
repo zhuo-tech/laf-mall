@@ -34,7 +34,7 @@ export class EditorService {
     /**
      * 当前页面 商品ID
      */
-    private productId = computed(() => <string>this.route.params.id)
+    private productId = computed(() => <string>this.route.params['id'])
     /**
      * 是编辑?
      */
@@ -67,7 +67,7 @@ export class EditorService {
             if (this.specData.value._id) {
                 await this.specProductRepository.updateRequest(this.specData.value)
             } else {
-                this.specData.value.productId = productId
+                this.specData.value.productId = productId!
                 await this.specProductRepository.createRequest(this.specData.value)
             }
 
@@ -128,7 +128,7 @@ export class EditorService {
                     }
                     if (productDetail.specType === SpecType.SingleSpec) {
                         console.log('商品详情', productDetail)
-                        this.specData.value = productDetail?.specArr[0]
+                        this.specData.value = productDetail?.specArr[0]!
                     }
                     Object.assign(this.formData, productDetail)
                 })

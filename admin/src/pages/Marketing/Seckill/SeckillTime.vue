@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import ShowImage from '@/components/Show/ShowImage.vue'
+import ShowImage from '@/components/Show/index.vue'
 import { UniversalConfigRepository } from '@/repository/UniversalConfigRepository'
 import BasisCrud from '@/service/BasisCrud'
 import { formatDate } from '@/util/Format'
+// @ts-ignore
 import { CirclePlusFilled, Delete, Edit, Refresh, Warning } from '@element-plus/icons-vue'
 import { RuleItem } from 'async-validator'
 import { Entity, MallConfigKey, SeckillTimePeriod } from 'common'
@@ -16,9 +17,9 @@ type SeckillTimePeriodEntity = SeckillTimePeriod & Entity
  * @date 2022-07-07 下午 01:12
  **/
 class SpikeTime extends BasisCrud<SeckillTimePeriodEntity> {
-    protected readonly request = new UniversalConfigRepository<SeckillTimePeriodEntity>(MallConfigKey.SECKILL_TIME_PERIOD)
+    protected override readonly request = new UniversalConfigRepository<SeckillTimePeriodEntity>(MallConfigKey.SECKILL_TIME_PERIOD)
 
-    public formRule: Partial<Record<keyof SeckillTimePeriodEntity, Array<RuleItem>>> = {
+    public override formRule: Partial<Record<keyof SeckillTimePeriodEntity, Array<RuleItem>>> = {
         start: [{type: 'number', min: 0, max: 23, message: '请选择开始时间', trigger: 'blur'}],
         length: [{type: 'number', min: 1, max: 23, message: '请选择开始时间', trigger: 'blur'}],
     }

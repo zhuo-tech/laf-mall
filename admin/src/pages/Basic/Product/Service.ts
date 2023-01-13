@@ -3,5 +3,5 @@ import BasisCrud from '@/service/BasisCrud'
 import { CrudRequest } from '@/service/CrudRequest'
 
 export class ProductService extends BasisCrud<BasicProductDetail> {
-    protected readonly request: CrudRequest<BasicProductDetail> = new BasicProductRepository()
+    protected override readonly request: CrudRequest<BasicProductDetail> = new BasicProductRepository()
 }

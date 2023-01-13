@@ -2,6 +2,7 @@
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
 import FormTags from '@/pages/Config/Channel/components/FormTags/FormTags.vue'
 import { ChannelService } from '@/pages/Config/Channel/Service'
+// @ts-ignore
 import { CirclePlusFilled, Delete, Edit, Refresh, Warning } from '@element-plus/icons-vue'
 
 const {

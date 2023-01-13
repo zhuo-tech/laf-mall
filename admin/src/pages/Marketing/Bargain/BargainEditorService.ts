@@ -29,7 +29,7 @@ export class BargainEditorService {
         sort: {},
     }
     private readonly route: RouteLocationNormalizedLoaded
-    private currentId = computed(() => <string>this.route.params?.id)
+    private currentId = computed(() => <string>this.route.params?.['id'])
     private isEditor = computed(() => !!this.currentId.value)
     private formRef = ref<FormInstance>({} as any)
 

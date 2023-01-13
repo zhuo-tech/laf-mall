@@ -14,7 +14,7 @@ import { Ref, ref } from 'vue'
 export class UserService extends BasisCrud<SysUserInfo> {
     public roleSelectOption: Ref<Array<SelectOption>> = ref([])
 
-    protected readonly request: CrudRequest<SysUserInfo> = this.repository
+    protected override readonly request: CrudRequest<SysUserInfo> = this.repository
 
     constructor() {
         super()
@@ -31,7 +31,7 @@ export class UserService extends BasisCrud<SysUserInfo> {
         return null as any
     }
 
-    protected get formDataDefault(): Partial<SysUserInfo> {
+    protected override get formDataDefault(): Partial<SysUserInfo> {
         return Object.assign(new SysAdmin(), {
             isAdmin: true,
             freeze: false,
@@ -40,7 +40,7 @@ export class UserService extends BasisCrud<SysUserInfo> {
         })
     }
 
-    public formRule: Partial<Record<keyof SysUserInfo, Array<RuleItem>>> = {
+    public override formRule: Partial<Record<keyof SysUserInfo, Array<RuleItem>>> = {
         avatar: [{type: 'string', message: '请选择文件上传', required: false}],
         username: [{type: 'string', message: '必填', required: true}],
         nickname: [{type: 'string', message: '必填', required: true}],

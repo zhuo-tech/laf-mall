@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+// @ts-ignore
 import { ArrowLeft } from '@element-plus/icons-vue'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'

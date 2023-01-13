@@ -9,13 +9,12 @@ import { defineConfig } from 'vite'
 export default defineConfig({
     plugins: [
         vue(),
-        vueJsx({}),
+        vueJsx(),
     ],
     server: {
         port: 80,
     },
     envDir: './env',
-    envPrefix: [ 'VUE_APP_' ],
     resolve: {
         alias: {
             '@': join(__dirname, 'src'),

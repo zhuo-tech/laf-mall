@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout/index.vue'
+// @ts-ignore
 import { DataAnalysis } from '@element-plus/icons-vue'
 import { RouteRecordRaw } from 'vue-router'
 

@@ -2,11 +2,11 @@ import { HOME_PATH } from '@/pages/Home/Router'
 import { SysAdminApi } from '@/repository/SysAdminApi'
 import { StorageLevel, StorageService, StorageServiceKey } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
+import { StrTool } from '@es-tool/core'
 import { RuleItem } from 'async-validator'
 import { Inject } from 'common'
 import { FormInstance, InputInstance } from 'element-plus'
-import { StrTool } from '@es-tool/core'
-import { reactive, ref } from 'vue'
+import { reactive, ref, UnwrapNestedRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 /**
@@ -34,7 +34,8 @@ export class LoginForm {
             this.formRef.value = el
         }
     }
-    public refs = reactive<Record<'username' | 'password' | 'code', InputInstance>>({
+    public refs: UnwrapNestedRefs<Record<'username' | 'password' | 'code', InputInstance>> =
+        reactive<Record<'username' | 'password' | 'code', InputInstance>>({
         username: null as any,
         password: null as any,
         code: null as any,
@@ -45,9 +46,9 @@ export class LoginForm {
         verificationCode: '',
     })
     public formRule: Record<keyof typeof this.formData, Array<RuleItem>> = {
-        username: [{required: true, type: 'string', message: '请输入用户名', min: 2, max: 128, trigger: 'blur'}],
-        password: [{required: true, type: 'string', message: '请输入密码', min: 6, max: 128, trigger: 'blur'}],
-        verificationCode: [{required: false}],
+        username: [ { required: true, type: 'string', message: '请输入用户名', min: 2, max: 128, trigger: 'blur' } ],
+        password: [ { required: true, type: 'string', message: '请输入密码', min: 6, max: 128, trigger: 'blur' } ],
+        verificationCode: [ { required: false } ],
     }
     public showNext = reactive<Partial<Record<keyof typeof this.formData, boolean>>>({
         username: false,
@@ -67,7 +68,6 @@ export class LoginForm {
         this.showNext[property] = true
         switch (property) {
             case 'username':
-                // noinspection JSIgnoredPromiseFromCall
                 this.refs.password?.focus?.()
                 break
             case 'password':

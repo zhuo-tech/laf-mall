@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import ShowImage from '@/components/Show/ShowImage.vue'
+import ShowImage from '@/components/Show/index.vue'
 import { ProductService } from '@/pages/Basic/Product/Service'
 import { BasicRouterControl } from '@/pages/Basic/Router'
+// @ts-ignore
 import { CirclePlusFilled, Delete, Edit, Refresh, Search, Warning } from '@element-plus/icons-vue'
 import { onActivated } from 'vue'
 

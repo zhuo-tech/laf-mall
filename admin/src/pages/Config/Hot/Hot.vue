@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
 import { HotService } from '@/pages/Config/Hot/Service'
+// @ts-ignore
 import { CirclePlusFilled, Delete, Edit, Refresh, Warning } from '@element-plus/icons-vue'
 
 const {

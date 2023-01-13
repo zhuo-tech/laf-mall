@@ -9,7 +9,7 @@ import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
  * @date 2022-07-08 上午 10:19
  **/
 const route: RouteLocationNormalizedLoaded = useRoute()
-const productId = computed(() => <string>route.params.id)
+const productId = computed(() => <string>route.params['id'])
 
 </script>
 

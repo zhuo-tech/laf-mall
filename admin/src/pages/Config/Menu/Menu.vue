@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import ShowImage from '@/components/Show/ShowImage.vue'
+import ShowImage from '@/components/Show/index.vue'
 import UploadFile from '@/components/Upload/UploadFile.vue'
 import { MenuService } from '@/pages/Config/Menu/Service'
+// @ts-ignore
 import { CirclePlusFilled, Delete, Refresh, Warning } from '@element-plus/icons-vue'
 
 const {

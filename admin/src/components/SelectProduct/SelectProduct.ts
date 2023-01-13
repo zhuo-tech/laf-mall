@@ -2,7 +2,7 @@ import { BasicProductRepository } from '@/repository/BasicProductRepository'
 import { BasicProduct, Inject } from 'common'
 import { Page } from 'laf-db-query-wrapper'
 import { ObjectTool } from '@es-tool/core'
-import { ExtractPropTypes, reactive, ref, Ref, watch } from 'vue'
+import { ExtractPropTypes, reactive, ref, Ref, UnwrapNestedRefs, watch } from 'vue'
 
 /**
  * SelectProduct
@@ -14,7 +14,7 @@ export class SelectProduct {
     private readonly emits: EmitsType
 
     public pageIsLoading: Ref<boolean> = ref(false)
-    public page = reactive<Page<BasicProduct>>(new Page(1, 20))
+    public page: UnwrapNestedRefs<Page<BasicProduct>> = reactive<Page<BasicProduct>>(new Page(1, 20))
     public queryData = reactive<Partial<BasicProduct>>({})
 
     public isShow: Ref<boolean> = ref(false)

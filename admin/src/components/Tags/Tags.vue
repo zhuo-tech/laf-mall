@@ -43,6 +43,7 @@ const inputVisible = ref(false)
 const InputRef = ref<InstanceType<typeof ElInput>>()
 
 watch(() => props.value, function (newValue) {
+    // @ts-ignore
     dynamicTags.value = newValue
 }, {
     immediate: true,

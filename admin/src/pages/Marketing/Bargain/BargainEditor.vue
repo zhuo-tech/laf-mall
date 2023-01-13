@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import FormPage from '@/components/PageContainer/FormPage.vue'
-import RichTextEditor from '@/components/RichTextEditor/RichTextEditor.vue'
-import SelectProduct from '@/components/SelectProduct/SelectProduct.vue'
+import RichTextEditor from '@/components/RichTextEditor/index.vue'
+import SelectProduct from '@/components/SelectProduct/index.vue'
 import TimePeriod from '@/components/TimePeriod/TimePeriod.vue'
 import UploadFile from '@/components/Upload/UploadFile.vue'
 import { BargainEditorService } from '@/pages/Marketing/Bargain/BargainEditorService'

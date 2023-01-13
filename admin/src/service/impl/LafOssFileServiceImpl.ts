@@ -42,7 +42,7 @@ class LafOssFileServiceImpl implements FileService {
 
     public async upload(file: File, onProgress?: (event: ProgressEvent) => void): Promise<UploadFileInfo> {
         const {path, url} = await this.toolApi.ossUploadUrlPreSigned(LafOssFileServiceImpl.BUCKET_NAME, file.name)
-        await Request({method: 'PUT', url, body: file, timeout: 1000 * 60 * 60, onProgress})
+        await Request({method: 'PUT', url, body: file, timeout: 1000 * 60 * 60, onProgress} as any)
 
         return {
             path: path,
@@ -60,7 +60,7 @@ class LafOssFileServiceImpl implements FileService {
         }
 
         // arr[1] 应为 video(HTMLVideoElement) 或 audio (HTMLAudioElement)
-        const me: HTMLMediaElement = document.createElement(arr[1]) as any
+        const me: HTMLMediaElement = document.createElement(arr[1] as any) as any
 
         me.src = URL.createObjectURL(file)
         me.autoplay = true

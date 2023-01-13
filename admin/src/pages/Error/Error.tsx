@@ -5,7 +5,7 @@ export default defineComponent({
 
     computed: {
         pathMatch(): Array<string> {
-            return (this.$route.params.pathMatch ?? []) as Array<string>
+            return (this.$route.params['pathMatch'] ?? []) as Array<string>
         },
     },
     render() {

@@ -1,7 +1,8 @@
 <script lang="tsx" setup>
 import ShowFile from '@/components/Show/ShowFile'
-import ShowImage from '@/components/Show/ShowImage.vue'
+import ShowImage from '@/components/Show/index.vue'
 import { UploadFileInfo } from '@/service/FileService'
+// @ts-ignore
 import { UploadFilled } from '@element-plus/icons-vue'
 import { UploadProps, UploadUserFile } from 'element-plus'
 import { UploadFileService } from './UploadFileService'

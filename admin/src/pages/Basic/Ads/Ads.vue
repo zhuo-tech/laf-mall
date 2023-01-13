@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import ShowImage from '@/components/Show/ShowImage.vue'
+import ShowImage from '@/components/Show/index.vue'
 import UploadFile from '@/components/Upload/UploadFile.vue'
 import { AdsService } from '@/pages/Basic/Ads/Service'
 import { formatDate } from '@/util/Format'
+// @ts-ignore
 import { CirclePlusFilled, Delete, Edit, Refresh, Warning } from '@element-plus/icons-vue'
 
 /**

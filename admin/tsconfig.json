@@ -1,21 +1,42 @@
 {
     "compilerOptions": {
-        "target": "ESNext",
-        "module": "CommonJS",
-        "strict": true,
-        "useDefineForClassFields": true,
-        "moduleResolution": "node",
-        "jsx": "preserve",
-        "sourceMap": true,
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
+        /* 类型检查 */
+        "alwaysStrict": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
         "noImplicitReturns": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "allowJs": true,
-        "skipLibCheck": true,
-        "experimentalDecorators": true,
+        "noImplicitThis": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
         "noUnusedLocals": false,
+        "strict": true,
+        "strictNullChecks": true,
         "strictPropertyInitialization": false,
+        /* 模块 */
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        /* 输出 */
+        "declaration": true,
+        "declarationMap": true,
+        "inlineSources": true,
+        "sourceMap": true,
+        /* JavaScript 支持 */
+        "allowJs": false,
+        /* 互操作约束 */
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true,
+        /* 语言和环境 */
+        "experimentalDecorators": true,
+        "moduleDetection": "auto",
+        "target": "ESNext",
+        "jsx": "preserve",
+        "useDefineForClassFields": true,
+        "module": "ESNext",
+        "locale": "zh-cn",
+        "suppressImplicitAnyIndexErrors": true,
+        "skipLibCheck": true,
         "lib": [
             "esnext",
             "dom"
@@ -25,9 +46,10 @@
         ],
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"]
-        },
-        "allowSyntheticDefaultImports": true
+            "@/*": [
+                "src/*"
+            ]
+        }
     },
     "include": [
         "src/**/*.ts",

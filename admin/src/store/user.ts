@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', {
         const roles = ref<Array<string>>([])
         const permissions = ref<Array<string>>([])
 
-        return {nickname, username, avatar, _id, roles, permissions}
+        return { nickname, username, avatar, _id, roles, permissions }
     },
     actions: {
         init() {
@@ -26,7 +26,7 @@ export const useUserStore = defineStore('user', {
 
             adminInfo()
                 .then(info => {
-                    const {_id, username, nickname, avatar, roles, pers} = info
+                    const { _id, username, nickname, avatar, roles, pers } = info
                     this._id = _id
                     this.username = username
                     this.nickname = nickname!

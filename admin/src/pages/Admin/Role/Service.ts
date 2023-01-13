@@ -12,12 +12,12 @@ import { Ref, ref } from 'vue'
  * @date 2022-06-14 下午 06:06
  **/
 export class RoleService extends BasisCrud<SysRoleRow> {
-    protected readonly request: CrudRequest<SysRoleRow> = this.repository
+    protected override readonly request: CrudRequest<SysRoleRow> = this.repository
     /**
      * 所有的权限信息 选择项
      */
     public perSelectOption: Ref<Array<SelectOption>> = ref([])
-    public formRule: Partial<Record<keyof SysRole, Array<RuleItem>>> = {
+    public override formRule: Partial<Record<keyof SysRole, Array<RuleItem>>> = {
         key: [{type: 'string', required: true, message: '必填'}],
         name: [{type: 'string', required: true, message: '必填'}],
         desc: [{type: 'string', required: true, message: '必填'}],
@@ -40,7 +40,7 @@ export class RoleService extends BasisCrud<SysRoleRow> {
         return null as any
     }
 
-    protected get formDataDefault(): Partial<SysRole> {
+    protected override get formDataDefault(): Partial<SysRole> {
         return new SysRole()
     }
 

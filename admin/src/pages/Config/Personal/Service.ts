@@ -8,7 +8,7 @@ type PersonalAndId = Personal & { _id: string }
 
 export class PersonalService extends BasisCrud<PersonalAndId> {
 
-    public formRule: Partial<Record<keyof Personal, Array<RuleItem>>> = {
+    public override formRule: Partial<Record<keyof Personal, Array<RuleItem>>> = {
         name: [{type: 'string', message: '必填', required: true}],
         uniIcon: [{type: 'string', message: '请选择文件上传', required: true}],
         pcIcon: [{type: 'string', message: '请选择文件上传', required: true}],
@@ -16,9 +16,9 @@ export class PersonalService extends BasisCrud<PersonalAndId> {
         pcUrl: [{type: 'string', message: '必填', required: true}],
     }
 
-    protected readonly request: CrudRequest<PersonalAndId> = new UniversalConfigRepository<Personal>(MallConfigKey.PERSONAL_CENTER)
+    protected override readonly request: CrudRequest<PersonalAndId> = new UniversalConfigRepository<Personal>(MallConfigKey.PERSONAL_CENTER)
 
-    protected get formDataDefault(): Partial<PersonalAndId> {
+    protected override get formDataDefault(): Partial<PersonalAndId> {
         return Object.assign(new Personal(), {
             sort: 1,
             status: true,

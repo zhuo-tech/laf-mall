@@ -55,9 +55,9 @@ declare global {
      * 环境变量类型定义
      */
     interface ImportMetaEnv {
-        VUE_APP_LAF_BASE_URL: string
-        VUE_APP_LAF_DB_PROXY: string
-        VUE_APP_LAF_FILE: string
+        VITE_LAF_BASE_URL: string
+        VITE_LAF_DB_PROXY: string
+        VITE_LAF_FILE: string
     }
 
     /**

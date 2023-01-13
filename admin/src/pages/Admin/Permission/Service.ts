@@ -39,8 +39,8 @@ export type PermissionLine = {
  * @date 2022-06-14 下午 06:06
  **/
 export class PermissionService extends BasisCrud<SysPermission> {
-    protected readonly request: CrudRequest<SysPermission> = this.repository
-    public formRule: Partial<Record<keyof SysRole, Array<RuleItem>>> = {
+    protected override readonly request: CrudRequest<SysPermission> = this.repository
+    public override formRule: Partial<Record<keyof SysRole, Array<RuleItem>>> = {
         name: [{type: 'string', required: true, message: '必填'}],
         desc: [{type: 'string', required: true, message: '必填'}],
     }
@@ -50,7 +50,7 @@ export class PermissionService extends BasisCrud<SysPermission> {
         return null as any
     }
 
-    protected get formDataDefault(): Partial<SysPermission> {
+    protected override get formDataDefault(): Partial<SysPermission> {
         return new SysPermission()
     }
 
@@ -83,7 +83,7 @@ export class PermissionService extends BasisCrud<SysPermission> {
         })
     })
 
-    public show: () => void = () => {
+    public override show: () => void = () => {
         this.isShow.value = true
         this.batchSelectionInit()
     }

@@ -2,6 +2,7 @@
 import Aside from '@/components/Layout/components/Aside.vue'
 import { StorageService, StorageServiceKey } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
+// @ts-ignore
 import { Expand } from '@element-plus/icons-vue'
 import { Context } from 'common'
 import { ref } from 'vue'

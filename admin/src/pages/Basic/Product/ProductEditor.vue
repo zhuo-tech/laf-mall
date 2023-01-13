@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import FormPage from '@/components/PageContainer/FormPage.vue'
-import RichTextEditor from '@/components/RichTextEditor/RichTextEditor.vue'
+import RichTextEditor from '@/components/RichTextEditor/index.vue'
 import Tags from '@/components/Tags/Tags.vue'
 import UploadFile from '@/components/Upload/UploadFile.vue'
 import SpecForm from '@/pages/Basic/Product/components/SpecForm/SpecForm.vue'
