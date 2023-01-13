@@ -1,4 +1,4 @@
-import { TimeUnit } from 'typescript-util'
+import { TimeUnit } from '@es-tool/core'
 
 /**
  * 组件注册 KEY

@@ -2,7 +2,7 @@ import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
 import { Component, SelectOption, SysPermission, SysRole } from 'common'
 import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
-import { CollUtil } from 'typescript-util'
+import { ArrayTool } from '@es-tool/core'
 
 export type SysRoleRow = SysRole & { per: Array<Pick<SysPermission, 'name' | 'desc'>> }
 
@@ -37,13 +37,13 @@ export class SysRoleRepository implements CrudRequest<SysRoleRow> {
             .hide('createBy', 'updateBy')
             .page(page)
 
-        if (CollUtil.isEmpty(sysRolePage.list)) {
+        if (ArrayTool.isEmpty(sysRolePage.list)) {
             return sysRolePage
         }
 
         const perKeys = sysRolePage.list.flatMap(i => i.permissions)
         const permissions = await new QueryChainWrapper<SysPermission>(SysPermission.NAME)
-            .inNotEmpty('name', CollUtil.distinct(perKeys))
+            .inNotEmpty('name', ArrayTool.distinct(perKeys))
             .show('name', 'desc')
             .list(9999)
         sysRolePage.list.forEach(role => role.per = permissions.filter(per => role.permissions.includes(per.name)))

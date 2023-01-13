@@ -1,6 +1,6 @@
 import { StorageLevel, StorageRegister, StorageService, StorageServiceKey, StorageWrapper } from '@/service/StorageService'
 import { Component } from 'common'
-import { Function, ObjectUtil, StrUtil } from 'typescript-util'
+import { Function, ObjectTool, StrTool } from '@es-tool/core'
 
 /**
  * RamSessionServiceImpl
@@ -17,13 +17,13 @@ export class StorageServiceImpl implements StorageService {
     private readonly actionCache: Record<StorageLevel, Function<keyof StorageRegister, any>>
 
     constructor() {
-        if (ObjectUtil.isEmpty(this.actionCache)) {
+        if (ObjectTool.isEmpty(this.actionCache)) {
             this.actionCache = {} as any
         }
         // 内存存储不应用超时规则
         this.actionCache[StorageLevel.RAM] = (key) => {
             const ram = this.ram[key]
-            return ObjectUtil.isNotNull(ram) ? ram : null
+            return ObjectTool.isNotNull(ram) ? ram : null
         }
         this.actionCache[StorageLevel.SESSION] = (key) => {
             return this.getNotTimeoutStorage(this.session, key) as any
@@ -53,10 +53,10 @@ export class StorageServiceImpl implements StorageService {
     }
 
     public getAttribute<K extends keyof StorageRegister>(key: K, level: StorageLevel): StorageRegister[K]['value'] | null {
-        if (ObjectUtil.isNotNull(level)) {
+        if (ObjectTool.isNotNull(level)) {
             return this.actionCache[level](key)
         }
-        for (let actionKv of ObjectUtil.toArray(this.actionCache)) {
+        for (let actionKv of ObjectTool.toArray(this.actionCache)) {
             const data = actionKv.value(key)
             if (data !== null) {
                 return data
@@ -105,7 +105,7 @@ export class WindowStorage {
     private readonly storage: Storage
     private readonly keyPrefix: string
 
-    constructor(storage: Storage, keyPrefix: string = StrUtil.EMPTY) {
+    constructor(storage: Storage, keyPrefix: string = StrTool.EMPTY) {
         this.storage = storage
         this.keyPrefix = keyPrefix
     }

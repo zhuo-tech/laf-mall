@@ -3,7 +3,7 @@ import { SysPassword, SysPermission, SysRole, SysAdmin } from 'common'
 // @ts-ignore
 import * as crypto from 'crypto'
 import { LafClient, LafWrapperConfig, QueryChainWrapper } from 'laf-db-query-wrapper'
-import { CollUtil, ObjectUtil } from 'typescript-util'
+import { ArrayTool, ObjectTool } from 'typescript-util'
 
 LafWrapperConfig.database = cloud.database
 
@@ -117,10 +117,10 @@ async function createUser(body: SysAdmin & { password: string }, operatorId: str
 async function getUserDetail(uid: string): Promise<(SysAdmin & { roles: Array<string>, pers: Array<string> }) | null> {
     const user = await new LafClient<SysAdmin>(DB_NAME.SYS_ADMIN).selectById(uid)
 
-    if (ObjectUtil.isEmpty(user)) {
+    if (ObjectTool.isEmpty(user)) {
         return null
     }
-    if (CollUtil.isEmpty(user!.role)) {
+    if (ArrayTool.isEmpty(user!.role)) {
         return {...user!, roles: [], pers: []}
     }
 
@@ -128,9 +128,9 @@ async function getUserDetail(uid: string): Promise<(SysAdmin & { roles: Array<st
         .in('key', user!.role)
         .show('key', 'name', 'permissions')
         .list()
-    const perNames = CollUtil.distinct(roles.flatMap(i => i.permissions))
+    const perNames = ArrayTool.distinct(roles.flatMap(i => i.permissions))
 
-    if (CollUtil.isEmpty(perNames)) {
+    if (ArrayTool.isEmpty(perNames)) {
         return {...user!, roles: roles.flatMap(i => i.key), pers: []}
     }
     const pers = await new QueryChainWrapper<SysPermission>(DB_NAME.SYS_PERMISSION)

@@ -2,7 +2,7 @@ import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
 import { Component, Entity, HomePageChannel, MallConfig, MallConfigKey } from 'common'
 import { LafClient, Page } from 'laf-db-query-wrapper'
-import { CollUtil } from 'typescript-util'
+import { ArrayTool } from '@es-tool/core'
 
 /**
  * MallConfigRepository
@@ -50,7 +50,7 @@ export class MallConfigRepository implements CrudRequest<MallConfig> {
             .show('_id', 'value')
             .list(10000)
 
-        if (CollUtil.isEmpty(list)) {
+        if (ArrayTool.isEmpty(list)) {
             return []
         }
 

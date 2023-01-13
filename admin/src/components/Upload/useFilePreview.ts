@@ -1,6 +1,6 @@
 import { UploadFileInfo } from '@/service/FileService'
 import { UploadProps } from 'element-plus'
-import { ObjectUtil } from 'typescript-util'
+import { ObjectTool } from '@es-tool/core'
 import { ref, Ref } from 'vue'
 
 export type FilePreviewReturn = {
@@ -28,7 +28,7 @@ export function useFilePreview(intiValue: UploadFileInfo = {} as any): FilePrevi
         show,
         close,
         onPreview(f) {
-            if (ObjectUtil.isEmpty(f)) {
+            if (ObjectTool.isEmpty(f)) {
                 return
             }
             file.value = f.response as UploadFileInfo

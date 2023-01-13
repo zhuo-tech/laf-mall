@@ -5,7 +5,7 @@ import { useUserStore } from '@/store/user'
 import { RuleItem } from 'async-validator'
 import { Inject } from 'common'
 import { FormInstance, InputInstance } from 'element-plus'
-import { StrUtil } from 'typescript-util'
+import { StrTool } from '@es-tool/core'
 import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -58,7 +58,7 @@ export class LoginForm {
     private route = useRoute()
 
     public next = (property: keyof typeof this.formData) => {
-        if (StrUtil.isEmpty(this.formData[property])) {
+        if (StrTool.isEmpty(this.formData[property])) {
             return
         }
         if (this.showNext[property]) {

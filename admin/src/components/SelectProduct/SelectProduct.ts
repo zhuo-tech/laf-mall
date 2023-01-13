@@ -1,7 +1,7 @@
 import { BasicProductRepository } from '@/repository/BasicProductRepository'
 import { BasicProduct, Inject } from 'common'
 import { Page } from 'laf-db-query-wrapper'
-import { ObjectUtil } from 'typescript-util'
+import { ObjectTool } from '@es-tool/core'
 import { ExtractPropTypes, reactive, ref, Ref, watch } from 'vue'
 
 /**
@@ -41,7 +41,7 @@ export class SelectProduct {
     }
 
     private handleEcho() {
-        if (ObjectUtil.isNotEmpty(this.props.product)) {
+        if (ObjectTool.isNotEmpty(this.props.product)) {
             this.currentSelect.value = this.props.product as any
             return
         }

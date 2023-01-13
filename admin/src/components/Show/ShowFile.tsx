@@ -1,7 +1,7 @@
 import { FileService, FileServiceKey, UploadFileInfo } from '@/service/FileService'
 import { Picture as IconPicture } from '@element-plus/icons-vue'
 import { Context } from 'common'
-import { ObjectUtil, StrUtil } from 'typescript-util'
+import { ObjectTool, StrTool } from '@es-tool/core'
 import { defineComponent } from 'vue'
 
 /**
@@ -103,12 +103,12 @@ export default defineComponent({
     },
     render() {
         const {file, href, hrefType} = this.$props
-        if (StrUtil.isNotEmpty(href)) {
+        if (StrTool.isNotEmpty(href)) {
             return this.renderByType(href as string, hrefType)
         }
 
         const f: UploadFileInfo = file as any
-        if (ObjectUtil.isNotEmpty(f)) {
+        if (ObjectTool.isNotEmpty(f)) {
             return this.renderByType(f.path, f.type)
         }
 

@@ -1,4 +1,4 @@
-import { StrUtil } from 'typescript-util'
+import { StrTool } from '@es-tool/core'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -18,7 +18,7 @@ export default defineComponent({
             )
         }
 
-        const errPath = StrUtil.PATH_INTEGRAL + this.pathMatch.join(StrUtil.PATH_INTEGRAL)
+        const errPath = StrTool.PATH_INTEGRAL + this.pathMatch.join(StrTool.PATH_INTEGRAL)
         return (
             <div style={{height: '100vh', paddingTop: '15vh'}}>
                 <el-result icon="error" title={`页面 ${errPath} 不存在`} sub-title="可能真的不存在 或者您木的权限..." v-slots={resultSlots}></el-result>

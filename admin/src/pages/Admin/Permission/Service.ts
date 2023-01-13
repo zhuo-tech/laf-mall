@@ -4,7 +4,7 @@ import { CrudRequest } from '@/service/CrudRequest'
 import { computed } from '@vue/runtime-core'
 import { RuleItem } from 'async-validator'
 import { BasicProduct, BasicProductCategory, Inject, KeyValue, MallConfig, MallOrder, MallRechargeRecord, MallShopCart, SysPermission, SysRole, SysUser } from 'common'
-import { ObjectUtil } from 'typescript-util'
+import { ObjectTool } from '@es-tool/core'
 import { reactive, ref } from 'vue'
 
 // 预设权限表名称
@@ -117,7 +117,7 @@ export class PermissionService extends BasisCrud<SysPermission> {
 
     public bulkSave = () => {
         const asyncOperation = async () => {
-            const toArray = ObjectUtil.toArray(this.batchSelection)
+            const toArray = ObjectTool.toArray(this.batchSelection)
             // value 有值, 例如: sys_user_create: '创建系统用户'; 无值的是取消勾选
             const newCreates = toArray.filter(kv => kv.value && !this.oldSelectKey.includes(kv.key))
                 .map(kv => ({name: kv.key, desc: kv.value}))

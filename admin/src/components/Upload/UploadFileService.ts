@@ -1,7 +1,7 @@
 import { FileService, FileServiceKey, UploadFileInfo } from '@/service/FileService'
 import { Inject } from 'common'
 import { ElMessage, UploadFile, UploadFiles, UploadProps, UploadRequestOptions, UploadUserFile } from 'element-plus'
-import { CollUtil, ObjectUtil, StrUtil } from 'typescript-util'
+import { ArrayTool, ObjectTool, StrTool } from '@es-tool/core'
 import { ref, watchEffect } from 'vue'
 
 // noinspection JSUnusedLocalSymbols
@@ -69,8 +69,8 @@ export class UploadFileService {
      */
     private updateModel(fileList: UploadFiles, propValue: PropType) {
         const {emits} = this
-        if (CollUtil.isEmpty(fileList)) {
-            emits('update:href', StrUtil.EMPTY)
+        if (ArrayTool.isEmpty(fileList)) {
+            emits('update:href', StrTool.EMPTY)
             emits('update:hrefs', [])
             emits('update:fileInfo', undefined as any)
             emits('update:fileInfoList', [])
@@ -82,7 +82,7 @@ export class UploadFileService {
         const value = fileInfo.map(i => i.path)
 
         // 取最后一个 (最新), 用于 avatar 模式 替换
-        emits('update:href', value[value.length - 1] ?? StrUtil.EMPTY)
+        emits('update:href', value[value.length - 1] ?? StrTool.EMPTY)
         emits('update:hrefs', value)
         emits('update:fileInfo', fileInfo[value.length - 1])
         emits('update:fileInfoList', fileInfo)
@@ -94,23 +94,23 @@ export class UploadFileService {
      */
     private handleEcho = () => {
         const {fileList} = this
-        if (CollUtil.isNotEmpty(fileList.value)) {
+        if (ArrayTool.isNotEmpty(fileList.value)) {
             return
         }
         const {href, hrefs, fileInfo, fileInfoList} = this.props
 
-        if (CollUtil.isNotEmpty(fileInfoList)) {
+        if (ArrayTool.isNotEmpty(fileInfoList)) {
             fileList.value = fileInfoList?.map(i => this.fileInfoToUploadFile(i)) as any
             return
         }
-        if (ObjectUtil.isNotEmpty(fileInfo)) {
+        if (ObjectTool.isNotEmpty(fileInfo)) {
             fileList.value = [this.fileInfoToUploadFile(fileInfo!)]
             return
         }
-        if (CollUtil.isNotEmpty(hrefs)) {
+        if (ArrayTool.isNotEmpty(hrefs)) {
             fileList.value = hrefs?.map(i => this.strToUploadFile(i)) as any
         }
-        if (StrUtil.isNotEmpty(href)) {
+        if (StrTool.isNotEmpty(href)) {
             fileList.value = [this.strToUploadFile(href)]
         }
     }

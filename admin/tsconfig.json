@@ -1,23 +1,20 @@
 {
     "compilerOptions": {
-        "target": "esnext",
-        "useDefineForClassFields": true,
-        "module": "esnext",
-        "moduleResolution": "node",
+        "target": "ESNext",
+        "module": "CommonJS",
         "strict": true,
+        "useDefineForClassFields": true,
+        "moduleResolution": "node",
         "jsx": "preserve",
         "sourceMap": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        // 没有隐式返回
         "noImplicitReturns": true,
         "suppressImplicitAnyIndexErrors": true,
         "allowJs": true,
         "skipLibCheck": true,
         "experimentalDecorators": true,
-        // TS6133 禁止没有使用的定义
         "noUnusedLocals": false,
-        // TS2564 严格的属性初始化
         "strictPropertyInitialization": false,
         "lib": [
             "esnext",

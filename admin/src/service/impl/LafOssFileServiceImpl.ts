@@ -2,7 +2,7 @@ import { ToolApi } from '@/repository/ToolApi'
 import { FileService, FileServiceKey, UploadFileInfo } from '@/service/FileService'
 import { Request } from '@/util/Tool'
 import { Component, Inject } from 'common'
-import { StrUtil } from 'typescript-util'
+import { StrTool } from '@es-tool/core'
 
 /**
  * LafOssFileServiceImpl
@@ -24,13 +24,13 @@ class LafOssFileServiceImpl implements FileService {
     }
 
     public pathCompletion(path: string): string {
-        if (StrUtil.isEmpty(path)) {
-            return StrUtil.EMPTY
+        if (StrTool.isEmpty(path)) {
+            return StrTool.EMPTY
         }
-        if (path.startsWith(StrUtil.HTTP) || path.startsWith(StrUtil.HTTPS)) {
+        if (path.startsWith(StrTool.HTTP) || path.startsWith(StrTool.HTTPS)) {
             return path
         }
-        if (path.startsWith(StrUtil.PATH_INTEGRAL)) {
+        if (path.startsWith(StrTool.PATH_INTEGRAL)) {
             return 'https://oss.lafyun.com' + path
         }
         return 'https://oss.lafyun.com/' + path

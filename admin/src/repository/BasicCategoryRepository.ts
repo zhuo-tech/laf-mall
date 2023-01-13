@@ -1,7 +1,7 @@
 import { CrudRequest } from '@/service/CrudRequest'
 import { BasicProductCategory, Component } from 'common'
 import { LafClient, Page } from 'laf-db-query-wrapper'
-import { CollUtil } from 'typescript-util'
+import { ArrayTool, TreeTool } from '@es-tool/core'
 
 export type BasicProductCategoryTree = BasicProductCategory & {
     children: Array<BasicProductCategoryTree>
@@ -19,7 +19,7 @@ export class BasicCategoryRepository implements CrudRequest<BasicProductCategory
     private readonly client = new LafClient<BasicProductCategoryTree>(BasicProductCategory.NAME)
 
     private static buildTree<E extends BasicProductCategory>(list: Array<E>): Array<E> {
-        return CollUtil.buildTree(list, i => !i.parentId || i.parentId === '0',
+        return TreeTool.build(list, i => !i.parentId || i.parentId === '0',
             // @ts-ignore
             '_id', 'parentId', 'children')
     }
@@ -42,7 +42,7 @@ export class BasicCategoryRepository implements CrudRequest<BasicProductCategory
             .orderByDesc('createTime')
             .page(new Page(1, 1000))
 
-        if (CollUtil.isEmpty(categoryPage.list)) {
+        if (ArrayTool.isEmpty(categoryPage.list)) {
             return categoryPage
         }
         const list = categoryPage.list.sort((a, b) => a.sort - b.sort)

@@ -2,7 +2,7 @@ import { CrudRequest } from '@/service/CrudRequest'
 import { RuleItem } from 'async-validator'
 import { ElMessage, FormInstance } from 'element-plus'
 import { Page } from 'laf-db-query-wrapper'
-import { ObjectUtil } from 'typescript-util'
+import { ObjectTool } from '@es-tool/core'
 import { reactive, Ref, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -139,7 +139,7 @@ export default abstract class BasisCrud<E> {
         const submitAction = async () => {
             const valid = await this.formRef?.value?.validate()
                 .catch((err: Record<string, Array<any>>) => {
-                    ObjectUtil.toArray(err).flatMap(i => i.value)
+                    ObjectTool.toArray(err).flatMap(i => i.value)
                         .forEach(i => this.basisLog.warn('验证失败', i))
                 })
             this.basisLog.debug('验证结果:', valid)
@@ -179,7 +179,7 @@ export default abstract class BasisCrud<E> {
      * @param {E} data 一行数据
      */
     public readyEdit = (data: E) => {
-        this.formData = Object.assign(this.formData, ObjectUtil.copy(data))
+        this.formData = Object.assign(this.formData, ObjectTool.copy(data))
         this.formIsAdd.value = false
         this.show()
     }

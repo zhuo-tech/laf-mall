@@ -2,7 +2,7 @@ import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
 import { Component, SelectOption, SysPermission } from 'common'
 import { LafClient, Page } from 'laf-db-query-wrapper'
-import { CollUtil } from 'typescript-util'
+import { ArrayTool } from '@es-tool/core'
 
 /**
  * SysPermissionRepository
@@ -46,7 +46,7 @@ export class SysPermissionRepository implements CrudRequest<SysPermission> {
      * @param key
      */
     public async deleteByKey(...key: Array<string>) {
-        if (CollUtil.isEmpty(key)) {
+        if (ArrayTool.isEmpty(key)) {
             return
         }
 

@@ -9,7 +9,7 @@ import Marketing from '@/pages/Marketing/Router'
 import { StorageService, StorageServiceKey } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
 import { Inject } from 'common'
-import { StrUtil } from 'typescript-util'
+import { StrTool } from '@es-tool/core'
 import {
     createRouter,
     createWebHistory,
@@ -69,7 +69,7 @@ export class RoutingProvider {
      */
     private beforeEach: NavigationGuard = (to, from, next) => {
         this.log.debug('导航之前: ', from.path, ' => ', to.path)
-        const logged = StrUtil.isNotEmpty(this.storageService.getAttribute('token') as string)
+        const logged = StrTool.isNotEmpty(this.storageService.getAttribute('token') as string)
 
         // 前往登录页
         if (to.path === '/login') {
@@ -88,12 +88,12 @@ export class RoutingProvider {
         this.log.debug('导航完成: ', from.path, ' => ', to.path)
         const MAX_SHOW_DEEP = 5
         const title = to.matched.map(({meta, name}) => meta?.title || name)
-            .filter(str => StrUtil.isNotEmpty(str as string))
+            .filter(str => StrTool.isNotEmpty(str as string))
             .reverse()
             .filter((s, i) => i <= MAX_SHOW_DEEP)
             .join(' - ')
 
-        if (StrUtil.isNotEmpty(title)) {
+        if (StrTool.isNotEmpty(title)) {
             document.title = `${ title }`
             // TODO: 缺一个站点名称
             // document.title = `${title} - ${site_name}`

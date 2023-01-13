@@ -3,7 +3,7 @@ import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
 import { Component, Inject, LogicDelete, SysRole, SysAdmin } from 'common'
 import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
-import { CollUtil } from 'typescript-util'
+import { ArrayTool } from '@es-tool/core'
 
 export type SysUserInfo = SysAdmin & { password: string, roleInfo: Array<Partial<SysRole>> }
 
@@ -41,12 +41,12 @@ export class SysAdminRepository implements CrudRequest<SysUserInfo> {
             .inNotEmpty('role', query?.role)
             .page(page)
 
-        if (CollUtil.isEmpty(userInfoPage.list)) {
+        if (ArrayTool.isEmpty(userInfoPage.list)) {
             return userInfoPage
         }
         const roleKeys = userInfoPage.list.flatMap(i => i.role)
         const roleList = await new QueryChainWrapper<SysRole>(SysRole.NAME)
-            .inNotEmpty('key', CollUtil.distinct(roleKeys))
+            .inNotEmpty('key', ArrayTool.distinct(roleKeys))
             .show('key', 'name', 'permissions')
             .list(9999)
 

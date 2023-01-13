@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { VueRouter } from '@/main'
-import { CollUtil, StrUtil } from 'typescript-util'
+import { ArrayTool, StrTool } from '@es-tool/core'
 import { defineComponent } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 
@@ -36,7 +36,7 @@ export default defineComponent({
             this.$emit('select', index)
         },
 
-        expectStartWith(str: string, expect: string = StrUtil.PATH_INTEGRAL) {
+        expectStartWith(str: string, expect: string = StrTool.PATH_INTEGRAL) {
             // 二级路由有可能 path 留空
             if (str === '') {
                 return str
@@ -44,13 +44,13 @@ export default defineComponent({
             return str.startsWith(expect) ? str : expect + str
         },
 
-        renderMenuItem(menu: RouteRecordRaw, rootPath: string = StrUtil.EMPTY) {
+        renderMenuItem(menu: RouteRecordRaw, rootPath: string = StrTool.EMPTY) {
             // 没有子菜单: 一级菜单
             let {children, path} = menu
             children = children?.filter(i => i?.meta?.isMenu !== false)
 
             path = rootPath + this.expectStartWith(path)
-            if (CollUtil.isEmpty(children)) {
+            if (ArrayTool.isEmpty(children)) {
                 return this.renderMenuNode(path, path, menu)
             }
             // 只有唯一子菜单
