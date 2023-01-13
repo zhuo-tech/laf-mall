@@ -29,7 +29,3 @@ admin
         ├── env.d.ts
         └── App.tsx
 ```
-
-# 注意
-`package.json` 中 `"dev": "update.ps1 && vite --host"`  
-但是 [common 依赖更新脚本: update.ps1](./update.ps1) 仅供`win` 平台使用;   

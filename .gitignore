@@ -18,6 +18,7 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .idea
+*.iml
 .DS_Store
 *.suo
 *.ntvs*
@@ -28,3 +29,5 @@ dist-ssr
 coverage
 yarn.lock
 *.mp4
+
+/common/lib/
