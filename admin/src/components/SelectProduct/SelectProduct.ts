@@ -1,7 +1,7 @@
 import { BasicProductRepository } from '@/repository/BasicProductRepository'
-import { BasicProduct, Inject } from 'common'
-import { Page } from 'laf-db-query-wrapper'
 import { ObjectTool } from '@es-tool/core'
+import { BasicProduct } from 'common'
+import { Page } from 'laf-db-query-wrapper'
 import { ExtractPropTypes, reactive, ref, Ref, UnwrapNestedRefs, watch } from 'vue'
 
 /**
@@ -10,34 +10,41 @@ import { ExtractPropTypes, reactive, ref, Ref, UnwrapNestedRefs, watch } from 'v
  * @date 2022-07-08 下午 03:27
  **/
 export class SelectProduct {
-    private readonly props: PropsType
-    private readonly emits: EmitsType
-
     public pageIsLoading: Ref<boolean> = ref(false)
     public page: UnwrapNestedRefs<Page<BasicProduct>> = reactive<Page<BasicProduct>>(new Page(1, 20))
     public queryData = reactive<Partial<BasicProduct>>({})
-
     public isShow: Ref<boolean> = ref(false)
-    public show = () => this.isShow.value = true
-    public close = () => this.isShow.value = false
-
     public echoIsLoading = ref(false)
     public currentSelect = ref<BasicProduct | null>(null)
-
-    @Inject(BasicProductRepository.KEY)
-    private get productRepository(): BasicProductRepository {
-        return null as any
-    }
+    private readonly props: PropsType
+    private readonly emits: EmitsType
+    private readonly productRepository: BasicProductRepository = new BasicProductRepository()
 
     constructor(props: PropsType, emits: EmitsType) {
         this.props = props
         this.emits = emits
 
-        watch(() => this.page.pageSize, this.listUpdate, {deep: true})
-        watch(() => this.page.currentPage, this.listUpdate, {deep: true})
+        watch(() => this.page.pageSize, this.listUpdate, { deep: true })
+        watch(() => this.page.currentPage, this.listUpdate, { deep: true })
 
         this.handleEcho()
         this.listUpdate()
+    }
+
+    public show = () => this.isShow.value = true
+
+    public close = () => this.isShow.value = false
+
+    public queryFormSubmit = () => this.listUpdate()
+
+    public select = (product: BasicProduct) => {
+        this.currentSelect.value = product
+
+        this.emits('update', product?._id)
+        this.emits('update:value', product?._id)
+        this.emits('update:product', product)
+
+        this.close()
     }
 
     private handleEcho() {
@@ -61,20 +68,8 @@ export class SelectProduct {
 
         // TODO: 可以更换一个有限的列查询, 节省流量
         this.productRepository.pageRequest(this.page as any, this.queryData)
-            .then(({list, total}) => Object.assign(this.page, {list, total}))
+            .then(({ list, total }) => Object.assign(this.page, { list, total }))
             .finally(() => this.pageIsLoading.value = false)
-    }
-
-    public queryFormSubmit = () => this.listUpdate()
-
-    public select = (product: BasicProduct) => {
-        this.currentSelect.value = product
-
-        this.emits('update', product?._id)
-        this.emits('update:value', product?._id)
-        this.emits('update:product', product)
-
-        this.close()
     }
 
 }

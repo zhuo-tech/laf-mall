@@ -1,7 +1,7 @@
 import { BasicSpecProductDetail, BasicSpecProductRepository } from '@/repository/BasicSpecProductRepository'
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { BasicProduct, BasicProductCategory, Component, Inject, LogicDelete } from 'common'
+import { BasicProduct, BasicProductCategory, LogicDelete } from 'common'
 import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
 
 /**
@@ -9,16 +9,10 @@ import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
  * @author 冰凝
  * @date 2022-06-20 下午 05:33
  **/
-@Component(BasicProductRepository.KEY)
 export class BasicProductRepository implements CrudRequest<BasicProductDetail> {
-    public static readonly KEY = 'BasicProductRepository'
     private readonly client = new LafClient<BasicProduct>(BasicProduct.NAME)
     private readonly userStore = useUserStore()
-
-    @Inject(BasicSpecProductRepository.KEY)
-    private get specProductRepository(): BasicSpecProductRepository {
-        return null as any
-    }
+    private readonly specProductRepository: BasicSpecProductRepository = new BasicSpecProductRepository()
 
     /**
      * 获取商品 - 商品分类 关联参数
@@ -42,7 +36,7 @@ export class BasicProductRepository implements CrudRequest<BasicProductDetail> {
     }
 
     public deleteByIdRequest = async (id: string | number): Promise<any> => {
-        return await this.client.updateById(id, {isDelete: LogicDelete.DELETED})
+        return await this.client.updateById(id, { isDelete: LogicDelete.DELETED })
     }
 
     public pageRequest = async (page: Page<BasicProductDetail>, query: Partial<BasicProductDetail>): Promise<Page<BasicProductDetail>> => {

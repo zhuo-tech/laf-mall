@@ -1,10 +1,10 @@
 import { HOME_PATH } from '@/pages/Home/Router'
 import { SysAdminApi } from '@/repository/SysAdminApi'
-import { StorageLevel, StorageService, StorageServiceKey } from '@/service/StorageService'
+import { StorageServiceImpl } from '@/service/impl/StorageServiceImpl'
+import { StorageLevel, StorageService } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
 import { StrTool } from '@es-tool/core'
 import { RuleItem } from 'async-validator'
-import { Inject } from 'common'
 import { FormInstance, InputInstance } from 'element-plus'
 import { reactive, ref, UnwrapNestedRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -16,30 +16,12 @@ import { useRoute, useRouter } from 'vue-router'
  **/
 export class LoginForm {
     private static readonly ROUTER_REDIRECT_PARAM = 'redirect'
-
-    @Inject(SysAdminApi.KEY)
-    private get sysAdminApi(): SysAdminApi {
-        return null as any
-    }
-
-    @Inject(StorageServiceKey)
-    private get storageService(): StorageService {
-        return null as any
-    }
-
-    private formRef = ref<FormInstance>({} as any)
-
-    public setFormRef = (el: any) => {
-        if (el) {
-            this.formRef.value = el
-        }
-    }
     public refs: UnwrapNestedRefs<Record<'username' | 'password' | 'code', InputInstance>> =
         reactive<Record<'username' | 'password' | 'code', InputInstance>>({
-        username: null as any,
-        password: null as any,
-        code: null as any,
-    })
+            username: null as any,
+            password: null as any,
+            code: null as any,
+        })
     public formData = reactive({
         username: '',
         password: '',
@@ -55,8 +37,17 @@ export class LoginForm {
         password: false,
     })
     public isLoading = ref(false)
+    private readonly sysAdminApi: SysAdminApi = new SysAdminApi()
+    private readonly storageService: StorageService = new StorageServiceImpl()
+    private formRef = ref<FormInstance>({} as any)
     private router = useRouter()
     private route = useRoute()
+
+    public setFormRef = (el: any) => {
+        if (el) {
+            this.formRef.value = el
+        }
+    }
 
     public next = (property: keyof typeof this.formData) => {
         if (StrTool.isEmpty(this.formData[property])) {

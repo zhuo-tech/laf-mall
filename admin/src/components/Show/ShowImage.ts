@@ -1,6 +1,6 @@
-import { FileService, FileServiceKey } from '@/service/FileService'
+import { FileService } from '@/service/FileService'
+import { LafOssFileServiceImpl } from '@/service/impl/LafOssFileServiceImpl'
 import { computed } from '@vue/runtime-core'
-import { Inject } from 'common'
 
 type PropType = { src?: string | Array<string> }
 
@@ -12,17 +12,12 @@ type PropType = { src?: string | Array<string> }
 export class ShowImage {
     private static readonly ABSOLUTE_ADDRESS = new RegExp('^(http://|https://)(.+/)*.+\\.\\S{1,5}')
     private prop: Readonly<PropType>
-
-    @Inject(FileServiceKey)
-    private get fileService(): FileService {
-        return {} as any
-    }
+    public srcArr = computed(() => ShowImage.preprocessing(this.prop.src).map(i => this.hrefFilter(i)))
+    private readonly fileService: FileService = new LafOssFileServiceImpl()
 
     constructor(prop: Readonly<PropType>) {
         this.prop = prop
     }
-
-    public srcArr = computed(() => ShowImage.preprocessing(this.prop.src).map(i => this.hrefFilter(i)))
 
     /**
      * props 类型预处理
@@ -32,7 +27,7 @@ export class ShowImage {
             return []
         }
         if (typeof src === 'string') {
-            return [src]
+            return [ src ]
         }
         if (Array.isArray(src)) {
             return src

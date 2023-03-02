@@ -1,6 +1,6 @@
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { BasicSpec, BasicSpecProduct, Component } from 'common'
+import { BasicSpec, BasicSpecProduct } from 'common'
 import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
 
 /**
@@ -8,9 +8,7 @@ import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
  * @author 冰凝
  * @date 2022-07-08 上午 10:38
  **/
-@Component(BasicSpecProductRepository.KEY)
 export class BasicSpecProductRepository implements CrudRequest<BasicSpecProduct> {
-    public static readonly KEY = 'BasicSpecProductRepository'
     private readonly client = new LafClient<BasicSpecProduct>(BasicSpecProduct.NAME)
     private readonly store = useUserStore()
 

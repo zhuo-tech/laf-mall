@@ -1,13 +1,13 @@
 import { BASE_URL, DB_PROXY } from '@/config/Env'
-import { StorageService, StorageServiceKey } from '@/service/StorageService'
-import { Context } from 'common'
+import { StorageServiceImpl } from '@/service/impl/StorageServiceImpl'
+import { StorageService } from '@/service/StorageService'
 import { Cloud, EnvironmentType } from 'laf-client-sdk'
 import { LafWrapperConfig, LoggerLevel } from 'laf-db-query-wrapper'
 
 export const cloud = new Cloud({
     baseUrl: BASE_URL,
     getAccessToken: () => {
-        const service: StorageService = Context.getBean(StorageServiceKey)
+        const service: StorageService = new StorageServiceImpl()
         return service.getAttribute('token') || ''
     },
     dbProxyUrl: DB_PROXY,

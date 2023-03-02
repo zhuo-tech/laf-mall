@@ -1,6 +1,6 @@
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { Component, LogicDelete, MallActivitySeckill } from 'common'
+import { LogicDelete, MallActivitySeckill } from 'common'
 import { LafClient, Page } from 'laf-db-query-wrapper'
 
 /**
@@ -8,9 +8,7 @@ import { LafClient, Page } from 'laf-db-query-wrapper'
  * @author 冰凝
  * @date 2022-07-11 10:50:00
  **/
-@Component(MallActivitySeckillRepository.KEY)
 export class MallActivitySeckillRepository implements CrudRequest<MallActivitySeckill> {
-    public static readonly KEY = 'MallActivitySeckillRepository'
     private readonly client = new LafClient<MallActivitySeckill>(MallActivitySeckill.NAME)
     private readonly userStore = useUserStore()
 
@@ -23,7 +21,7 @@ export class MallActivitySeckillRepository implements CrudRequest<MallActivitySe
         return await this.client.insert(data)
     }
 
-    public deleteByIdRequest = async (id: string | number): Promise<any> => await this.client.updateById(id, {isDelete: LogicDelete.DELETED})
+    public deleteByIdRequest = async (id: string | number): Promise<any> => await this.client.updateById(id, { isDelete: LogicDelete.DELETED })
 
     public pageRequest = async (page: Page<MallActivitySeckill>, query: Partial<MallActivitySeckill>): Promise<Page<MallActivitySeckill>> => {
         return this.client.queryWrapper()
@@ -39,6 +37,5 @@ export class MallActivitySeckillRepository implements CrudRequest<MallActivitySe
 
         return await this.client.updateById(data._id!, data, '_id')
     }
-
 
 }

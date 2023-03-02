@@ -5,7 +5,7 @@ import { BasicSpecProductRepository } from '@/repository/BasicSpecProductReposit
 import { MallConfigRepository } from '@/repository/MallConfigRepository'
 import { computed } from '@vue/runtime-core'
 import { RuleItem } from 'async-validator'
-import { BasicProduct, BasicSpecProduct, Entity, HomePageChannel, Inject, ProductTag, SpecType } from 'common'
+import { BasicProduct, BasicSpecProduct, Entity, HomePageChannel, ProductTag, SpecType } from 'common'
 import { ElMessage, FormInstance } from 'element-plus'
 import { onActivated, reactive, ref, Ref } from 'vue'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
@@ -15,8 +15,8 @@ export class EditorService {
     public specData = ref<Partial<BasicSpecProduct>>({})
     public formIsLoading: Ref<boolean> = ref(false)
     public formRule: Partial<Record<keyof BasicProduct, Array<RuleItem>>> = {
-        name: [{type: 'string', message: '必填', required: true}],
-        cover: [{type: 'string', message: '请选择文件上传', required: true}],
+        name: [ { type: 'string', message: '必填', required: true } ],
+        cover: [ { type: 'string', message: '请选择文件上传', required: true } ],
     }
     /**
      * 商品分类 树形数据
@@ -39,6 +39,10 @@ export class EditorService {
      * 是编辑?
      */
     private isEdit = computed(() => !!this.productId.value)
+    private readonly categoryRepository: BasicCategoryRepository = new BasicCategoryRepository()
+    private readonly productRepository: BasicProductRepository = new BasicProductRepository()
+    private readonly mallConfigRepository: MallConfigRepository = new MallConfigRepository()
+    private readonly specProductRepository: BasicSpecProductRepository = new BasicSpecProductRepository()
 
     constructor(route: RouteLocationNormalizedLoaded) {
         this.route = route
@@ -50,6 +54,19 @@ export class EditorService {
             .then(list => this.channelList.value = list)
 
         onActivated(() => this.formDateInit())
+    }
+
+    /**
+     * 表单默认值
+     * @protected
+     */
+    protected get formDataDefault(): Partial<BasicProduct> {
+        return Object.assign(new BasicProduct(), {
+            sort: 1,
+            status: true,
+            tags: [] as ProductTag[],
+            specType: SpecType.SingleSpec,
+        } as Partial<BasicProduct>)
     }
 
     /**
@@ -76,43 +93,20 @@ export class EditorService {
             this.formIsLoading.value = true
         }
         asyncSave().catch(err => {
-                console.log('保存失败', err)
-                ElMessage.error(err?.message)
-            })
+            console.log('保存失败', err)
+            ElMessage.error(err?.message)
+        })
             .finally(() => this.formIsLoading.value = false)
     }
 
-    /**
-     * 表单默认值
-     * @protected
-     */
-    protected get formDataDefault(): Partial<BasicProduct> {
-        return Object.assign(new BasicProduct(), {
-            sort: 1,
-            status: true,
-            tags: [] as ProductTag[],
-            specType: SpecType.SingleSpec,
-        } as Partial<BasicProduct>)
+    public changeChannel = () => {
+        this.formData.channelValue = ''
     }
 
-    @Inject(BasicCategoryRepository.KEY)
-    private get categoryRepository(): BasicCategoryRepository {
-        return null as any
-    }
-
-    @Inject(BasicProductRepository.KEY)
-    private get productRepository(): BasicProductRepository {
-        return null as any
-    }
-
-    @Inject(MallConfigRepository.KEY)
-    private get mallConfigRepository(): MallConfigRepository {
-        return null as any
-    }
-
-    @Inject(BasicSpecProductRepository.KEY)
-    private get specProductRepository(): BasicSpecProductRepository {
-        return null as any
+    public setFormRef = (ref: any) => {
+        if (ref) {
+            this.formRef.value = ref
+        }
     }
 
     /**
@@ -135,16 +129,6 @@ export class EditorService {
         } else {
             this.specData.value = new BasicSpecProduct()
             Object.assign(this.formData, this.formDataDefault)
-        }
-    }
-
-    public changeChannel = () => {
-        this.formData.channelValue = ''
-    }
-
-    public setFormRef = (ref: any) => {
-        if (ref) {
-            this.formRef.value = ref
         }
     }
 }

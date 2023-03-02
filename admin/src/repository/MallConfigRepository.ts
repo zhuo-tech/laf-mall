@@ -1,17 +1,15 @@
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { Component, Entity, HomePageChannel, MallConfig, MallConfigKey } from 'common'
-import { LafClient, Page } from 'laf-db-query-wrapper'
 import { ArrayTool } from '@es-tool/core'
+import { Entity, HomePageChannel, MallConfig, MallConfigKey } from 'common'
+import { LafClient, Page } from 'laf-db-query-wrapper'
 
 /**
  * MallConfigRepository
  * @author 冰凝
  * @date 2022-06-20 下午 05:33
  **/
-@Component(MallConfigRepository.KEY)
 export class MallConfigRepository implements CrudRequest<MallConfig> {
-    public static readonly KEY = 'MallConfigRepository'
     private readonly client = new LafClient<MallConfig>(MallConfig.NAME)
     private readonly userStore = useUserStore()
 
@@ -54,7 +52,7 @@ export class MallConfigRepository implements CrudRequest<MallConfig> {
             return []
         }
 
-        return list.map(({_id, value}) => (<HomePageChannel & Entity>{...value, _id}))
+        return list.map(({ _id, value }) => (<HomePageChannel & Entity>{ ...value, _id }))
     }
 
 }

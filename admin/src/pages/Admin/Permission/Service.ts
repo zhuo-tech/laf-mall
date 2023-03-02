@@ -1,10 +1,10 @@
 import { SysPermissionRepository } from '@/repository/SysPermissionRepository'
 import BasisCrud from '@/service/BasisCrud'
 import { CrudRequest } from '@/service/CrudRequest'
+import { ObjectTool } from '@es-tool/core'
 import { computed } from '@vue/runtime-core'
 import { RuleItem } from 'async-validator'
-import { BasicProduct, BasicProductCategory, Inject, KeyValue, MallConfig, MallOrder, MallRechargeRecord, MallShopCart, SysPermission, SysRole, SysUser } from 'common'
-import { ObjectTool } from '@es-tool/core'
+import { BasicProduct, BasicProductCategory, KeyValue, MallConfig, MallOrder, MallRechargeRecord, MallShopCart, SysPermission, SysRole, SysUser } from 'common'
 import { reactive, ref } from 'vue'
 
 // 预设权限表名称
@@ -39,21 +39,10 @@ export type PermissionLine = {
  * @date 2022-06-14 下午 06:06
  **/
 export class PermissionService extends BasisCrud<SysPermission> {
-    protected override readonly request: CrudRequest<SysPermission> = this.repository
     public override formRule: Partial<Record<keyof SysRole, Array<RuleItem>>> = {
-        name: [{type: 'string', required: true, message: '必填'}],
-        desc: [{type: 'string', required: true, message: '必填'}],
+        name: [ { type: 'string', required: true, message: '必填' } ],
+        desc: [ { type: 'string', required: true, message: '必填' } ],
     }
-
-    @Inject(SysPermissionRepository.KEY)
-    public get repository(): SysPermissionRepository {
-        return null as any
-    }
-
-    protected override get formDataDefault(): Partial<SysPermission> {
-        return new SysPermission()
-    }
-
     /**
      * 批量选择时的值:
      * - key: 权限key {@link SysPermission.name} {@link defineKey}
@@ -66,9 +55,7 @@ export class PermissionService extends BasisCrud<SysPermission> {
      * - value: checkbox 选中状态
      */
     public selectAllButton = reactive<Record<string, boolean>>({})
-    private oldSelectKey: Array<string> = []
     public bulkSaveIsLoading = ref(false)
-
     /**
      * 默认权限
      */
@@ -82,10 +69,48 @@ export class PermissionService extends BasisCrud<SysPermission> {
             return o
         })
     })
+    private readonly repository: SysPermissionRepository = new SysPermissionRepository()
+    protected override readonly request: CrudRequest<SysPermission> = this.repository
+    private oldSelectKey: Array<string> = []
+
+    protected override get formDataDefault(): Partial<SysPermission> {
+        return new SysPermission()
+    }
 
     public override show: () => void = () => {
         this.isShow.value = true
         this.batchSelectionInit()
+    }
+
+    public lineChange = (tableKv: KeyValue, isSelect: boolean) => {
+        for (const actionKv of defaultAction) {
+            this.batchSelection[defineValue(tableKv, actionKv)] = isSelect ? defineKey(actionKv, tableKv) : ''
+        }
+    }
+
+    public bulkSave = () => {
+        const asyncOperation = async () => {
+            const toArray = ObjectTool.toArray(this.batchSelection)
+            // value 有值, 例如: sys_user_create: '创建系统用户'; 无值的是取消勾选
+            const newCreates = toArray.filter(kv => kv.value && !this.oldSelectKey.includes(kv.key))
+                .map(kv => ({ name: kv.key, desc: kv.value }))
+            await this.repository.bulkSave(newCreates)
+
+            // value 为空, 可能是要删除; 同时 oldSelect 存在, 那一定是需要删除
+            const needToDelete = toArray.filter(kv => !kv.value && this.oldSelectKey.includes(kv.key))
+                .flatMap(i => i.key)
+            await this.repository.deleteByKey(...needToDelete)
+        }
+
+        console.debug('批量保存')
+        this.bulkSaveIsLoading.value = true
+        asyncOperation()
+            .then(() => {
+                this.close()
+                this.listUpdate()
+            })
+            .catch(err => console.debug('批量操作失败: ', err))
+            .finally(() => this.bulkSaveIsLoading.value = false)
     }
 
     /**
@@ -106,37 +131,6 @@ export class PermissionService extends BasisCrud<SysPermission> {
                         .every(perKey => this.oldSelectKey.includes(perKey))
                 }
             })
-            .finally(() => this.bulkSaveIsLoading.value = false)
-    }
-
-    public lineChange = (tableKv: KeyValue, isSelect: boolean) => {
-        for (const actionKv of defaultAction) {
-            this.batchSelection[defineValue(tableKv, actionKv)] = isSelect ? defineKey(actionKv, tableKv) : ''
-        }
-    }
-
-    public bulkSave = () => {
-        const asyncOperation = async () => {
-            const toArray = ObjectTool.toArray(this.batchSelection)
-            // value 有值, 例如: sys_user_create: '创建系统用户'; 无值的是取消勾选
-            const newCreates = toArray.filter(kv => kv.value && !this.oldSelectKey.includes(kv.key))
-                .map(kv => ({name: kv.key, desc: kv.value}))
-            await this.repository.bulkSave(newCreates)
-
-            // value 为空, 可能是要删除; 同时 oldSelect 存在, 那一定是需要删除
-            const needToDelete = toArray.filter(kv => !kv.value && this.oldSelectKey.includes(kv.key))
-                .flatMap(i => i.key)
-            await this.repository.deleteByKey(...needToDelete)
-        }
-
-        console.debug('批量保存')
-        this.bulkSaveIsLoading.value = true
-        asyncOperation()
-            .then(() => {
-                this.close()
-                this.listUpdate()
-            })
-            .catch(err => console.debug('批量操作失败: ', err))
             .finally(() => this.bulkSaveIsLoading.value = false)
     }
 }

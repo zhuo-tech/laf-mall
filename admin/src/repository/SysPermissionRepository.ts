@@ -1,18 +1,15 @@
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { Component, SelectOption, SysPermission } from 'common'
-import { LafClient, Page } from 'laf-db-query-wrapper'
 import { ArrayTool } from '@es-tool/core'
+import { SelectOption, SysPermission } from 'common'
+import { LafClient, Page } from 'laf-db-query-wrapper'
 
 /**
  * SysPermissionRepository
  * @author 冰凝
  * @date 2022-06-15 下午 03:32
  **/
-@Component(SysPermissionRepository.KEY)
 export class SysPermissionRepository implements CrudRequest<SysPermission> {
-    public static readonly KEY = 'SysPermissionRepository'
-
     private readonly client = new LafClient<SysPermission>(SysPermission.NAME)
     private readonly userStore = useUserStore()
 
@@ -52,7 +49,7 @@ export class SysPermissionRepository implements CrudRequest<SysPermission> {
 
         // 一般没有批量权限, 没办法
         for (let i of key) {
-            await this.client.queryWrapper().where({name: i}).delete()
+            await this.client.queryWrapper().where({ name: i }).delete()
         }
 
         // await this.client.queryWrapper()
@@ -76,7 +73,7 @@ export class SysPermissionRepository implements CrudRequest<SysPermission> {
             .orderByAsc('name')
             .list(9999)
 
-        return roles.map(({desc, name}) => ({label: desc, value: name}))
+        return roles.map(({ desc, name }) => ({ label: desc, value: name }))
     }
 
 }

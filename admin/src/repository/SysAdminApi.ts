@@ -1,5 +1,5 @@
 import { invoke } from '@/util/Tool'
-import { Component, Response, SysUser } from 'common'
+import { Response, SysUser } from 'common'
 
 /**
  * 后台管理 云函数
@@ -7,10 +7,7 @@ import { Component, Response, SysUser } from 'common'
  * @author 冰凝
  * @date 2022-06-17 下午 03:51
  **/
-@Component(SysAdminApi.KEY)
 export class SysAdminApi {
-    public static readonly KEY = 'SysAdminApi'
-
     /**
      * 管理员登录
      * @see https://console.lafyun.com/app-console/#/app/3dgrfj/cloudfunction/functions/62ab05081a8c4af190ddb420

@@ -1,7 +1,7 @@
 import { CrudRequest } from '@/service/CrudRequest'
-import { BasicProductCategory, Component } from 'common'
-import { LafClient, Page } from 'laf-db-query-wrapper'
 import { ArrayTool, TreeTool } from '@es-tool/core'
+import { BasicProductCategory } from 'common'
+import { LafClient, Page } from 'laf-db-query-wrapper'
 
 export type BasicProductCategoryTree = BasicProductCategory & {
     children: Array<BasicProductCategoryTree>
@@ -12,10 +12,7 @@ export type BasicProductCategoryTree = BasicProductCategory & {
  * @author 冰凝
  * @date 2022-07-04 下午 04:12
  **/
-@Component(BasicCategoryRepository.KEY)
 export class BasicCategoryRepository implements CrudRequest<BasicProductCategoryTree> {
-    public static readonly KEY = 'BasicCategoryRepository'
-
     private readonly client = new LafClient<BasicProductCategoryTree>(BasicProductCategory.NAME)
 
     private static buildTree<E extends BasicProductCategory>(list: Array<E>): Array<E> {

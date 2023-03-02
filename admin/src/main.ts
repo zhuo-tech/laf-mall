@@ -2,12 +2,9 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import * as ElIconModules from '@element-plus/icons-vue'
-
 import App from '@/App'
 import { RoutingProvider } from '@/config/RouterConfig'
 import '@/config/LafConfig'
-import '@/service/impl/StorageServiceImpl'
-import '@/service/impl/LafOssFileServiceImpl'
 
 // 在 element-plus css 之前导入 tailwind css 以避免冲突
 import './style/index.css'

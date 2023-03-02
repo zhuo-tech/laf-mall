@@ -1,5 +1,4 @@
-import { StorageLevel, StorageRegister, StorageService, StorageServiceKey, StorageWrapper } from '@/service/StorageService'
-import { Component } from 'common'
+import { StorageLevel, StorageRegister, StorageService, StorageWrapper } from '@/service/StorageService'
 import { Function, ObjectTool, StrTool } from '@es-tool/core'
 
 /**
@@ -7,7 +6,6 @@ import { Function, ObjectTool, StrTool } from '@es-tool/core'
  * @author LL
  * @date 2022-01-20 下午 8:38
  **/
-@Component(StorageServiceKey)
 export class StorageServiceImpl implements StorageService {
     private readonly KEY_PREFIX = ''
     private readonly log = console

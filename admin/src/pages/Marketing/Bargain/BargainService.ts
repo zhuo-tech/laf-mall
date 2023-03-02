@@ -1,7 +1,7 @@
 import { MallActivityBargainRepository } from '@/repository/MallActivityBargainRepository'
 import BasisCrud from '@/service/BasisCrud'
 import { CrudRequest } from '@/service/CrudRequest'
-import { Inject, MallActivityBargain } from 'common'
+import { MallActivityBargain } from 'common'
 
 /**
  * BargainService
@@ -10,11 +10,7 @@ import { Inject, MallActivityBargain } from 'common'
  **/
 export class BargainService extends BasisCrud<MallActivityBargain> {
 
+    private readonly repository: MallActivityBargainRepository = new MallActivityBargainRepository()
     protected override readonly request: CrudRequest<MallActivityBargain> = this.repository
-
-    @Inject(MallActivityBargainRepository.KEY)
-    private get repository(): MallActivityBargainRepository {
-        return null as any
-    }
 
 }

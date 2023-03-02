@@ -1,22 +1,19 @@
 import { invoke } from '@/util/Tool'
-import { Component, Response } from 'common'
+import { Response } from 'common'
 
 /**
  * ToolApi
  * @author 冰凝
  * @date 2022-07-04 上午 10:43
  **/
-@Component(ToolApi.KEY)
 export class ToolApi {
-
-    public static readonly KEY = 'ToolApi'
 
     /**
      * @param sbn bucket name
      * @param name 文件名的参考值
      */
     public async ossUploadUrlPreSigned(sbn: string, name: string): Promise<PreSignedResponse> {
-        return Response.getDate(await invoke('oss-upload-url-pre-signed', {simpleBucketName: sbn, fileName: name} as PreSignedRequestBody))
+        return Response.getDate(await invoke('oss-upload-url-pre-signed', { simpleBucketName: sbn, fileName: name } as PreSignedRequestBody))
     }
 
 }

@@ -1,5 +1,3 @@
-export const FileServiceKey = 'FileService'
-
 /**
  * FileService
  * @author 冰凝

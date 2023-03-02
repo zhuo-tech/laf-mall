@@ -1,6 +1,6 @@
-import { FileService, FileServiceKey, UploadFileInfo } from '@/service/FileService'
+import { FileService, UploadFileInfo } from '@/service/FileService'
+import { LafOssFileServiceImpl } from '@/service/impl/LafOssFileServiceImpl'
 import { Picture as IconPicture } from '@element-plus/icons-vue'
-import { Context } from 'common'
 import { ObjectTool, StrTool } from '@es-tool/core'
 import { defineComponent } from 'vue'
 
@@ -26,7 +26,7 @@ export default defineComponent({
     },
     data() {
         return {
-            fileService: Context.getBean<FileService>(FileServiceKey),
+            fileService: new LafOssFileServiceImpl(),
             previewIsShow: false,
         }
     },
@@ -41,7 +41,7 @@ export default defineComponent({
             }
             // props 穿透最后添加, 确保 previewSrcList 还能关闭
             return (
-                <el-image src={ src } v-slots={ imageSlots } previewSrcList={ [src] } preview-teleported { ...this.$attrs }></el-image>
+                <el-image src={ src } v-slots={ imageSlots } previewSrcList={ [ src ] } preview-teleported { ...this.$attrs }></el-image>
             )
         },
 
@@ -51,15 +51,16 @@ export default defineComponent({
                     <el-icon onClick={ () => this.previewIsShow = true } size={ 50 }>
                         <video-play />
                     </el-icon>
-                    <el-dialog v-model={ this.previewIsShow }
-                               append-to-body
-                               close-on-click-modal
-                               destroy-on-close
-                               draggable
-                               lock-scroll
-                               modal
-                               width="50%">
-                        <video style={ {minHeight: '500px'} } src={ src } controls autoplay { ...this.$attrs } ></video>
+                    <el-dialog
+                        v-model={ this.previewIsShow }
+                        append-to-body
+                        close-on-click-modal
+                        destroy-on-close
+                        draggable
+                        lock-scroll
+                        modal
+                        width="50%">
+                        <video style={ { minHeight: '500px' } } src={ src } controls autoplay { ...this.$attrs } ></video>
                     </el-dialog>
                 </span>
             )
@@ -102,7 +103,7 @@ export default defineComponent({
         },
     },
     render() {
-        const {file, href, hrefType} = this.$props
+        const { file, href, hrefType } = this.$props
         if (StrTool.isNotEmpty(href)) {
             return this.renderByType(href as string, hrefType)
         }

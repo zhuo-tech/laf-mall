@@ -4,11 +4,11 @@ import MallConfig from '@/pages/Config/Router'
 import Error from '@/pages/Error/Router'
 import Home from '@/pages/Home/Router'
 import Login from '@/pages/Login/Router'
-import Order from '@/pages/Order/Router'
 import Marketing from '@/pages/Marketing/Router'
-import { StorageService, StorageServiceKey } from '@/service/StorageService'
+import Order from '@/pages/Order/Router'
+import { StorageServiceImpl } from '@/service/impl/StorageServiceImpl'
+import { StorageService } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
-import { Inject } from 'common'
 import { StrTool } from '@es-tool/core'
 import {
     createRouter,
@@ -41,6 +41,7 @@ const routes: RouteRecordRaw[] = [
 export class RoutingProvider {
     public instant: Router
     private log = console
+    private readonly storageService: StorageService = new StorageServiceImpl()
 
     constructor() {
         const instantiate = createRouter({
@@ -54,11 +55,6 @@ export class RoutingProvider {
         instantiate.beforeResolve(this.beforeResolve)
 
         this.instant = instantiate
-    }
-
-    @Inject(StorageServiceKey)
-    private get storageService(): StorageService {
-        return null as any
     }
 
     /**
@@ -87,7 +83,7 @@ export class RoutingProvider {
     private afterEach: NavigationHookAfter = (to, from) => {
         this.log.debug('导航完成: ', from.path, ' => ', to.path)
         const MAX_SHOW_DEEP = 5
-        const title = to.matched.map(({meta, name}) => meta?.title || name)
+        const title = to.matched.map(({ meta, name }) => meta?.title || name)
             .filter(str => StrTool.isNotEmpty(str as string))
             .reverse()
             .filter((s, i) => i <= MAX_SHOW_DEEP)

@@ -1,7 +1,6 @@
 import { ToolApi } from '@/repository/ToolApi'
-import { FileService, FileServiceKey, UploadFileInfo } from '@/service/FileService'
+import { FileService, UploadFileInfo } from '@/service/FileService'
 import { Request } from '@/util/Tool'
-import { Component, Inject } from 'common'
 import { StrTool } from '@es-tool/core'
 
 /**
@@ -9,8 +8,7 @@ import { StrTool } from '@es-tool/core'
  * @author 冰凝
  * @date 2022-07-04 上午 10:34
  **/
-@Component(FileServiceKey)
-class LafOssFileServiceImpl implements FileService {
+export class LafOssFileServiceImpl implements FileService {
 
     /**
      * 默认 bucket name
@@ -18,10 +16,7 @@ class LafOssFileServiceImpl implements FileService {
     private static readonly BUCKET_NAME = 'public'
     private static readonly MEDIA_FILE_TYPE = new RegExp('^(video|audio)/\\S*$')
 
-    @Inject(ToolApi.KEY)
-    private get toolApi(): ToolApi {
-        return null as any
-    }
+    private readonly toolApi: ToolApi = new ToolApi()
 
     public pathCompletion(path: string): string {
         if (StrTool.isEmpty(path)) {

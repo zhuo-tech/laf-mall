@@ -1,11 +1,6 @@
 import { TimeUnit } from '@es-tool/core'
 
 /**
- * 组件注册 KEY
- */
-export const StorageServiceKey = 'StorageService'
-
-/**
  * 会话存储 <br>
  * 虽然 setAttribute  getAttribute  removeAttribute 都拥有 key 的类型提示;
  * 但是基于谁保存(set) 谁提供(get) 的原则, 不推荐页面直接从这里取值

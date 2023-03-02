@@ -56,8 +56,8 @@ export default defineComponent({
             // 只有唯一子菜单
             if (children?.length === 1) {
                 const uniqueSubmenu = children[0]
-                const index = path + this.expectStartWith(uniqueSubmenu.path)
-                return this.renderMenuNode(index, index, uniqueSubmenu)
+                const index = path + this.expectStartWith(uniqueSubmenu?.path!)
+                return this.renderMenuNode(index, index, uniqueSubmenu!)
             }
 
             // 父级节点要求展开

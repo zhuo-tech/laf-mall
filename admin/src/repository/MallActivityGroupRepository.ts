@@ -1,6 +1,6 @@
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { Component, LogicDelete, MallActivityGroup } from 'common'
+import { LogicDelete, MallActivityGroup } from 'common'
 import { LafClient, Page } from 'laf-db-query-wrapper'
 
 /**
@@ -8,9 +8,7 @@ import { LafClient, Page } from 'laf-db-query-wrapper'
  * @author 冰凝
  * @date 2022-07-11 10:50:00
  **/
-@Component(MallActivityGroupRepository.KEY)
 export class MallActivityGroupRepository implements CrudRequest<MallActivityGroup> {
-    public static readonly KEY = 'MallActivityGroupRepository'
     private readonly client = new LafClient<MallActivityGroup>(MallActivityGroup.NAME)
     private readonly userStore = useUserStore()
 
@@ -23,7 +21,7 @@ export class MallActivityGroupRepository implements CrudRequest<MallActivityGrou
         return await this.client.insert(data)
     }
 
-    public deleteByIdRequest = async (id: string | number): Promise<any> => await this.client.updateById(id, {isDelete: LogicDelete.DELETED})
+    public deleteByIdRequest = async (id: string | number): Promise<any> => await this.client.updateById(id, { isDelete: LogicDelete.DELETED })
 
     public pageRequest = async (page: Page<MallActivityGroup>, query: Partial<MallActivityGroup>): Promise<Page<MallActivityGroup>> => {
         return this.client.queryWrapper()
@@ -39,6 +37,5 @@ export class MallActivityGroupRepository implements CrudRequest<MallActivityGrou
 
         return await this.client.updateById(data._id!, data, '_id')
     }
-
 
 }

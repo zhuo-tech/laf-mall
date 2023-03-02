@@ -1,9 +1,9 @@
 import { SysAdminApi } from '@/repository/SysAdminApi'
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { Component, Inject, LogicDelete, SysRole, SysAdmin } from 'common'
-import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
 import { ArrayTool } from '@es-tool/core'
+import { LogicDelete, SysAdmin, SysRole } from 'common'
+import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
 
 export type SysUserInfo = SysAdmin & { password: string, roleInfo: Array<Partial<SysRole>> }
 
@@ -12,24 +12,19 @@ export type SysUserInfo = SysAdmin & { password: string, roleInfo: Array<Partial
  * @author 冰凝
  * @date 2022-06-15 下午 12:23
  **/
-@Component(SysAdminRepository.KEY)
 export class SysAdminRepository implements CrudRequest<SysUserInfo> {
-    public static readonly KEY = 'SysAdminRepository'
 
     private readonly client = new LafClient<SysUserInfo>(SysAdmin.NAME)
     private readonly userStore = useUserStore()
 
-    @Inject(SysAdminApi.KEY)
-    private get adminApi(): SysAdminApi {
-        return null as any
-    }
+    private readonly adminApi: SysAdminApi = new SysAdminApi()
 
     public createRequest = async (data: Partial<SysUserInfo>): Promise<any> => {
         return await this.adminApi.createUser(data as any)
     }
 
     public deleteByIdRequest = async (id: string | number): Promise<any> => {
-        return await this.client.updateById(id, {isDelete: LogicDelete.DELETED})
+        return await this.client.updateById(id, { isDelete: LogicDelete.DELETED })
     }
 
     public pageRequest = async (page: Page<SysUserInfo>, query: Partial<SysUserInfo>): Promise<Page<SysUserInfo>> => {

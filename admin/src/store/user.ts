@@ -1,5 +1,4 @@
 import { SysAdminApi } from '@/repository/SysAdminApi'
-import { Context } from 'common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -21,7 +20,7 @@ export const useUserStore = defineStore('user', {
             }
         },
         update() {
-            const api: SysAdminApi = Context.getBean(SysAdminApi.KEY)
+            const api: SysAdminApi = new SysAdminApi()
             const adminInfo = async () => await api.userInfo()
 
             adminInfo()

@@ -1,8 +1,8 @@
 import { CrudRequest } from '@/service/CrudRequest'
 import { useUserStore } from '@/store/user'
-import { Component, SelectOption, SysPermission, SysRole } from 'common'
-import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
 import { ArrayTool } from '@es-tool/core'
+import { SelectOption, SysPermission, SysRole } from 'common'
+import { LafClient, Page, QueryChainWrapper } from 'laf-db-query-wrapper'
 
 export type SysRoleRow = SysRole & { per: Array<Pick<SysPermission, 'name' | 'desc'>> }
 
@@ -11,10 +11,7 @@ export type SysRoleRow = SysRole & { per: Array<Pick<SysPermission, 'name' | 'de
  * @author 冰凝
  * @date 2022-06-15 下午 03:21
  **/
-@Component(SysRoleRepository.KEY)
 export class SysRoleRepository implements CrudRequest<SysRoleRow> {
-    public static readonly KEY = 'SysRoleRepository'
-
     private readonly client = new LafClient<SysRoleRow>(SysRole.NAME)
     private readonly userStore = useUserStore()
 
@@ -63,7 +60,7 @@ export class SysRoleRepository implements CrudRequest<SysRoleRow> {
             .orderByAsc('key')
             .list(9999)
 
-        return roles.map(({key, name}) => ({label: name, value: key}))
+        return roles.map(({ key, name }) => ({ label: name, value: key }))
     }
 
 }

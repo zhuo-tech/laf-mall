@@ -1,7 +1,7 @@
-import { FileService, FileServiceKey, UploadFileInfo } from '@/service/FileService'
-import { Inject } from 'common'
-import { ElMessage, UploadFile, UploadFiles, UploadProps, UploadRequestOptions, UploadUserFile } from 'element-plus'
+import { FileService, UploadFileInfo } from '@/service/FileService'
+import { LafOssFileServiceImpl } from '@/service/impl/LafOssFileServiceImpl'
 import { ArrayTool, ObjectTool, StrTool } from '@es-tool/core'
+import { ElMessage, UploadFile, UploadFiles, UploadProps, UploadRequestOptions, UploadUserFile } from 'element-plus'
 import { ref, watchEffect } from 'vue'
 
 // noinspection JSUnusedLocalSymbols
@@ -11,15 +11,12 @@ import { ref, watchEffect } from 'vue'
  * @date 2022-06-29 下午 03:01
  **/
 export class UploadFileService {
-    private readonly log = console
     public readonly fileList = ref<Array<UploadUserFile>>([])
+    private readonly log = console
     private readonly props: PropType
     private readonly emits: EmitType
 
-    @Inject(FileServiceKey)
-    private get fileService(): FileService {
-        return null as any
-    }
+    private readonly fileService: FileService = new LafOssFileServiceImpl()
 
     constructor(props: PropType, emits: EmitType) {
         this.props = props
@@ -43,8 +40,8 @@ export class UploadFileService {
     public upLoadRequest = (options: UploadRequestOptions) => {
         const onProgress = (event: ProgressEvent) => {
             const percent = event.loaded / event.total * 100
-            const progress = {...event, percent: isNaN(percent) ? 100 : percent}
-            console.debug('进度: ', {progress, percent})
+            const progress = { ...event, percent: isNaN(percent) ? 100 : percent }
+            console.debug('进度: ', { progress, percent })
             // TODO: 进度回调无效
             // options.onProgress(progress as any)
         }
@@ -68,7 +65,7 @@ export class UploadFileService {
      * 内部状态变化后, 抛出变化后的数据
      */
     private updateModel(fileList: UploadFiles, propValue: PropType) {
-        const {emits} = this
+        const { emits } = this
         if (ArrayTool.isEmpty(fileList)) {
             emits('update:href', StrTool.EMPTY)
             emits('update:hrefs', [])
@@ -93,25 +90,25 @@ export class UploadFileService {
      * 处理回显
      */
     private handleEcho = () => {
-        const {fileList} = this
+        const { fileList } = this
         if (ArrayTool.isNotEmpty(fileList.value)) {
             return
         }
-        const {href, hrefs, fileInfo, fileInfoList} = this.props
+        const { href, hrefs, fileInfo, fileInfoList } = this.props
 
         if (ArrayTool.isNotEmpty(fileInfoList)) {
             fileList.value = fileInfoList?.map(i => this.fileInfoToUploadFile(i)) as any
             return
         }
         if (ObjectTool.isNotEmpty(fileInfo)) {
-            fileList.value = [this.fileInfoToUploadFile(fileInfo!)]
+            fileList.value = [ this.fileInfoToUploadFile(fileInfo!) ]
             return
         }
         if (ArrayTool.isNotEmpty(hrefs)) {
             fileList.value = hrefs?.map(i => this.strToUploadFile(i)) as any
         }
         if (StrTool.isNotEmpty(href)) {
-            fileList.value = [this.strToUploadFile(href)]
+            fileList.value = [ this.strToUploadFile(href) ]
         }
     }
 
@@ -119,7 +116,7 @@ export class UploadFileService {
      * 格式化工具: {@link UploadFileInfo} -> {@link UploadUserFile}
      */
     private fileInfoToUploadFile = (fileInfo: UploadFileInfo): UploadUserFile => {
-        const {path, size, type, name} = fileInfo
+        const { path, size, type, name } = fileInfo
         return {
             size,
             name,
@@ -134,7 +131,7 @@ export class UploadFileService {
      * 格式化工具: src -> {@link UploadUserFile}
      */
     private strToUploadFile = (s: any): UploadUserFile => ({
-        response: {path: s} as UploadFileInfo,
+        response: { path: s } as UploadFileInfo,
         status: 'success',
         name: s,
         size: 0,
