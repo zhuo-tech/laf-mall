@@ -131,7 +131,7 @@ export class UploadFileService {
      * 格式化工具: src -> {@link UploadUserFile}
      */
     private strToUploadFile = (s: any): UploadUserFile => ({
-        response: { path: s } as UploadFileInfo,
+        response: { path: s, type: 'image/*' } as UploadFileInfo,
         status: 'success',
         name: s,
         size: 0,
