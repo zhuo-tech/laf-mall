@@ -1,4 +1,3 @@
-import Layout from '@/components/Layout/index.vue'
 import { VueRouter } from '@/main'
 import { Document, Film, FolderOpened, PictureFilled, ShoppingBag } from '@element-plus/icons-vue'
 import { RouteRecordRaw } from 'vue-router'
@@ -11,7 +10,7 @@ import { RouteRecordRaw } from 'vue-router'
 const RouterConfig: RouteRecordRaw = {
     path: '/basic',
     redirect: '/basic/category',
-    component: Layout,
+    component: () => import('@/components/Layout/index.vue'),
     meta: {
         title: '基础信息',
         icon: Document,

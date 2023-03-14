@@ -7,7 +7,7 @@ export default defineComponent({
         config(): Partial<ConfigProviderProps> {
             return {
                 locale: zhCn,
-                size: 'large',
+                size: 'small',
                 keyboardNavigation: true,
                 button: { autoInsertSpace: true },
                 message: { max: 10 },

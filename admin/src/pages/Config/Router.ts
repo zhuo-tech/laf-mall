@@ -1,4 +1,3 @@
-import Layout from '@/components/Layout/index.vue'
 import { Document, FolderOpened } from '@element-plus/icons-vue'
 import { RouteRecordRaw } from 'vue-router'
 
@@ -10,7 +9,7 @@ import { RouteRecordRaw } from 'vue-router'
 const RouterConfig: RouteRecordRaw = {
     path: '/config',
     redirect: '/config/menu',
-    component: Layout,
+    component: () => import('@/components/Layout/index.vue'),
     meta: {
         title: '商城配置',
         icon: Document,

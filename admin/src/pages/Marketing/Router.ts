@@ -1,4 +1,3 @@
-import Layout from '@/components/Layout/index.vue'
 import { VueRouter } from '@/main'
 import { ShoppingCartFull, Ticket, Timer, TrendCharts } from '@element-plus/icons-vue'
 import { RouteRecordRaw } from 'vue-router'
@@ -11,7 +10,7 @@ import { RouteRecordRaw } from 'vue-router'
 const RouterConfig: RouteRecordRaw = {
     path: '/marketing',
     redirect: '/marketing/seckill',
-    component: Layout,
+    component: () => import('@/components/Layout/index.vue'),
     meta: {
         isMenu: true,
         title: '营销中心',

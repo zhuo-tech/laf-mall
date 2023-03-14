@@ -1,4 +1,3 @@
-import Layout from '@/components/Layout/index.vue'
 import { ShoppingCartFull } from '@element-plus/icons-vue'
 import { RouteRecordRaw } from 'vue-router'
 
@@ -10,7 +9,7 @@ import { RouteRecordRaw } from 'vue-router'
 const RouterConfig: RouteRecordRaw = {
     path: '/order',
     redirect: '/order/list',
-    component: Layout,
+    component: () => import('@/components/Layout/index.vue'),
     children: [
         {
             path: 'list',

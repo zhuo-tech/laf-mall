@@ -1,4 +1,3 @@
-import Layout from '@/components/Layout/index.vue'
 import { Check, Collection, Setting, User } from '@element-plus/icons-vue'
 import { RouteRecordRaw } from 'vue-router'
 
@@ -8,7 +7,7 @@ import { RouteRecordRaw } from 'vue-router'
  * @date 2022-06-14 下午 05:31
  **/
 const RouterConfig: RouteRecordRaw = {
-    component: Layout,
+    component: () => import('@/components/Layout/index.vue'),
     path: '/admin',
     meta: {
         title: '系统管理',
