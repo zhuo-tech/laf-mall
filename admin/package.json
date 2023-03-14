@@ -21,7 +21,7 @@
         "echarts": "^5.4.1",
         "element-plus": "^2.3.0",
         "laf-client-sdk": "^0.8.13",
-        "laf-db-query-wrapper": "^1.0.23",
+        "laf-db-query-wrapper": "^1.0.25",
         "pinia": "^2.0.33",
         "vue": "^3.2.47",
         "vue-router": "^4.1.6"
