@@ -31,7 +31,7 @@ const showQuery = ref(false)
                     <!--suppress JSValidateTypes -->
                     <el-button :icon="CirclePlusFilled" type="primary" @click="emits('create')">新建</el-button>
                     <!--suppress JSValidateTypes -->
-                    <el-button :icon="Search" type="primary" @click="showQuery = !showQuery" />
+                    <el-button v-if="!!$slots.searchForm" :icon="Search" type="primary" @click="showQuery = !showQuery" />
                     <!--suppress JSValidateTypes -->
                     <el-button :icon="Refresh" type="primary" @click="emits('refresh')" />
                 </el-row>
