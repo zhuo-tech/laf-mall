@@ -80,12 +80,14 @@ listUpdate()
             <template v-slot="{row}">
                 <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
                 <el-divider direction="vertical" />
-                <el-popconfirm :icon="Warning"
-                               cancel-button-text="手滑了"
-                               confirm-button-text="确认删除"
-                               icon-color="red"
-                               title=" 操作无法撤销, 确定要删除吗 ？"
-                               @confirm="readyDelete(row)">
+                <el-popconfirm
+                    :icon="Warning"
+                    cancel-button-text="手滑了"
+                    confirm-button-text="确认删除"
+                    icon-color="red"
+                    title=" 操作无法撤销, 确定要删除吗 ？"
+                    @confirm="readyDelete(row)"
+                >
                     <template #reference>
                         <el-button :icon="Delete" link>删除</el-button>
                     </template>
@@ -106,13 +108,16 @@ listUpdate()
         lock-scroll
         modal
         title=""
-        width="45%">
-        <el-form :ref="setFormRef"
-                 v-loading="formIsLoading"
-                 :model="formData"
-                 :rules="formRule"
-                 label-width="140px"
-                 style="max-width: 1000px">
+        width="45%"
+    >
+        <el-form
+            :ref="setFormRef"
+            v-loading="formIsLoading"
+            :model="formData"
+            :rules="formRule"
+            label-width="140px"
+            style="max-width: 1000px"
+        >
 
             <el-form-item label="KEY" prop="key">
                 <el-input v-model="formData.key" :disabled="!formIsAdd" clearable placeholder="key" />
@@ -124,11 +129,13 @@ listUpdate()
                 <el-input v-model="formData.desc" clearable placeholder="描述" type="textarea" />
             </el-form-item>
             <el-form-item label="权限" prop="permissions">
-                <el-transfer v-model="formData.permissions"
-                             :data="perSelectOption"
-                             :filterable="true"
-                             :props="{key: 'value', label: 'label'}"
-                             :titles="['未选择', '已选择', ]" />
+                <el-transfer
+                    v-model="formData.permissions"
+                    :data="perSelectOption"
+                    :filterable="true"
+                    :props="{key: 'value', label: 'label'}"
+                    :titles="['未选择', '已选择', ]"
+                />
             </el-form-item>
 
         </el-form>

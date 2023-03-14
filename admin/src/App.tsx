@@ -9,8 +9,8 @@ export default defineComponent({
                 locale: zhCn,
                 size: 'large',
                 keyboardNavigation: true,
-                button: {autoInsertSpace: true},
-                message: {max: 10},
+                button: { autoInsertSpace: true },
+                message: { max: 10 },
             }
         },
     },

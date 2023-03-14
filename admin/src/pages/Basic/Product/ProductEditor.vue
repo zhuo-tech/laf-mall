@@ -31,20 +31,24 @@ const {
 
 <template>
 <FormPage title="新增商品">
-    <el-form :ref="setFormRef"
-             v-loading="formIsLoading"
-             :model="formData"
-             :rules="formRule"
-             label-width="140px">
+    <el-form
+        :ref="setFormRef"
+        v-loading="formIsLoading"
+        :model="formData"
+        :rules="formRule"
+        label-width="140px"
+    >
 
         <el-row>
             <el-col :span="8">
                 <el-form-item label="所属分类" prop="categoryId">
-                    <el-cascader v-model="formData.categoryId"
-                                 :options="categoryOption"
-                                 :props="{value:'_id',label: 'name',emitPath: false}"
-                                 class="w-full"
-                                 clearable/>
+                    <el-cascader
+                        v-model="formData.categoryId"
+                        :options="categoryOption"
+                        :props="{value:'_id',label: 'name',emitPath: false}"
+                        class="w-full"
+                        clearable
+                    />
                 </el-form-item>
             </el-col>
             <el-col :span="8">
@@ -74,25 +78,30 @@ const {
                 filterable
                 multiple
                 placeholder="请输入关键字"
-                style="width: 100%">
-                <el-option v-for="item in formData.keyword" :key="item.value" :label="item" :value="item"/>
+                style="width: 100%"
+            >
+                <el-option v-for="item in formData.keyword" :key="item.value" :label="item" :value="item" />
             </el-select>
         </el-form-item>
         <el-form-item label="商品标签" prop="tags">
-            <Tags v-model:value="formData.tags"/>
+            <Tags v-model:value="formData.tags" />
         </el-form-item>
         <el-form-item label="简介" prop="info">
             <el-input v-model="formData.info" placeholder="请输入简介"></el-input>
         </el-form-item>
         <el-form-item label="封面图" prop="cover">
-            <UploadFile v-model:href="formData.cover"
-                        :limit="1"
-                        :show-file-list="false"/>
+            <UploadFile
+                v-model:href="formData.cover"
+                :limit="1"
+                :show-file-list="false"
+            />
         </el-form-item>
         <el-form-item label="轮播图" prop="carousel">
-            <UploadFile v-model:hrefs="formData.carousel"
-                        :limit="10"
-                        list-type="picture-card"/>
+            <UploadFile
+                v-model:hrefs="formData.carousel"
+                :limit="10"
+                list-type="picture-card"
+            />
         </el-form-item>
         <el-row>
             <el-col :span="12">
@@ -111,7 +120,7 @@ const {
         </el-row>
 
         <!--规格表单-->
-        <SpecForm v-model:specType="formData.specType" v-model:value="specData"/>
+        <SpecForm v-model:specType="formData.specType" v-model:value="specData" />
 
         <el-row>
             <el-col :span="12">
@@ -138,7 +147,7 @@ const {
             </el-col>
         </el-row>
         <el-form-item label="产品描述" prop="desc">
-            <RichTextEditor v-model:value="formData.desc"/>
+            <RichTextEditor v-model:value="formData.desc" />
         </el-form-item>
 
     </el-form>

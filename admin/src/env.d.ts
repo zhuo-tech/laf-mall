@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
-import 'vue-router'
 import { RuleItem } from 'async-validator'
+import 'vue-router'
 
 declare module '*.vue' {
     import type { DefineComponent } from 'vue'

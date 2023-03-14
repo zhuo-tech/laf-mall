@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import LoginForm from '@/pages/Login/components/index.vue'
-
-</script>
+import LoginForm from '@/pages/Login/components/index.vue'</script>
 
 <template>
 <div class="login-wrapper">

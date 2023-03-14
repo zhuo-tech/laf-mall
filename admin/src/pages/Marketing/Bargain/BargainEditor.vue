@@ -22,13 +22,15 @@ const {
 
 <template>
 <FormPage title="新增营销活动">
-    <el-form :ref="setFormRef"
-             v-loading="formIsLoading"
-             :model="formData"
-             :rules="formRule"
-             class="page-form"
-             label-suffix=":"
-             label-width="160px">
+    <el-form
+        :ref="setFormRef"
+        v-loading="formIsLoading"
+        :model="formData"
+        :rules="formRule"
+        class="page-form"
+        label-suffix=":"
+        label-width="160px"
+    >
         <el-row>
             <el-col :span="12">
                 <el-form-item label="封面图" prop="cover">

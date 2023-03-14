@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout/index.vue'
-import {VueRouter} from '@/main'
-import {Document, Film, FolderOpened, PictureFilled, ShoppingBag} from '@element-plus/icons-vue'
-import {RouteRecordRaw} from 'vue-router'
+import { VueRouter } from '@/main'
+import { Document, Film, FolderOpened, PictureFilled, ShoppingBag } from '@element-plus/icons-vue'
+import { RouteRecordRaw } from 'vue-router'
 
 /**
  * Router

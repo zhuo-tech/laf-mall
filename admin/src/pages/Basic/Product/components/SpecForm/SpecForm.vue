@@ -23,7 +23,7 @@ watch(() => props.value, (newValue) => {
     deep: true,
 })
 
-const {SingleSpec, MultipleSpec} = SpecType
+const { SingleSpec, MultipleSpec } = SpecType
 </script>
 
 <template>

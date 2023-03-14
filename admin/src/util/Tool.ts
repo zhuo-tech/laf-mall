@@ -11,7 +11,7 @@ export function invoke(url: string, body: any) {
  * 简单 HTTP 请求
  */
 export function Request<R = any>(option: RequestOption): Promise<R> {
-    const {method, url, onProgress, body, timeout} = option
+    const { method, url, onProgress, body, timeout } = option
 
     const request = new XMLHttpRequest()
     if (timeout !== undefined) {

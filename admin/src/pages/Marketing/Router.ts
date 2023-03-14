@@ -15,7 +15,7 @@ const RouterConfig: RouteRecordRaw = {
     meta: {
         isMenu: true,
         title: '营销中心',
-        icon: TrendCharts
+        icon: TrendCharts,
     },
     children: [
         {
@@ -163,6 +163,5 @@ export class MarketingRouterControl {
     public static toBargainUpdate(id: string) {
         VueRouter.push('/marketing/bargain/update/' + id)
     }
-
 
 }

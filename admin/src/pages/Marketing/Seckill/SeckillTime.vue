@@ -17,12 +17,11 @@ type SeckillTimePeriodEntity = SeckillTimePeriod & Entity
  * @date 2022-07-07 下午 01:12
  **/
 class SpikeTime extends BasisCrud<SeckillTimePeriodEntity> {
-    protected override readonly request = new UniversalConfigRepository<SeckillTimePeriodEntity>(MallConfigKey.SECKILL_TIME_PERIOD)
-
     public override formRule: Partial<Record<keyof SeckillTimePeriodEntity, Array<RuleItem>>> = {
-        start: [{type: 'number', min: 0, max: 23, message: '请选择开始时间', trigger: 'blur'}],
-        length: [{type: 'number', min: 1, max: 23, message: '请选择开始时间', trigger: 'blur'}],
+        start: [ { type: 'number', min: 0, max: 23, message: '请选择开始时间', trigger: 'blur' } ],
+        length: [ { type: 'number', min: 1, max: 23, message: '请选择开始时间', trigger: 'blur' } ],
     }
+    protected override readonly request = new UniversalConfigRepository<SeckillTimePeriodEntity>(MallConfigKey.SECKILL_TIME_PERIOD)
 }
 
 const {
@@ -63,12 +62,14 @@ const {
                 <template v-slot="{row}">
                     <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
                     <el-divider direction="vertical" />
-                    <el-popconfirm :icon="Warning"
-                                   cancel-button-text="手滑了"
-                                   confirm-button-text="确认删除"
-                                   icon-color="red"
-                                   title=" 操作无法撤销, 确定要删除吗 ？"
-                                   @confirm="readyDelete(row)">
+                    <el-popconfirm
+                        :icon="Warning"
+                        cancel-button-text="手滑了"
+                        confirm-button-text="确认删除"
+                        icon-color="red"
+                        title=" 操作无法撤销, 确定要删除吗 ？"
+                        @confirm="readyDelete(row)"
+                    >
                         <template #reference>
                             <el-button :icon="Delete" link>删除</el-button>
                         </template>
@@ -89,13 +90,16 @@ const {
             lock-scroll
             modal
             title=""
-            width="40%">
+            width="40%"
+        >
 
-            <el-form :ref="setFormRef"
-                     v-loading="formIsLoading"
-                     :model="formData"
-                     :rules="formRule"
-                     style="max-width: 1000px; min-height: 300px">
+            <el-form
+                :ref="setFormRef"
+                v-loading="formIsLoading"
+                :model="formData"
+                :rules="formRule"
+                style="max-width: 1000px; min-height: 300px"
+            >
                 <el-form-item label="" prop="start">
                     <el-time-picker
                         v-model="formData.per"

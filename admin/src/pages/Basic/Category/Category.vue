@@ -81,12 +81,14 @@ listUpdate()
                 <el-divider direction="vertical" />
                 <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
                 <el-divider direction="vertical" />
-                <el-popconfirm :icon="Warning"
-                               cancel-button-text="手滑了"
-                               confirm-button-text="确认删除"
-                               icon-color="red"
-                               title=" 操作无法撤销, 确定要删除吗 ？"
-                               @confirm="readyDelete(row)">
+                <el-popconfirm
+                    :icon="Warning"
+                    cancel-button-text="手滑了"
+                    confirm-button-text="确认删除"
+                    icon-color="red"
+                    title=" 操作无法撤销, 确定要删除吗 ？"
+                    @confirm="readyDelete(row)"
+                >
                     <template #reference>
                         <el-button :icon="Delete" link>删除</el-button>
                     </template>
@@ -107,20 +109,25 @@ listUpdate()
         draggable
         lock-scroll
         modal
-        title="">
-        <el-form :ref="setFormRef"
-                 v-loading="formIsLoading"
-                 :model="formData"
-                 :rules="formRule"
-                 label-width="140px"
-                 style="max-width: 1000px">
+        title=""
+    >
+        <el-form
+            :ref="setFormRef"
+            v-loading="formIsLoading"
+            :model="formData"
+            :rules="formRule"
+            label-width="140px"
+            style="max-width: 1000px"
+        >
 
             <el-form-item label="父级" prop="parentId">
-                <el-tree-select v-model="formData.parentId"
-                                :data="page.list"
-                                :props="{label: 'name', value: '_id'}"
-                                check-strictly
-                                style="width: 100%;" />
+                <el-tree-select
+                    v-model="formData.parentId"
+                    :data="page.list"
+                    :props="{label: 'name', value: '_id'}"
+                    check-strictly
+                    style="width: 100%;"
+                />
             </el-form-item>
 
             <el-form-item label="分类名" prop="name">

@@ -18,36 +18,6 @@ export class LafOssFileServiceImpl implements FileService {
 
     private readonly toolApi: ToolApi = new ToolApi()
 
-    public pathCompletion(path: string): string {
-        if (StrTool.isEmpty(path)) {
-            return StrTool.EMPTY
-        }
-        if (path.startsWith(StrTool.HTTP) || path.startsWith(StrTool.HTTPS)) {
-            return path
-        }
-        if (path.startsWith(StrTool.PATH_INTEGRAL)) {
-            return 'https://oss.lafyun.com' + path
-        }
-        return 'https://oss.lafyun.com/' + path
-    }
-
-    public async pathProcess(path: string): Promise<string> {
-        return this.pathCompletion(path)
-    }
-
-    public async upload(file: File, onProgress?: (event: ProgressEvent) => void): Promise<UploadFileInfo> {
-        const {path, url} = await this.toolApi.ossUploadUrlPreSigned(LafOssFileServiceImpl.BUCKET_NAME, file.name)
-        await Request({method: 'PUT', url, body: file, timeout: 1000 * 60 * 60, onProgress} as any)
-
-        return {
-            path: path,
-            duration: await LafOssFileServiceImpl.getMediaDuration(file),
-            name: file.name,
-            size: file.size,
-            type: file.type,
-        }
-    }
-
     private static getMediaDuration(file: File): Promise<number> {
         const arr = LafOssFileServiceImpl.MEDIA_FILE_TYPE.exec(file.type)
         if (!arr) {
@@ -76,6 +46,36 @@ export class LafOssFileServiceImpl implements FileService {
                 me.remove()
             }
         })
+    }
+
+    public pathCompletion(path: string): string {
+        if (StrTool.isEmpty(path)) {
+            return StrTool.EMPTY
+        }
+        if (path.startsWith(StrTool.HTTP) || path.startsWith(StrTool.HTTPS)) {
+            return path
+        }
+        if (path.startsWith(StrTool.PATH_INTEGRAL)) {
+            return 'https://oss.lafyun.com' + path
+        }
+        return 'https://oss.lafyun.com/' + path
+    }
+
+    public async pathProcess(path: string): Promise<string> {
+        return this.pathCompletion(path)
+    }
+
+    public async upload(file: File, onProgress?: (event: ProgressEvent) => void): Promise<UploadFileInfo> {
+        const { path, url } = await this.toolApi.ossUploadUrlPreSigned(LafOssFileServiceImpl.BUCKET_NAME, file.name)
+        await Request({ method: 'PUT', url, body: file, timeout: 1000 * 60 * 60, onProgress } as any)
+
+        return {
+            path: path,
+            duration: await LafOssFileServiceImpl.getMediaDuration(file),
+            name: file.name,
+            size: file.size,
+            type: file.type,
+        }
     }
 
 }

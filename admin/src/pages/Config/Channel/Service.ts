@@ -13,8 +13,8 @@ export type TagType = {
 export class ChannelService extends BasisCrud<ChannelAndId> {
 
     public override formRule: Partial<Record<keyof ChannelAndId, Array<RuleItem>>> = {
-        name: [{type: 'string', message: '必填', required: true}],
-        children: [{type: 'array', message: '必填', required: true}],
+        name: [ { type: 'string', message: '必填', required: true } ],
+        children: [ { type: 'array', message: '必填', required: true } ],
     }
 
     protected override readonly request: CrudRequest<ChannelAndId> = new UniversalConfigRepository<HomePageChannel>(MallConfigKey.HOMEPAGE_CHANNEL)

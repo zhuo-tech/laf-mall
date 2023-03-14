@@ -1,8 +1,8 @@
 import { CrudRequest } from '@/service/CrudRequest'
+import { ObjectTool } from '@es-tool/core'
 import { RuleItem } from 'async-validator'
 import { ElMessage, FormInstance } from 'element-plus'
 import { Page } from 'laf-db-query-wrapper'
-import { ObjectTool } from '@es-tool/core'
 import { reactive, Ref, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -12,15 +12,6 @@ import { useRoute } from 'vue-router'
  * @param E 当前模型对象, 对应表格中一行 / 编辑表单 / 搜索表单数据
  */
 export default abstract class BasisCrud<E> {
-    protected readonly request: CrudRequest<E>
-
-    /**
-     * 表单默认值
-     */
-    protected get formDataDefault(): Partial<E> {
-        return {}
-    }
-
     /**
      * 当前页的路由匹配路径, 可选的用于面包屑展示
      */
@@ -49,7 +40,6 @@ export default abstract class BasisCrud<E> {
      * 表格加载中
      */
     public tableIsLoading: Ref<boolean> = ref(false)
-
     /**
      * 新增/编辑表单是否展示
      */
@@ -71,20 +61,26 @@ export default abstract class BasisCrud<E> {
      * @type {Partial<Record<keyof E, Array<RuleItem>>>}
      */
     public formRule: Partial<Record<keyof E, Array<RuleItem>>> = {}
-
+    protected readonly request: CrudRequest<E>
     private formRef: Ref<FormInstance | undefined> = ref<FormInstance>()
+    private basisLog = console
+
+    constructor() {
+        watch(() => this.page.pageSize, this.listUpdate, { deep: true })
+        watch(() => this.page.currentPage, this.listUpdate, { deep: true })
+    }
+
+    /**
+     * 表单默认值
+     */
+    protected get formDataDefault(): Partial<E> {
+        return {}
+    }
 
     public setFormRef = (ref: any) => {
         if (ref) {
             this.formRef.value = ref
         }
-    }
-
-    private basisLog = console
-
-    constructor() {
-        watch(() => this.page.pageSize, this.listUpdate, {deep: true})
-        watch(() => this.page.currentPage, this.listUpdate, {deep: true})
     }
 
     /**
@@ -113,17 +109,6 @@ export default abstract class BasisCrud<E> {
             return
         }
         this.listUpdate()
-    }
-
-    /**
-     * 新增/编辑 表单 提交之前的预处理
-     * @param {Partial<E>} formData 表单数据
-     * @return {Partial<E>} 处理后的表单数据, 原样传递给 {@link createRequest} 或 {@link updateRequest}
-     * @protected
-     */
-    protected beforeSubmit(formData: Partial<E>): Partial<E> {
-        // 提交之前预处理
-        return formData
     }
 
     /**
@@ -184,8 +169,6 @@ export default abstract class BasisCrud<E> {
         this.show()
     }
 
-    private resetForm = () => this.formData = Object.assign(this.formData, this.formDataDefault)
-
     /**
      * 删除按钮回调事件, 需要传入当前行的数据
      * @param {E} data 一行数据
@@ -212,4 +195,17 @@ export default abstract class BasisCrud<E> {
     public close = () => {
         this.isShow.value = false
     }
+
+    /**
+     * 新增/编辑 表单 提交之前的预处理
+     * @param {Partial<E>} formData 表单数据
+     * @return {Partial<E>} 处理后的表单数据, 原样传递给 {@link createRequest} 或 {@link updateRequest}
+     * @protected
+     */
+    protected beforeSubmit(formData: Partial<E>): Partial<E> {
+        // 提交之前预处理
+        return formData
+    }
+
+    private resetForm = () => this.formData = Object.assign(this.formData, this.formDataDefault)
 }

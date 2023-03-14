@@ -94,12 +94,14 @@ onActivated(() => {
                 <el-divider direction="vertical" />
                 <el-button :icon="Edit" link @click="BasicRouterControl.toProductUpdate(row._id)">编辑</el-button>
                 <el-divider direction="vertical" />
-                <el-popconfirm :icon="Warning"
-                               cancel-button-text="手滑了"
-                               confirm-button-text="确认删除"
-                               icon-color="red"
-                               title=" 操作无法撤销, 确定要删除吗 ？"
-                               @confirm="readyDelete(row)">
+                <el-popconfirm
+                    :icon="Warning"
+                    cancel-button-text="手滑了"
+                    confirm-button-text="确认删除"
+                    icon-color="red"
+                    title=" 操作无法撤销, 确定要删除吗 ？"
+                    @confirm="readyDelete(row)"
+                >
                     <template #reference>
                         <el-button :icon="Delete" link>删除</el-button>
                     </template>

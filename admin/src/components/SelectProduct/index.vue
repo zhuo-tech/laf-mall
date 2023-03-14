@@ -23,7 +23,7 @@ const props = defineProps({
         default: '',
     },
     product: {
-        type: [Object, BasicProduct],
+        type: [ Object, BasicProduct ],
         default: () => ({}),
     },
 })
@@ -57,7 +57,8 @@ const {
     lock-scroll
     modal
     title="选择商品"
-    width="60%">
+    width="60%"
+>
     <div style="height: 60vh">
         <!-- 筛选条件 -->
         <div>
@@ -77,10 +78,12 @@ const {
         <!-- 列表 -->
         <el-row v-loading="pageIsLoading" :gutter="30">
             <el-col v-for="line in page.list" :key="line._id" :lg="8" :md="8" :xl="8" :xm="8" :xs="12">
-                <el-card :body-style="{padding: '5px'}"
-                         class="product-card"
-                         shadow="hover"
-                         @click="select(line)">
+                <el-card
+                    :body-style="{padding: '5px'}"
+                    class="product-card"
+                    shadow="hover"
+                    @click="select(line)"
+                >
                     <ShowProduct :data="line" />
                 </el-card>
             </el-col>

@@ -26,7 +26,7 @@ const {
     rowKey,
     showQuery,
     tableIsLoading,
-    roleSelectOption
+    roleSelectOption,
 } = new UserService()
 
 listUpdate()
@@ -50,15 +50,15 @@ listUpdate()
 
                     <el-form-item>
                         <el-select v-model="queryData.isAdmin" clearable placeholder="用户类型">
-                            <el-option label="管理员" :value="true"/>
-                            <el-option label="普通用户" :value="false"/>
+                            <el-option :value="true" label="管理员" />
+                            <el-option :value="false" label="普通用户" />
                         </el-select>
                     </el-form-item>
 
                     <el-form-item>
                         <el-select v-model="queryData.freeze" clearable placeholder="冻结">
-                            <el-option label="正常" :value="false"/>
-                            <el-option label="冻结" :value="true"/>
+                            <el-option :value="false" label="正常" />
+                            <el-option :value="true" label="冻结" />
                         </el-select>
                     </el-form-item>
 
@@ -100,12 +100,14 @@ listUpdate()
             <template v-slot="{row}">
                 <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
                 <el-divider direction="vertical" />
-                <el-popconfirm :icon="Warning"
-                               cancel-button-text="手滑了"
-                               confirm-button-text="确认删除"
-                               icon-color="red"
-                               title=" 操作无法撤销, 确定要删除吗 ？"
-                               @confirm="readyDelete(row)">
+                <el-popconfirm
+                    :icon="Warning"
+                    cancel-button-text="手滑了"
+                    confirm-button-text="确认删除"
+                    icon-color="red"
+                    title=" 操作无法撤销, 确定要删除吗 ？"
+                    @confirm="readyDelete(row)"
+                >
                     <template #reference>
                         <el-button :icon="Delete" link>删除</el-button>
                     </template>
@@ -126,13 +128,16 @@ listUpdate()
         lock-scroll
         modal
         title=""
-        width="45%">
-        <el-form :ref="setFormRef"
-                 v-loading="formIsLoading"
-                 :model="formData"
-                 :rules="formRule"
-                 label-width="140px"
-                 style="max-width: 1000px">
+        width="45%"
+    >
+        <el-form
+            :ref="setFormRef"
+            v-loading="formIsLoading"
+            :model="formData"
+            :rules="formRule"
+            label-width="140px"
+            style="max-width: 1000px"
+        >
 
             <el-form-item label="登录账号" prop="username">
                 <el-input v-model="formData.username" :disabled="!formIsAdd" clearable placeholder="登录账户"></el-input>
@@ -147,9 +152,11 @@ listUpdate()
             </el-form-item>
 
             <el-form-item label="头像" prop="avatar">
-                <UploadFile v-model:href="formData.avatar"
-                            :limit="1"
-                            listType="picture-card" />
+                <UploadFile
+                    v-model:href="formData.avatar"
+                    :limit="1"
+                    listType="picture-card"
+                />
             </el-form-item>
 
             <el-form-item v-if="!formIsAdd" label="锁定" prop="freeze">

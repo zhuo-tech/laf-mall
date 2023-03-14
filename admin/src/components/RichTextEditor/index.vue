@@ -45,21 +45,25 @@ const {
 
 <template>
 <div class="rich-text-editor-wrapper">
-    <Toolbar v-if="!readonly"
-             :defaultConfig="toolbarConfig"
-             :editor="editorRef"
-             :mode="mode"
-             class="toolbar" />
+    <Toolbar
+        v-if="!readonly"
+        :defaultConfig="toolbarConfig"
+        :editor="editorRef"
+        :mode="mode"
+        class="toolbar"
+    />
 
-    <Editor v-model="htmlValue"
-            :defaultConfig="editorConfig"
-            :mode="mode"
-            class="editor-content"
-            @onBlur="onBlur"
-            @onChange="onChange"
-            @onCreated="handleCreated"
-            @onFocus="onFocus"
-            @onMaxLength="onMaxLength" />
+    <Editor
+        v-model="htmlValue"
+        :defaultConfig="editorConfig"
+        :mode="mode"
+        class="editor-content"
+        @onBlur="onBlur"
+        @onChange="onChange"
+        @onCreated="handleCreated"
+        @onFocus="onFocus"
+        @onMaxLength="onMaxLength"
+    />
 </div>
 </template>
 

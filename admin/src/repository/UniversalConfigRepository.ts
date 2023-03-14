@@ -19,7 +19,7 @@ export class UniversalConfigRepository<E> implements CrudRequest<E & { _id: stri
         return await DB.collection(MallConfig.NAME)
             .add({
                 key: this.key,
-                value: {...data},
+                value: { ...data },
                 createTime: Date.now(),
                 updateTime: Date.now(),
             })
@@ -27,7 +27,7 @@ export class UniversalConfigRepository<E> implements CrudRequest<E & { _id: stri
 
     public deleteByIdRequest = async (id: string | number): Promise<any> => {
         return await DB.collection(MallConfig.NAME)
-            .where({_id: id})
+            .where({ _id: id })
             .remove()
     }
 
@@ -57,7 +57,7 @@ export class UniversalConfigRepository<E> implements CrudRequest<E & { _id: stri
 
         andIdPage.total = totalRes.total
         andIdPage.list = pageRes.data
-            .map(item => ({...item.value, _id: item._id} as any))
+            .map(item => ({ ...item.value, _id: item._id } as any))
             .sort((a, b) => (a.sort - b.sort))
 
         return andIdPage
@@ -67,7 +67,7 @@ export class UniversalConfigRepository<E> implements CrudRequest<E & { _id: stri
         const _id = data._id
         delete data._id
         return await DB.collection(MallConfig.NAME)
-            .where({_id})
+            .where({ _id })
             .update({
                 value: data,
                 updateTime: Date.now(),

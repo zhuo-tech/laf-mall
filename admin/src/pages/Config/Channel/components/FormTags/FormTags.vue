@@ -44,27 +44,26 @@ const handleInputConfirm = () => {
 </script>
 
 <template>
-    <el-tag
-        v-for="tag in dynamicTags"
-        :key="tag"
-        :disable-transitions="false"
-        class="mx-1"
-        closable
-        @close="handleClose(tag)"
-    >
-        {{ tag.name }}
-    </el-tag>
-    <el-input
-        v-if="inputVisible"
-        ref="InputRef"
-        v-model="inputValue"
-        class="ml-1 w-20"
-        size="large"
-        @blur="handleInputConfirm"
-        @keyup.enter="handleInputConfirm"
-    />
-    <el-button v-else class="button-new-tag ml-1" size="large" @click="showInput">
-        + 新栏目
-    </el-button>
+<el-tag
+    v-for="tag in dynamicTags"
+    :key="tag"
+    :disable-transitions="false"
+    class="mx-1"
+    closable
+    @close="handleClose(tag)"
+>
+    {{ tag.name }}
+</el-tag>
+<el-input
+    v-if="inputVisible"
+    ref="InputRef"
+    v-model="inputValue"
+    class="ml-1 w-20"
+    size="large"
+    @blur="handleInputConfirm"
+    @keyup.enter="handleInputConfirm"
+/>
+<el-button v-else class="button-new-tag ml-1" size="large" @click="showInput">
+    + 新栏目
+</el-button>
 </template>
-

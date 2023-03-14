@@ -59,7 +59,8 @@ export default defineComponent({
                         draggable
                         lock-scroll
                         modal
-                        width="50%">
+                        width="50%"
+                    >
                         <video style={ { minHeight: '500px' } } src={ src } controls autoplay { ...this.$attrs } ></video>
                     </el-dialog>
                 </span>

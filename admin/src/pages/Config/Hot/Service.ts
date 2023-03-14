@@ -9,7 +9,7 @@ type HotAndId = Hot & { _id: string }
 export class HotService extends BasisCrud<HotAndId> {
 
     public override formRule: Partial<Record<keyof Hot, Array<RuleItem>>> = {
-        tag: [{type: 'string', message: '必填', required: true}],
+        tag: [ { type: 'string', message: '必填', required: true } ],
     }
     protected override readonly request: CrudRequest<HotAndId> = new UniversalConfigRepository(MallConfigKey.HOMEPAGE_HOT)
 

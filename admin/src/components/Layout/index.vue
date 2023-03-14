@@ -31,7 +31,7 @@ window.addEventListener('resize', (ev) => {
             <router-view v-slot="{ Component }">
                 <transition appear mode="out-in" name="el-fade-in">
                     <keep-alive>
-                        <component :is="Component"/>
+                        <component :is="Component" />
                     </keep-alive>
                 </transition>
             </router-view>

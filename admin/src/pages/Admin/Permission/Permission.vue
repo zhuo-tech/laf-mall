@@ -77,12 +77,14 @@ const editFormTabs = ref<string>('preset')
             <template v-slot="{row}">
                 <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
                 <el-divider direction="vertical" />
-                <el-popconfirm :icon="Warning"
-                               cancel-button-text="手滑了"
-                               confirm-button-text="确认删除"
-                               icon-color="red"
-                               title=" 操作无法撤销, 确定要删除吗 ？"
-                               @confirm="readyDelete(row)">
+                <el-popconfirm
+                    :icon="Warning"
+                    cancel-button-text="手滑了"
+                    confirm-button-text="确认删除"
+                    icon-color="red"
+                    title=" 操作无法撤销, 确定要删除吗 ？"
+                    @confirm="readyDelete(row)"
+                >
                     <template #reference>
                         <el-button :icon="Delete" link>删除</el-button>
                     </template>
@@ -103,7 +105,8 @@ const editFormTabs = ref<string>('preset')
         draggable
         lock-scroll
         modal
-        title="">
+        title=""
+    >
 
         <el-tabs v-if="formIsAdd" v-model="editFormTabs" stretch style="min-height: 300px">
             <el-tab-pane v-loading="bulkSaveIsLoading" label="预设" name="preset">
@@ -115,23 +118,29 @@ const editFormTabs = ref<string>('preset')
                     </el-table-column>
                     <el-table-column align="left" fixed="left" label="" width="90">
                         <template v-slot="{row}">
-                            <el-checkbox v-model="selectAllButton[row.tableName.value]"
-                                         label="全选"
-                                         @change="(select) => lineChange(row.tableName, select)" />
+                            <el-checkbox
+                                v-model="selectAllButton[row.tableName.value]"
+                                label="全选"
+                                @change="(select) => lineChange(row.tableName, select)"
+                            />
                         </template>
                     </el-table-column>
-                    <el-table-column v-for="actionKv in defaultAction"
-                                     :key="actionKv.value"
-                                     :label="actionKv.key"
-                                     :prop="actionKv.value"
-                                     align="left"
-                                     min-width="100">
+                    <el-table-column
+                        v-for="actionKv in defaultAction"
+                        :key="actionKv.value"
+                        :label="actionKv.key"
+                        :prop="actionKv.value"
+                        align="left"
+                        min-width="100"
+                    >
                         <template v-slot="{row}">
-                            <el-checkbox v-model="batchSelection[row[actionKv.value].value]"
-                                         :false-label="''"
-                                         :label="row[actionKv.value].key"
-                                         :true-label="row[actionKv.value].key"
-                                         @change="lineChange" />
+                            <el-checkbox
+                                v-model="batchSelection[row[actionKv.value].value]"
+                                :false-label="''"
+                                :label="row[actionKv.value].key"
+                                :true-label="row[actionKv.value].key"
+                                @change="lineChange"
+                            />
                         </template>
                     </el-table-column>
                 </el-table>
@@ -141,12 +150,14 @@ const editFormTabs = ref<string>('preset')
             </el-tab-pane>
 
             <el-tab-pane label="自定义" name="customize">
-                <el-form :ref="setFormRef"
-                         v-loading="formIsLoading"
-                         :model="formData"
-                         :rules="formRule"
-                         label-width="140px"
-                         style="max-width: 1000px">
+                <el-form
+                    :ref="setFormRef"
+                    v-loading="formIsLoading"
+                    :model="formData"
+                    :rules="formRule"
+                    label-width="140px"
+                    style="max-width: 1000px"
+                >
                     <el-form-item label="KEY" prop="name">
                         <el-input v-model="formData.name" :disabled="!formIsAdd" clearable placeholder="KEY"></el-input>
                     </el-form-item>
@@ -163,13 +174,15 @@ const editFormTabs = ref<string>('preset')
             </el-tab-pane>
         </el-tabs>
         <!-- 和楼上的自定义表单重复, 懒 -->
-        <el-form v-else
-                 :ref="setFormRef"
-                 v-loading="formIsLoading"
-                 :model="formData"
-                 :rules="formRule"
-                 label-width="140px"
-                 style="max-width: 1000px">
+        <el-form
+            v-else
+            :ref="setFormRef"
+            v-loading="formIsLoading"
+            :model="formData"
+            :rules="formRule"
+            label-width="140px"
+            style="max-width: 1000px"
+        >
             <el-form-item label="KEY" prop="name">
                 <el-input v-model="formData.name" :disabled="!formIsAdd" clearable placeholder="KEY"></el-input>
             </el-form-item>

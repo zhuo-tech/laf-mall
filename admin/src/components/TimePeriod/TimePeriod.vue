@@ -17,19 +17,18 @@ const props = defineProps<{
     end?: TimeValueType
 }>()
 const emits = defineEmits<{
-    (event: 'update', value: [TimeValueType, TimeValueType]): void
+    (event: 'update', value: [ TimeValueType, TimeValueType ]): void
     (event: 'update:start', value: TimeValueType): void
     (event: 'update:end', value: TimeValueType): void
 }>()
 
-
-const data = ref<[TimeValueType, TimeValueType]>([props.start, props.end])
+const data = ref<[ TimeValueType, TimeValueType ]>([ props.start, props.end ])
 
 watch(() => props.start, () => data.value[0] = props.start)
 watch(() => props.end, () => data.value[1] = props.end)
 
 watch(() => data.value, () => {
-    const [start, end] = data.value as any
+    const [ start, end ] = data.value as any
 
     // noinspection SuspiciousTypeOfGuard
     if (start instanceof Date) {
@@ -42,7 +41,7 @@ watch(() => data.value, () => {
     processEmit(data.value)
 })
 
-const processEmit = (tp: [TimeValueType, TimeValueType]) => {
+const processEmit = (tp: [ TimeValueType, TimeValueType ]) => {
     emits('update', tp)
     emits('update:start', tp?.[0])
     emits('update:end', tp?.[1])
@@ -51,12 +50,14 @@ const processEmit = (tp: [TimeValueType, TimeValueType]) => {
 </script>
 
 <template>
-<el-date-picker v-model="data"
-                end-placeholder="结束日期"
-                range-separator="至"
-                start-placeholder="开始日期"
-                type="datetimerange"
-                v-bind="$attrs"/>
+<el-date-picker
+    v-model="data"
+    end-placeholder="结束日期"
+    range-separator="至"
+    start-placeholder="开始日期"
+    type="datetimerange"
+    v-bind="$attrs"
+/>
 </template>
 
 <style lang="sass" scoped>

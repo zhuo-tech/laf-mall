@@ -11,5 +11,5 @@
 <h1>Seckill</h1>
 </template>
 
-<style scoped lang="sass">
+<style lang="sass" scoped>
 </style>

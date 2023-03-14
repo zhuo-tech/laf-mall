@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
-import ShowFile from '@/components/Show/ShowFile'
 import ShowImage from '@/components/Show/index.vue'
+import ShowFile from '@/components/Show/ShowFile'
 import { UploadFileInfo } from '@/service/FileService'
 // @ts-ignore
 import { UploadFilled } from '@element-plus/icons-vue'
@@ -41,10 +41,10 @@ const emits = defineEmits<{
     (event: 'input', value: Array<UploadUserFile>): void
 }>()
 
-const {fileList, upLoadRequest, onRemove, onUploadSuccess, beforeUpload} = new UploadFileService(props, emits)
+const { fileList, upLoadRequest, onRemove, onUploadSuccess, beforeUpload } = new UploadFileService(props, emits)
 
 // 预览
-const {isShow, onPreview, file} = useFilePreview()
+const { isShow, onPreview, file } = useFilePreview()
 
 </script>
 
@@ -58,7 +58,8 @@ const {isShow, onPreview, file} = useFilePreview()
     :on-remove="onRemove"
     :on-success="onUploadSuccess"
     class="upload"
-    v-bind="$attrs">
+    v-bind="$attrs"
+>
     <!-- 上传控制区域 -->
     <slot>
         <!-- 拖动上传 -->
@@ -102,14 +103,16 @@ const {isShow, onPreview, file} = useFilePreview()
     </template>
 
     <!-- 预览弹框 -->
-    <el-dialog v-model="isShow"
-               append-to-body
-               close-on-click-modal
-               destroy-on-close
-               draggable
-               lock-scroll
-               modal
-               width="45%">
+    <el-dialog
+        v-model="isShow"
+        append-to-body
+        close-on-click-modal
+        destroy-on-close
+        draggable
+        lock-scroll
+        modal
+        width="45%"
+    >
         <ShowFile :file="file" />
     </el-dialog>
 

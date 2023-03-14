@@ -46,7 +46,7 @@ export default defineComponent({
 
         renderMenuItem(menu: RouteRecordRaw, rootPath: string = StrTool.EMPTY) {
             // 没有子菜单: 一级菜单
-            let {children, path} = menu
+            let { children, path } = menu
             children = children?.filter(i => i?.meta?.isMenu !== false)
 
             path = rootPath + this.expectStartWith(path)
@@ -86,7 +86,7 @@ export default defineComponent({
 
         /* 独立渲染一个菜单叶子节点 */
         renderMenuNode(key: string, index: string, menu: RouteRecordRaw, isTitle: boolean = false): JSX.Element {
-            const {name, path, meta} = menu
+            const { name, path, meta } = menu
             const Icon = meta?.icon
 
             if (!Icon) {
@@ -112,14 +112,15 @@ export default defineComponent({
 
     },
     render() {
-        const {menuList, $props: {collapse}} = this
+        const { menuList, $props: { collapse } } = this
         return (
             <el-menu
                 class="h-full"
                 default-active={ this.$route.path }
                 collapse={ collapse }
                 router={ true }
-                onSelect={ this.onSelect }>
+                onSelect={ this.onSelect }
+            >
                 { menuList.map(router => this.renderMenuItem(router)) }
             </el-menu>
         )

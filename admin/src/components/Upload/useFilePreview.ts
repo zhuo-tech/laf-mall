@@ -1,6 +1,6 @@
 import { UploadFileInfo } from '@/service/FileService'
-import { UploadProps } from 'element-plus'
 import { ObjectTool } from '@es-tool/core'
+import { UploadProps } from 'element-plus'
 import { ref, Ref } from 'vue'
 
 export type FilePreviewReturn = {
