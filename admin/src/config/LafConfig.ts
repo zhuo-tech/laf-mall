@@ -19,4 +19,4 @@ export const cloud = new Cloud({
 /* 包装器 cloud 引用注入 */
 LafWrapperConfig.cloud = () => cloud
 // 设置 LoggerLevel.TRACE 可以启用 wrapper 层日志
-LafWrapperConfig.LoggerFactory.enableLevel = LoggerLevel.WARN
+LafWrapperConfig.LoggerFactory.enableLevel = LoggerLevel.TRACE

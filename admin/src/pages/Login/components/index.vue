@@ -7,7 +7,7 @@ const { isLoading, formData, submit, setFormRef, formRule, refs } = new LoginFor
 <template>
 <div>
     <h1 style="font-size: 30px; margin-bottom: 20px">用户登录</h1>
-    <el-form :ref="setFormRef" v-loading="isLoading" :model="formData" :rules="formRule">
+    <el-form :ref="setFormRef" v-loading="isLoading" :model="formData" :rules="formRule" size="large">
         <el-form-item prop="username">
             <el-input
                 :ref="el => refs.username = el"

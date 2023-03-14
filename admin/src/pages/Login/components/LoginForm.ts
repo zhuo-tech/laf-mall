@@ -3,6 +3,7 @@ import { SysAdminApi } from '@/repository/SysAdminApi'
 import { StorageServiceImpl } from '@/service/impl/StorageServiceImpl'
 import { StorageLevel, StorageService } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
+import { StandardErrorProcess } from '@/util'
 import { RuleItem } from 'async-validator'
 import { FormInstance, InputInstance } from 'element-plus'
 import { reactive, ref, UnwrapNestedRefs } from 'vue'
@@ -64,6 +65,7 @@ export class LoginForm {
 
         this.isLoading.value = true
         asyncOperation()
+            .catch(StandardErrorProcess)
             .finally(() => this.isLoading.value = false)
     }
 
