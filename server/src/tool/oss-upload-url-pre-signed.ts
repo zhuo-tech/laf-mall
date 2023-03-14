@@ -1,6 +1,6 @@
 import cloud from '@/cloud-sdk'
+import { RandomTool } from '@es-tool/core'
 import { Client } from 'minio'
-import { RandomUtil } from 'typescript-util'
 
 interface Body {
     /**
@@ -63,7 +63,7 @@ const FILE_EXTENSION = new RegExp('.*?/?([^/]+)(\\.[\\d\\w]+)$')
  */
 function generateFileName(fileName: string) {
     const timePrefix = Date.now().toString(36)
-    const randomNumStr = RandomUtil.randomString(RandomUtil.NUMBER, 20)
+    const randomNumStr = RandomTool.randomString(RandomTool.NUMBER, 20)
     const randomSuffix = Number(randomNumStr).toString(36)
 
     const exec = FILE_EXTENSION.exec(fileName)

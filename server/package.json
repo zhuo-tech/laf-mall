@@ -4,8 +4,8 @@
     "description": "云函数本地开发环境",
     "dependencies": {
         "laf-client-sdk": "^0.8.2",
-        "laf-db-query-wrapper": "^1.0.23",
-        "typescript-util": "^1.0.27",
+        "laf-db-query-wrapper": "^1.0.25",
+        "@es-tool/core": "^1.0.5",
         "minio": "^7.0.28",
         "common": "../common"
     },

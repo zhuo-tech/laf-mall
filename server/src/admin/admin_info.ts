@@ -1,7 +1,7 @@
 import cloud from '@/cloud-sdk'
-import { SysPermission, SysRole, SysAdmin } from 'common'
+import { ArrayTool, ObjectTool } from '@es-tool/core'
+import { SysAdmin, SysPermission, SysRole } from 'common'
 import { LafClient, LafWrapperConfig, QueryChainWrapper } from 'laf-db-query-wrapper'
-import { ArrayTool, ObjectTool } from 'typescript-util'
 
 LafWrapperConfig.database = cloud.database
 

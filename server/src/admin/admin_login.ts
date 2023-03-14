@@ -1,9 +1,9 @@
 import cloud from '@/cloud-sdk'
-import { SysPassword, SysAdmin } from 'common'
+import { TimeUnit } from '@es-tool/core'
+import { SysAdmin, SysPassword } from 'common'
 // @ts-ignore
 import * as crypto from 'crypto'
 import { LafWrapperConfig, QueryChainWrapper } from 'laf-db-query-wrapper'
-import { TimeUnit } from 'typescript-util'
 
 LafWrapperConfig.database = cloud.database
 
