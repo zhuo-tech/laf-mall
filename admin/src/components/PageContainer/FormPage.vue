@@ -1,54 +1,39 @@
 <script lang="ts" setup>
-// @ts-ignore
-import { ArrowLeft } from '@element-plus/icons-vue'
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-
-/**
- * FormPage
- * @author 冰凝
- * @date 2022-07-11 13:19:22
- **/
-defineProps<{
-    title?: string
-}>()
-const matched = computed(() => useRoute().matched)
-</script>
+import PageHeader from '@/components/PageContainer/PageHeader.vue'</script>
 
 <template>
-<el-card>
-    <!-- 页眉 -->
-    <template v-slot:header>
-        <el-page-header :icon="ArrowLeft" content="detail" @back="$router.go(-1)">
-            <template v-slot:title>
-                {{ title }}
-            </template>
-            <template v-slot:content>
-                <div class="header-bread-crumbs">
-                    <el-breadcrumb separator="/">
-                        <el-breadcrumb-item v-for="route in matched" :key="route.path" :to="route.path">
-                            {{ route.meta.title || route.name || route.path }}
-                        </el-breadcrumb-item>
-                    </el-breadcrumb>
-                </div>
-            </template>
-        </el-page-header>
-    </template>
-
-    <!-- 内容区 -->
-    <el-row>
-        <el-col :lg="22" :md="24" :xl="20">
-            <slot name="default"></slot>
-        </el-col>
-    </el-row>
-
-    <!--   页脚  -->
-    <slot name="footer">
-    </slot>
-</el-card>
+<main>
+    <header>
+        <PageHeader />
+    </header>
+    <section class="body">
+        <slot name="default"></slot>
+    </section>
+    <footer>
+        <slot name="footer"></slot>
+    </footer>
+</main>
 </template>
 
 <style lang="sass" scoped>
-.header-bread-crumbs
-    margin-top: 5px
+main
+    box-sizing: border-box
+    max-width: 1920px
+    margin: 0 auto
+    padding: 0 70px 0 20px
+
+    background-color: var(--el-bg-color)
+
+    > header
+        padding: 30px
+        margin-bottom: 10px
+        border-bottom: rgba(0, 0, 0, .1)
+
+    > .body
+        box-sizing: border-box
+        min-height: 80vh
+
+    > footer
+        min-height: 200px
+        text-align: center
 </style>

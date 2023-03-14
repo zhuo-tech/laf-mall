@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import ShowImage from '@/components/Show/index.vue'
-import UploadFile from '@/components/Upload/UploadFile.vue'
-import { formatDate } from '@/util/Format'
-// @ts-ignore
-import { CirclePlusFilled, Delete, Edit, Refresh, Search, Warning } from '@element-plus/icons-vue'
+import { CrudPagination, ShowImage, TablePage, UploadFile } from '@/components'
+import { formatDate } from '@/util'
+import { CirclePlusFilled, Delete, Edit, Search, Warning } from '@element-plus/icons-vue'
 import { CategoryService } from './Service'
 
 const {
@@ -32,38 +29,27 @@ listUpdate()
 </script>
 
 <template>
-<el-card class="box-card" header="系统权限">
-    <!-- 搜索区域 & 功能按钮 -->
-    <el-row justify="end" type="flex">
-        <el-collapse-transition>
-            <el-col v-show="showQuery">
-                <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">
-                    <el-form-item>
-                        <el-input v-model="queryData.name" clearable placeholder="分类名" v-on:keyup.enter="queryFormSubmit" />
-                    </el-form-item>
-                    <el-form-item>
-                        <el-checkbox-group v-model="queryData.isShow" @change="queryFormSubmit">
-                            <el-checkbox-button :label="true">启用</el-checkbox-button>
-                            <el-checkbox-button :label="false">禁用</el-checkbox-button>
-                        </el-checkbox-group>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button :icon="Search" type="primary" @click="queryFormSubmit"></el-button>
-                    </el-form-item>
-                </el-form>
-            </el-col>
-        </el-collapse-transition>
-        <el-col :span="12">
-            <el-row justify="end" type="flex">
-                <el-button :icon="CirclePlusFilled" type="primary" @click="readyAdd()">新建</el-button>
-                <el-button :icon="Search" type="primary" @click="showQuery = !showQuery" />
-                <el-button v-loading="formIsLoading" :disabled="formIsLoading" :icon="Refresh" type="primary" @click="listUpdate" />
-            </el-row>
-        </el-col>
-    </el-row>
+<TablePage @create="readyAdd()" @refresh="listUpdate">
+
+    <template #searchForm>
+        <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">
+            <el-form-item>
+                <el-input v-model="queryData.name" clearable placeholder="分类名" v-on:keyup.enter="queryFormSubmit" />
+            </el-form-item>
+            <el-form-item>
+                <el-checkbox-group v-model="queryData.isShow" @change="queryFormSubmit">
+                    <el-checkbox-button :label="true">启用</el-checkbox-button>
+                    <el-checkbox-button :label="false">禁用</el-checkbox-button>
+                </el-checkbox-group>
+            </el-form-item>
+            <el-form-item>
+                <el-button :icon="Search" type="primary" @click="queryFormSubmit"></el-button>
+            </el-form-item>
+        </el-form>
+    </template>
 
     <!-- 表格 -->
-    <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
+    <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" border class="data-table" fit show-header stripe>
         <el-table-column align="center" label="序号" type="index" width="60" />
         <el-table-column align="left" label="分类名" min-width="100" prop="name" />
         <el-table-column align="left" label="排序" min-width="100" prop="sort" />
@@ -148,7 +134,7 @@ listUpdate()
         </el-form>
     </el-dialog>
 
-</el-card>
+</TablePage>
 </template>
 
 <style lang="sass" scoped>

@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import ShowImage from '@/components/Show/index.vue'
+import { CrudPagination, ShowImage, TablePage } from '@/components'
 import { ProductService } from '@/pages/Basic/Product/Service'
 import { BasicRouterControl } from '@/pages/Basic/Router'
-// @ts-ignore
-import { CirclePlusFilled, Delete, Edit, Refresh, Search, Warning } from '@element-plus/icons-vue'
+import { Delete, Edit, Search, Warning } from '@element-plus/icons-vue'
 import { onActivated } from 'vue'
 
 /**
@@ -24,39 +22,26 @@ const {
     readyAdd,
     queryFormSubmit,
 } = new ProductService()
-onActivated(() => {
-    listUpdate()
-})
+onActivated(() => listUpdate())
 </script>
 
 <template>
-<el-card header="商品">
-    <el-row justify="end" type="flex">
-        <el-collapse-transition>
-            <el-col v-show="showQuery">
-                <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">
-                    <el-form-item>
-                        <el-input v-model="queryData.nickname" clearable placeholder="所属分类"></el-input>
-                    </el-form-item>
+<TablePage @create="BasicRouterControl.toProductCreate()" @refresh="listUpdate">
+  <template #searchForm>
+    <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">
+      <el-form-item>
+        <el-input v-model="queryData.nickname" clearable placeholder="所属分类"></el-input>
+      </el-form-item>
 
-                    <el-form-item>
-                        <el-input v-model="queryData.username" clearable placeholder="商品名称"></el-input>
-                    </el-form-item>
+      <el-form-item>
+        <el-input v-model="queryData.username" clearable placeholder="商品名称"></el-input>
+      </el-form-item>
 
-                    <el-form-item>
-                        <el-button :icon="Search" type="primary" @click="queryFormSubmit"></el-button>
-                    </el-form-item>
-                </el-form>
-            </el-col>
-        </el-collapse-transition>
-        <el-col :span="12">
-            <el-row justify="end" type="flex">
-                <el-button :icon="CirclePlusFilled" type="primary" @click="BasicRouterControl.toProductCreate()">新增</el-button>
-                <el-button :icon="Search" type="primary" @click="showQuery = !showQuery" />
-                <el-button v-loading="formIsLoading" :disabled="formIsLoading" :icon="Refresh" type="primary" @click="listUpdate" />
-            </el-row>
-        </el-col>
-    </el-row>
+      <el-form-item>
+        <el-button :icon="Search" type="primary" @click="queryFormSubmit"></el-button>
+      </el-form-item>
+    </el-form>
+  </template>
 
     <!-- 表格 -->
     <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
@@ -102,16 +87,16 @@ onActivated(() => {
                     title=" 操作无法撤销, 确定要删除吗 ？"
                     @confirm="readyDelete(row)"
                 >
-                    <template #reference>
-                        <el-button :icon="Delete" link>删除</el-button>
-                    </template>
+                  <template #reference>
+                    <el-button :icon="Delete" link>删除</el-button>
+                  </template>
                 </el-popconfirm>
             </template>
         </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <CrudPagination :service="{page}" style="padding-top: 20px" />
-</el-card>
+  <CrudPagination :service="{page}" style="padding-top: 20px" />
+</TablePage>
 </template>
 
 <style lang="sass" scoped>

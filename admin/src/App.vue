@@ -8,10 +8,11 @@ export default defineComponent({
         config(): Partial<ConfigProviderProps> {
             return {
                 locale: zhCn,
-                size: 'small',
+                size: 'default',
                 keyboardNavigation: true,
                 button: { autoInsertSpace: true },
                 message: { max: 10 },
+                zIndex: 100,
             }
         },
     },
