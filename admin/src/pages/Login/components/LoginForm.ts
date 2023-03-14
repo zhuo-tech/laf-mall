@@ -3,7 +3,6 @@ import { SysAdminApi } from '@/repository/SysAdminApi'
 import { StorageServiceImpl } from '@/service/impl/StorageServiceImpl'
 import { StorageLevel, StorageService } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
-import { StrTool } from '@es-tool/core'
 import { RuleItem } from 'async-validator'
 import { FormInstance, InputInstance } from 'element-plus'
 import { reactive, ref, UnwrapNestedRefs } from 'vue'
@@ -32,10 +31,7 @@ export class LoginForm {
         password: [ { required: true, type: 'string', message: '请输入密码', min: 6, max: 128, trigger: 'blur' } ],
         verificationCode: [ { required: false } ],
     }
-    public showNext = reactive<Partial<Record<keyof typeof this.formData, boolean>>>({
-        username: false,
-        password: false,
-    })
+
     public isLoading = ref(false)
     private readonly sysAdminApi: SysAdminApi = new SysAdminApi()
     private readonly storageService: StorageService = new StorageServiceImpl()
@@ -46,29 +42,6 @@ export class LoginForm {
     public setFormRef = (el: any) => {
         if (el) {
             this.formRef.value = el
-        }
-    }
-
-    public next = (property: keyof typeof this.formData) => {
-        if (StrTool.isEmpty(this.formData[property])) {
-            return
-        }
-        if (this.showNext[property]) {
-            return
-        }
-        this.showNext[property] = true
-        switch (property) {
-            case 'username':
-                this.refs.password?.focus?.()
-                break
-            case 'password':
-                // noinspection JSIgnoredPromiseFromCall
-                this.refs.code?.focus?.()
-                break
-            case 'verificationCode':
-                this.submit()
-                break
-            default:
         }
     }
 
