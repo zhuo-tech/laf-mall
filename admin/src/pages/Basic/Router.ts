@@ -1,6 +1,7 @@
-import { VueRouter } from '@/main'
+// noinspection JSIgnoredPromiseFromCall
+
 import { Document, Film, FolderOpened, PictureFilled, ShoppingBag } from '@element-plus/icons-vue'
-import { RouteRecordRaw } from 'vue-router'
+import { RouteRecordRaw, useRouter } from 'vue-router'
 
 /**
  * Router
@@ -78,31 +79,32 @@ const RouterConfig: RouteRecordRaw = {
         },
     ],
 }
-
-// noinspection JSIgnoredPromiseFromCall
-export class BasicRouterControl {
-
-    public static toProduct() {
-        VueRouter.push('/basic/product')
-    }
-
-    public static toProductCreate() {
-        VueRouter.push('/basic/product/create')
-    }
-
-    /**
-     * @param id {@link BasicProduct._id}
-     */
-    public static toProductUpdate(id: string) {
-        VueRouter.push('/basic/product/update/' + id)
-    }
-
-    /**
-     * @param id {@link BasicProduct._id}
-     */
-    public static toProductDetail(id: string) {
-        VueRouter.push('/basic/product/detail/' + id)
-    }
-}
-
 export default RouterConfig
+
+export function useBasicRouter() {
+    const router = useRouter()
+    return {
+        toProduct() {
+            router.push('/basic/product')
+        },
+
+        toProductCreate() {
+            router.push('/basic/product/create')
+        },
+
+        /**
+         * @param id {@link BasicProduct._id}
+         */
+        toProductUpdate(id: string) {
+            router.push('/basic/product/update/' + id)
+        },
+
+        /**
+         * @param id {@link BasicProduct._id}
+         */
+        toProductDetail(id: string) {
+            router.push('/basic/product/detail/' + id)
+        },
+    }
+
+}

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { BasicRouterControl } from '@/pages/Basic/Router'
+import { useBasicRouter } from '@/pages/Basic/Router'
 import { computed } from '@vue/runtime-core'
 import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
 
@@ -10,6 +10,7 @@ import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
  **/
 const route: RouteLocationNormalizedLoaded = useRoute()
 const productId = computed(() => <string>route.params['id'])
+const router = useBasicRouter()
 
 </script>
 
@@ -17,7 +18,7 @@ const productId = computed(() => <string>route.params['id'])
 <div>
     <h1>商品详情页 只读</h1>
 
-    <el-button @click="BasicRouterControl.toProductUpdate(productId)"> 编辑</el-button>
+    <el-button @click="router.toProductUpdate(productId)"> 编辑</el-button>
 </div>
 </template>
 

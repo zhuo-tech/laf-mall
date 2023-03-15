@@ -5,7 +5,7 @@ import Tags from '@/components/Tags/Tags.vue'
 import UploadFile from '@/components/Upload/UploadFile.vue'
 import SpecForm from '@/pages/Basic/Product/components/SpecForm/SpecForm.vue'
 import { EditorService } from '@/pages/Basic/Product/EditorService'
-import { BasicRouterControl } from '@/pages/Basic/Router'
+import { useBasicRouter } from '@/pages/Basic/Router'
 import { SpecType } from 'common'
 import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
 
@@ -27,6 +27,9 @@ const {
     formSubmit,
     changeChannel,
 } = new EditorService(route)
+
+const router = useBasicRouter()
+
 </script>
 
 <template>
@@ -154,7 +157,7 @@ const {
 
     <template v-slot:footer>
         <div slot="footer" class="drawer-body-footer" style="text-align: right">
-            <el-button @click="BasicRouterControl.toProduct()">取 消</el-button>
+            <el-button @click="router.toProduct()">取 消</el-button>
             <el-button :loading="formIsLoading" type="primary" @click="formSubmit">
                 {{ formIsLoading ? '提交中 ...' : '确 定' }}
             </el-button>

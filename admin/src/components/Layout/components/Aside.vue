@@ -1,5 +1,4 @@
 <script lang="tsx">
-import { VueRouter } from '@/main'
 import { ArrayTool, StrTool } from '@es-tool/core'
 import { defineComponent } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
@@ -27,7 +26,7 @@ export default defineComponent({
     },
     computed: {
         menuList() {
-            return VueRouter.options.routes.filter(i => i.meta?.isMenu !== false)
+            return this.$router.options.routes.filter(i => i.meta?.isMenu !== false)
         },
     },
     methods: {

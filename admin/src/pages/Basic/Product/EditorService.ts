@@ -1,4 +1,4 @@
-import { BasicRouterControl } from '@/pages/Basic/Router'
+import { useBasicRouter } from '@/pages/Basic/Router'
 import { BasicCategoryRepository, ProductCategoryTreeNode } from '@/repository/BasicCategoryRepository'
 import { BasicProductRepository } from '@/repository/BasicProductRepository'
 import { BasicSpecProductRepository } from '@/repository/BasicSpecProductRepository'
@@ -44,7 +44,9 @@ export class EditorService {
     private readonly mallConfigRepository: MallConfigRepository = new MallConfigRepository()
     private readonly specProductRepository: BasicSpecProductRepository = new BasicSpecProductRepository()
 
-    constructor(route: RouteLocationNormalizedLoaded) {
+    private readonly router: ReturnType<typeof useBasicRouter>
+
+    public constructor(route: RouteLocationNormalizedLoaded) {
         this.route = route
 
         this.categoryRepository.categoryTree()
@@ -54,6 +56,8 @@ export class EditorService {
             .then(list => this.channelList.value = list)
 
         onActivated(() => this.formDateInit())
+
+        this.router = useBasicRouter()
     }
 
     /**
@@ -89,7 +93,7 @@ export class EditorService {
             }
 
             ElMessage.success(this.isEdit ? '编辑成功' : '添加成功')
-            BasicRouterControl.toProduct()
+            this.router.toProduct()
             this.formIsLoading.value = true
         }
         asyncSave().catch(err => {

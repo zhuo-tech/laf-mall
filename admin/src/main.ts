@@ -6,12 +6,10 @@ import ElementPlus from 'element-plus'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 
-export const app = createApp(App)
-export const VueRouter = new RoutingProvider().instant
-
-app.use(VueRouter)
+createApp(App)
+    .use(new RoutingProvider().instant)
     .use(createPinia())
     .use(ElementPlus)
     .mount('#app')
 
-Object.values(ElIconModules).forEach(icon => app.component(icon.name, icon))
+Object.values(ElIconModules).forEach(icon => createApp(App).component(icon.name, icon))

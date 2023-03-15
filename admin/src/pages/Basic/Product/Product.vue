@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { CrudPagination, ShowImage, TableLineAction, TablePage } from '@/components'
 import { ProductService } from '@/pages/Basic/Product/Service'
-import { BasicRouterControl } from '@/pages/Basic/Router'
+import { useBasicRouter } from '@/pages/Basic/Router'
 import { Edit, Search } from '@element-plus/icons-vue'
 import { onActivated } from 'vue'
 
@@ -23,10 +23,13 @@ const {
     queryFormSubmit,
 } = new ProductService()
 onActivated(() => listUpdate())
+
+const router = useBasicRouter()
+
 </script>
 
 <template>
-<TablePage @create="BasicRouterControl.toProductCreate()" @refresh="listUpdate">
+<TablePage @create="router.toProductCreate()" @refresh="listUpdate">
     <template #searchForm>
         <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">
             <el-form-item>
@@ -75,9 +78,9 @@ onActivated(() => listUpdate())
 
         <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="250">
             <template v-slot="{row}">
-                <el-button :icon="Edit" link @click="BasicRouterControl.toProductDetail(row._id)">详情</el-button>
+                <el-button :icon="Edit" link @click="router.toProductDetail(row._id)">详情</el-button>
                 <el-divider direction="vertical" />
-                <TableLineAction @del="readyDelete(row)" @edit="BasicRouterControl.toProductUpdate(row._id)" />
+                <TableLineAction @del="readyDelete(row)" @edit="router.toProductUpdate(row._id)" />
             </template>
         </el-table-column>
     </el-table>

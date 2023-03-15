@@ -3,8 +3,7 @@ import Aside from '@/components/Layout/components/Aside.vue'
 import { StorageServiceImpl } from '@/service/impl/StorageServiceImpl'
 import { StorageService } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
-// @ts-ignore
-import { Expand } from '@element-plus/icons-vue'
+import { CircleClose, Expand } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 
 const isOpenMenu = ref(false)

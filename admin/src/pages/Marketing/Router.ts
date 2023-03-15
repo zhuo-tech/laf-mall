@@ -1,6 +1,7 @@
-import { VueRouter } from '@/main'
+// noinspection JSIgnoredPromiseFromCall
+
 import { ShoppingCartFull, Ticket, Timer, TrendCharts } from '@element-plus/icons-vue'
-import { RouteRecordRaw } from 'vue-router'
+import { RouteRecordRaw, useRouter } from 'vue-router'
 
 /**
  * Router
@@ -112,55 +113,56 @@ const RouterConfig: RouteRecordRaw = {
         },
     ],
 }
-
 export default RouterConfig
 
-// noinspection JSIgnoredPromiseFromCall
-export class MarketingRouterControl {
+export function useMarketingRouter() {
+    const router = useRouter()
 
-    public static toSeckill() {
-        VueRouter.push('/marketing/seckill')
+    // noinspection SpellCheckingInspection
+    return {
+        toSeckill() {
+            router.push('/marketing/seckill')
+        },
+
+        toSeckillCreate() {
+            router.push('/marketing/seckill/create')
+        },
+
+        /**
+         * @param id {@link MallActivitySeckill._id}
+         */
+        toSeckillUpdate(id: string) {
+            router.push('/marketing/seckill/update/' + id)
+        },
+
+        toGroup() {
+            router.push('/marketing/group')
+        },
+
+        toGroupCreate() {
+            router.push('/marketing/group/create')
+        },
+
+        /**
+         * @param id {@link MallActivityGroup._id}
+         */
+        toGroupUpdate(id: string) {
+            router.push('/marketing/group/update/' + id)
+        },
+
+        toBargain() {
+            router.push('/marketing/bargain')
+        },
+
+        toBargainCreate() {
+            router.push('/marketing/bargain/create')
+        },
+
+        /**
+         * @param id {@link MallActivityBargain._id}
+         */
+        toBargainUpdate(id: string) {
+            router.push('/marketing/bargain/update/' + id)
+        },
     }
-
-    public static toSeckillCreate() {
-        VueRouter.push('/marketing/seckill/create')
-    }
-
-    /**
-     * @param id {@link MallActivitySeckill._id}
-     */
-    public static toSeckillUpdate(id: string) {
-        VueRouter.push('/marketing/seckill/update/' + id)
-    }
-
-    public static toGroup() {
-        VueRouter.push('/marketing/group')
-    }
-
-    public static toGroupCreate() {
-        VueRouter.push('/marketing/group/create')
-    }
-
-    /**
-     * @param id {@link MallActivityGroup._id}
-     */
-    public static toGroupUpdate(id: string) {
-        VueRouter.push('/marketing/group/update/' + id)
-    }
-
-    public static toBargain() {
-        VueRouter.push('/marketing/bargain')
-    }
-
-    public static toBargainCreate() {
-        VueRouter.push('/marketing/bargain/create')
-    }
-
-    /**
-     * @param id {@link MallActivityBargain._id}
-     */
-    public static toBargainUpdate(id: string) {
-        VueRouter.push('/marketing/bargain/update/' + id)
-    }
-
 }

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { CrudPagination, ShowImage, TableLineAction, TablePage } from '@/components'
 import { BargainService } from '@/pages/Marketing/Bargain/BargainService'
-import { MarketingRouterControl } from '@/pages/Marketing/Router'
+import { useMarketingRouter } from '@/pages/Marketing/Router'
 import { Search } from '@element-plus/icons-vue'
 
 /**
@@ -23,6 +23,9 @@ const {
 } = new BargainService()
 
 listUpdate()
+
+const router = useMarketingRouter()
+
 </script>
 
 <template>
@@ -65,7 +68,7 @@ listUpdate()
 
         <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="380">
             <template v-slot="{row}">
-                <TableLineAction @del="readyDelete(row)" @edit="MarketingRouterControl.toBargainUpdate(row._id)" />
+                <TableLineAction @del="readyDelete(row)" @edit="router.toBargainUpdate(row._id)" />
             </template>
         </el-table-column>
     </el-table>
