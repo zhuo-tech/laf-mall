@@ -10,18 +10,27 @@
 
 <template>
 <div>
-    <el-card class="grid-content" header="这是个标题">
+    <el-row :gutter="20">
+        <el-col :span="18">
+            <el-card class="grid-content" header="" shadow="hover">
 
-    </el-card>
+            </el-card>
+        </el-col>
+        <el-col :span="6">
+            <el-card class="grid-content" header="" shadow="hover">
+
+            </el-card>
+        </el-col>
+    </el-row>
     <br>
     <el-row :gutter="20">
         <el-col :span="12">
-            <el-card class="grid-content" header="详情">
+            <el-card class="grid-content" header="" shadow="hover">
 
             </el-card>
         </el-col>
         <el-col :span="12">
-            <el-card class="grid-content" header="卡片">
+            <el-card class="grid-content" header="" shadow="hover">
 
             </el-card>
         </el-col>
@@ -29,16 +38,16 @@
 
     <el-row :gutter="20">
         <el-col :span="6">
-            <el-card class="grid-content ep-bg-purple" />
+            <el-card class="grid-content ep-bg-purple" shadow="hover" />
         </el-col>
         <el-col :span="6">
-            <el-card class="grid-content ep-bg-purple-light" />
+            <el-card class="grid-content ep-bg-purple-light" shadow="hover" />
         </el-col>
         <el-col :span="6">
-            <el-card class="grid-content ep-bg-purple" />
+            <el-card class="grid-content ep-bg-purple" shadow="hover" />
         </el-col>
         <el-col :span="6">
-            <el-card class="grid-content ep-bg-purple-light" />
+            <el-card class="grid-content ep-bg-purple-light" shadow="hover" />
         </el-col>
     </el-row>
 
