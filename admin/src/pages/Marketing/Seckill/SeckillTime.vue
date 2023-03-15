@@ -33,7 +33,7 @@ const {
 <template>
 <TablePage @create="readyAdd()" @refresh="listUpdate">
     <!-- 表格 -->
-    <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
+    <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" border class="data-table" fit show-header stripe>
         <el-table-column align="center" label="序号" type="index" width="60" />
         <el-table-column align="left" label="排序" min-width="100" prop="sort" />
         <el-table-column align="left" label="图片地址" min-width="100" prop="href">

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { TablePage } from '@/components'
 
 /**
  * Coupon
@@ -8,7 +9,8 @@
 </script>
 
 <template>
-<h1>Coupon</h1>
+<TablePage>
+</TablePage>
 </template>
 
 <style lang="sass" scoped>
