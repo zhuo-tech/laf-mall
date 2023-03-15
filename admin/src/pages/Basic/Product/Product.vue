@@ -44,7 +44,7 @@ onActivated(() => listUpdate())
     </template>
 
     <!-- 表格 -->
-    <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
+    <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" border class="data-table" fit show-header stripe>
         <el-table-column align="center" label="序号" type="index" width="60" />
         <el-table-column align="left" label="所属分类" min-width="150" prop="categoryId">
             <template v-slot="{row}">
@@ -73,7 +73,7 @@ onActivated(() => listUpdate())
             </template>
         </el-table-column>
 
-        <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="380">
+        <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="250">
             <template v-slot="{row}">
                 <el-button :icon="Edit" link @click="BasicRouterControl.toProductDetail(row._id)">详情</el-button>
                 <el-divider direction="vertical" />

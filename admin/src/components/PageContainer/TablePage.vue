@@ -16,7 +16,22 @@ const showQuery = ref(false)
 <div>
     <main>
         <header>
-            <PageHeader />
+            <el-row :gutter="20">
+                <el-col :md="12" :sm="24" :xs="24">
+                    <PageHeader />
+                </el-col>
+                <el-col :md="12" :sm="24" :xs="24">
+                    <el-row justify="end" type="flex">
+                        <slot name="action"></slot>
+                        <!--suppress JSValidateTypes -->
+                        <el-button :icon="CirclePlusFilled" type="primary" @click="emits('create')">新建</el-button>
+                        <!--suppress JSValidateTypes -->
+                        <el-button v-if="!!$slots.searchForm" :icon="Search" type="primary" @click="showQuery = !showQuery" />
+                        <!--suppress JSValidateTypes -->
+                        <el-button :icon="Refresh" type="primary" @click="emits('refresh')" />
+                    </el-row>
+                </el-col>
+            </el-row>
         </header>
         <section class="body">
             <el-collapse-transition>
@@ -24,18 +39,6 @@ const showQuery = ref(false)
                     <slot name="searchForm"></slot>
                 </div>
             </el-collapse-transition>
-
-            <el-col :span="24">
-                <el-row justify="end" type="flex">
-                    <slot name="action"></slot>
-                    <!--suppress JSValidateTypes -->
-                    <el-button :icon="CirclePlusFilled" type="primary" @click="emits('create')">新建</el-button>
-                    <!--suppress JSValidateTypes -->
-                    <el-button v-if="!!$slots.searchForm" :icon="Search" type="primary" @click="showQuery = !showQuery" />
-                    <!--suppress JSValidateTypes -->
-                    <el-button :icon="Refresh" type="primary" @click="emits('refresh')" />
-                </el-row>
-            </el-col>
 
             <div class="table-wrapper">
                 <slot name="default"></slot>
