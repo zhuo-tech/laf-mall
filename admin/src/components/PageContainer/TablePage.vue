@@ -6,9 +6,13 @@ import { ref } from 'vue'
 const emits = defineEmits<{
     (event: 'create'): void
     (event: 'refresh'): void
+    (event: 'search'): void
 }>()
 
 const showQuery = ref(false)
+
+// noinspection JSUnusedLocalSymbols
+const enterUp = (event: KeyboardEvent) => emits('search')
 
 </script>
 
@@ -35,7 +39,7 @@ const showQuery = ref(false)
         </header>
         <section class="body">
             <el-collapse-transition>
-                <div v-show="showQuery">
+                <div v-show="showQuery" @keyup.enter="enterUp">
                     <slot name="searchForm"></slot>
                 </div>
             </el-collapse-transition>

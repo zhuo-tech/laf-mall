@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ShowImage } from '@/components/Show/ShowImage'
+import { Picture } from '@element-plus/icons-vue'
 
 /**
  * ShowImage

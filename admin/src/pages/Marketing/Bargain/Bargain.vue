@@ -29,14 +29,14 @@ const router = useMarketingRouter()
 </script>
 
 <template>
-<TablePage @create="readyAdd()" @refresh="listUpdate">
+<TablePage @create="readyAdd()" @refresh="listUpdate" @search="queryFormSubmit">
     <template #searchForm>
         <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">
             <el-form-item>
-                <el-input v-model="queryData.nickname" clearable placeholder="所属分类"></el-input>
+                <el-input v-model="queryData.title" clearable placeholder="所属分类"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="queryData.username" clearable placeholder="商品名称"></el-input>
+                <el-input v-model="queryData.title" clearable placeholder="商品名称"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button :icon="Search" type="primary" @click="queryFormSubmit"></el-button>

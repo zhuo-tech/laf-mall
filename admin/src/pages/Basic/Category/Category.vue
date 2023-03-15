@@ -29,7 +29,7 @@ listUpdate()
 </script>
 
 <template>
-<TablePage @create="readyAdd()" @refresh="listUpdate">
+<TablePage @create="readyAdd()" @refresh="listUpdate" @search="queryFormSubmit">
 
     <template #searchForm>
         <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">

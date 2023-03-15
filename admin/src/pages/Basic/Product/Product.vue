@@ -29,7 +29,7 @@ const router = useBasicRouter()
 </script>
 
 <template>
-<TablePage @create="router.toProductCreate()" @refresh="listUpdate">
+<TablePage @create="router.toProductCreate()" @refresh="listUpdate" @search="queryFormSubmit">
     <template #searchForm>
         <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">
             <el-form-item>
