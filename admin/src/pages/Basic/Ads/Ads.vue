@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { CrudPagination, ShowImage, TablePage, UploadFile } from '@/components'
+import { CrudPagination, ShowImage, TableLineAction, TablePage, UploadFile } from '@/components'
 import { AdsService } from '@/pages/Basic/Ads/Service'
 import { formatDate } from '@/util'
-import { Delete, Edit, Warning } from '@element-plus/icons-vue'
 
 /**
  * Category
@@ -57,20 +56,7 @@ listUpdate()
                 <el-table-column :formatter="formatDate()" align="center" label="创建时间" prop="createTime" width="180" />
                 <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="180">
                     <template v-slot="{row}">
-                        <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
-                        <el-divider direction="vertical" />
-                        <el-popconfirm
-                            :icon="Warning"
-                            cancel-button-text="手滑了"
-                            confirm-button-text="确认删除"
-                            icon-color="red"
-                            title=" 操作无法撤销, 确定要删除吗 ？"
-                            @confirm="readyDelete(row)"
-                        >
-                            <template #reference>
-                                <el-button :icon="Delete" link>删除</el-button>
-                            </template>
-                        </el-popconfirm>
+                        <TableLineAction @del="readyDelete(row)" @edit="readyEdit(row)" />
                     </template>
                 </el-table-column>
             </el-table>

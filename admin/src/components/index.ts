@@ -7,7 +7,7 @@ import Tags from '@/components/Tags/Tags.vue'
 import TimePeriod from '@/components/TimePeriod/TimePeriod.vue'
 import UploadFile from '@/components/Upload/UploadFile.vue'
 
-export * from './PageContainer'
+export { FormPage, TableLineAction, TablePage } from './PageContainer'
 
 export {
     CrudPagination,

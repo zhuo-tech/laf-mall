@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import CrudPagination from '@/components/CrudPagination/CrudPagination'
+import { CrudPagination, TableLineAction, TablePage } from '@/components'
 import FormTags from '@/pages/Config/Channel/components/FormTags/FormTags.vue'
 import { ChannelService } from '@/pages/Config/Channel/Service'
-// @ts-ignore
-import { CirclePlusFilled, Delete, Edit, Refresh, Warning } from '@element-plus/icons-vue'
 
 const {
     setFormRef,
@@ -28,22 +26,14 @@ listUpdate()
 </script>
 
 <template>
-<el-card class="box-card" header="主页栏目">
-    <!--新建和刷新-->
-    <el-row>
-        <el-col :offset="12" :span="12">
-            <el-row justify="end" type="flex">
-                <el-button :icon="CirclePlusFilled" type="primary" @click="readyAdd()">新建</el-button>
-                <el-button v-loading="formIsLoading" :disabled="formIsLoading" :icon="Refresh" type="primary" @click="listUpdate" />
-            </el-row>
-        </el-col>
-    </el-row>
+<TablePage @create="readyAdd()" @refresh="listUpdate">
     <!--表格-->
     <el-table
         v-loading="tableIsLoading"
         :data="page.list"
         :row-key="rowKey"
         :tree-props="{children: '__'}"
+        border
         class="data-table"
         fit
         show-header
@@ -61,19 +51,7 @@ listUpdate()
         <el-table-column align="left" label="排序" min-width="60" prop="sort" />
         <el-table-column align="center" fixed="right" label="操作" prop="Operate" width="180">
             <template v-slot="{row}">
-                <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
-                <el-popconfirm
-                    :icon="Warning"
-                    cancel-button-text="手滑了"
-                    confirm-button-text="确认删除"
-                    icon-color="red"
-                    title=" 操作无法撤销, 确定要删除吗 ？"
-                    @confirm="readyDelete(row)"
-                >
-                    <template #reference>
-                        <el-button :icon="Delete" link>删除</el-button>
-                    </template>
-                </el-popconfirm>
+                <TableLineAction @del="readyDelete(row)" @edit="readyEdit(row)" />
             </template>
         </el-table-column>
     </el-table>
@@ -125,7 +103,7 @@ listUpdate()
             </el-col>
         </el-row>
     </el-dialog>
-</el-card>
+</TablePage>
 </template>
 
 <style lang="sass" scoped>

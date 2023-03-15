@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { CrudPagination, ShowImage, TablePage, UploadFile } from '@/components'
+import { CrudPagination, ShowImage, TableLineAction, TablePage, UploadFile } from '@/components'
 import { formatDate } from '@/util'
-import { CirclePlusFilled, Delete, Edit, Search, Warning } from '@element-plus/icons-vue'
+import { CirclePlusFilled, Search } from '@element-plus/icons-vue'
 import { CategoryService } from './Service'
 
 const {
@@ -65,20 +65,7 @@ listUpdate()
             <template v-slot="{row}">
                 <el-button :icon="CirclePlusFilled" link @click="readyEdit(row)">新增子节点</el-button>
                 <el-divider direction="vertical" />
-                <el-button :icon="Edit" link @click="readyEdit(row)">编辑</el-button>
-                <el-divider direction="vertical" />
-                <el-popconfirm
-                    :icon="Warning"
-                    cancel-button-text="手滑了"
-                    confirm-button-text="确认删除"
-                    icon-color="red"
-                    title=" 操作无法撤销, 确定要删除吗 ？"
-                    @confirm="readyDelete(row)"
-                >
-                    <template #reference>
-                        <el-button :icon="Delete" link>删除</el-button>
-                    </template>
-                </el-popconfirm>
+                <TableLineAction @del="readyDelete(row)" @edit="readyEdit(row)" />
             </template>
         </el-table-column>
     </el-table>

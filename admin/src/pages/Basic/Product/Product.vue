@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { CrudPagination, ShowImage, TablePage } from '@/components'
+import { CrudPagination, ShowImage, TableLineAction, TablePage } from '@/components'
 import { ProductService } from '@/pages/Basic/Product/Service'
 import { BasicRouterControl } from '@/pages/Basic/Router'
-import { Delete, Edit, Search, Warning } from '@element-plus/icons-vue'
+import { Edit, Search } from '@element-plus/icons-vue'
 import { onActivated } from 'vue'
 
 /**
@@ -27,21 +27,21 @@ onActivated(() => listUpdate())
 
 <template>
 <TablePage @create="BasicRouterControl.toProductCreate()" @refresh="listUpdate">
-  <template #searchForm>
-    <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">
-      <el-form-item>
-        <el-input v-model="queryData.nickname" clearable placeholder="所属分类"></el-input>
-      </el-form-item>
+    <template #searchForm>
+        <el-form ref="queryFormRef" :model="queryData" inline label-width="80px">
+            <el-form-item>
+                <el-input v-model="queryData.nickname" clearable placeholder="所属分类"></el-input>
+            </el-form-item>
 
-      <el-form-item>
-        <el-input v-model="queryData.username" clearable placeholder="商品名称"></el-input>
-      </el-form-item>
+            <el-form-item>
+                <el-input v-model="queryData.username" clearable placeholder="商品名称"></el-input>
+            </el-form-item>
 
-      <el-form-item>
-        <el-button :icon="Search" type="primary" @click="queryFormSubmit"></el-button>
-      </el-form-item>
-    </el-form>
-  </template>
+            <el-form-item>
+                <el-button :icon="Search" type="primary" @click="queryFormSubmit"></el-button>
+            </el-form-item>
+        </el-form>
+    </template>
 
     <!-- 表格 -->
     <el-table v-loading="tableIsLoading" :data="page.list" :row-key="rowKey" class="data-table" fit show-header stripe>
@@ -77,25 +77,12 @@ onActivated(() => listUpdate())
             <template v-slot="{row}">
                 <el-button :icon="Edit" link @click="BasicRouterControl.toProductDetail(row._id)">详情</el-button>
                 <el-divider direction="vertical" />
-                <el-button :icon="Edit" link @click="BasicRouterControl.toProductUpdate(row._id)">编辑</el-button>
-                <el-divider direction="vertical" />
-                <el-popconfirm
-                    :icon="Warning"
-                    cancel-button-text="手滑了"
-                    confirm-button-text="确认删除"
-                    icon-color="red"
-                    title=" 操作无法撤销, 确定要删除吗 ？"
-                    @confirm="readyDelete(row)"
-                >
-                  <template #reference>
-                    <el-button :icon="Delete" link>删除</el-button>
-                  </template>
-                </el-popconfirm>
+                <TableLineAction @del="readyDelete(row)" @edit="BasicRouterControl.toProductUpdate(row._id)" />
             </template>
         </el-table-column>
     </el-table>
     <!-- 分页 -->
-  <CrudPagination :service="{page}" style="padding-top: 20px" />
+    <CrudPagination :service="{page}" style="padding-top: 20px" />
 </TablePage>
 </template>
 
