@@ -3,6 +3,7 @@ import RichTextEditor from '@/components/RichTextEditor/index.vue'
 import SelectProduct from '@/components/SelectProduct/index.vue'
 import ShowImage from '@/components/Show/index.vue'
 import ShowFile from '@/components/Show/ShowFile'
+import TagList from '@/components/Tags/TagList.vue'
 import Tags from '@/components/Tags/Tags.vue'
 import TimePeriod from '@/components/TimePeriod/TimePeriod.vue'
 import UploadFile from '@/components/Upload/UploadFile.vue'
@@ -16,6 +17,7 @@ export {
     ShowFile,
     ShowImage,
     Tags,
+    TagList,
     TimePeriod,
     UploadFile,
 }

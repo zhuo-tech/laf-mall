@@ -27,6 +27,15 @@ const RouterConfig: RouteRecordRaw = {
             },
         },
         {
+            path: 'spec',
+            component: () => import('./Spec/SpecPage.vue'),
+            meta: {
+                isMenu: true,
+                title: '商品规格',
+                icon: FolderOpened,
+            },
+        },
+        {
             path: 'product',
             component: () => import('./Product/Product.vue'),
             meta: {

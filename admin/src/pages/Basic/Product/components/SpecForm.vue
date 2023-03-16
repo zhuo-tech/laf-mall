@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { BasicSpecProduct, SpecType } from 'common'
 import { ref, watch } from 'vue'
-import PriceForm from '../PriceForm/PriceForm.vue'
+import PriceForm from './PriceForm.vue'
 
 const props = defineProps<{
     specType: SpecType
@@ -12,7 +12,7 @@ const emits = defineEmits<{
     (event: 'update', value: Partial<BasicSpecProduct>): void
 }>()
 
-let formData = ref<Partial<BasicSpecProduct>>()
+const formData = ref<Partial<BasicSpecProduct>>({})
 
 watch(() => props.value, (newValue) => {
     console.log('监听', newValue)
@@ -29,7 +29,7 @@ const { SingleSpec, MultipleSpec } = SpecType
 <template>
 <div>
     <el-collapse-transition appear mode="out-in">
-        <el-form v-if="props.specType === SingleSpec" ref="form" :model="formData" label-width="140px">
+        <el-form v-if="props.specType === SingleSpec" ref="form" :model="formData" class="mark" label-width="140px">
             <el-row :gutter="10">
                 <el-col :span="12">
                     <el-form-item label="条形码" prop="barCode">
@@ -67,10 +67,17 @@ const { SingleSpec, MultipleSpec } = SpecType
         </el-form>
     </el-collapse-transition>
     <el-collapse-transition appear mode="out-in">
-        <el-form v-if="props.specType === MultipleSpec" ref="form" :model="formData" label-width="140px">
-            <div>你好啊</div>
+        <el-form v-if="props.specType === MultipleSpec" ref="form" :model="formData" class="mark" label-width="140px">
+
+            <h1>多规格表单</h1>
+
         </el-form>
     </el-collapse-transition>
 </div>
 
 </template>
+
+<style lang="sass">
+.mark
+    border: 1px solid red
+</style>
