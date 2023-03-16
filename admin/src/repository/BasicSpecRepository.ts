@@ -35,4 +35,10 @@ export class BasicSpecRepository implements CrudRequest<BasicSpec> {
 
         return this.client.updateById(data._id!, data, '_id')
     }
+
+    public selectAllOptions = async () => {
+        const list = await this.client.queryWrapper()
+            .list()
+        return list.map(i => ({ label: i.name, value: i }))
+    }
 }

@@ -1,4 +1,5 @@
 import SelectProduct from './business/SelectProduct/index.vue'
+import SelectSpec from './business/SelectSpec/SelectSpec.vue'
 import CrudPagination from './common/CrudPagination/CrudPagination'
 import RichTextEditor from './common/RichTextEditor/index.vue'
 import ShowImage from './common/Show/index.vue'
@@ -20,4 +21,5 @@ export {
     TagList,
     TimePeriod,
     UploadFile,
+    SelectSpec,
 }
