@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { FormPage, RichTextEditor, Tags, UploadFile } from '@/components'
-import SpecForm from '@/pages/Basic/Product/components/SpecForm.vue'
-import { EditorService } from '@/pages/Basic/Product/EditorService'
 import { useBasicRouter } from '@/pages/Basic/Router'
 import { SpecType } from 'common'
 import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
+import SpecForm from './components/SpecForm.vue'
+import { EditorService } from './EditorService'
 
 /**
  * ProductForm

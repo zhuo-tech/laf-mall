@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { RichTextEditor } from '@/components'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import '@wangeditor/editor/dist/css/style.css'
+import { RichTextEditor } from './RichTextEditor'
 
 /**
  * 富文本编辑器
