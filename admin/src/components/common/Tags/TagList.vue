@@ -27,12 +27,12 @@ watch(
     { immediate: true },
 )
 
-const prepareAdd = (e: any) => {
+const prepareAdd = () => {
     showInput.value = true
     nextTick(() => inputRef.value?.focus())
 }
 
-const add = (e: any) => {
+const add = () => {
     if (StrTool.isNotEmpty(tempValue.value)) {
         valueList.value.push(tempValue.value)
         emits('update:value', valueList.value)
