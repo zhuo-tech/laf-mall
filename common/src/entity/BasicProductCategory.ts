@@ -1,5 +1,5 @@
-import { CanUpdateEntity } from '../entity/Entity'
 import { TreeNode } from '../type/TreeNode'
+import { CanUpdateEntity } from './Entity'
 
 /**
  * 基本产品类别
