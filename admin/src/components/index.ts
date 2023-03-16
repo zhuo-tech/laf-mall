@@ -1,14 +1,14 @@
-import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import RichTextEditor from '@/components/RichTextEditor/index.vue'
-import SelectProduct from '@/components/SelectProduct/index.vue'
-import ShowImage from '@/components/Show/index.vue'
-import ShowFile from '@/components/Show/ShowFile'
-import TagList from '@/components/Tags/TagList.vue'
-import Tags from '@/components/Tags/Tags.vue'
-import TimePeriod from '@/components/TimePeriod/TimePeriod.vue'
-import UploadFile from '@/components/Upload/UploadFile.vue'
+import SelectProduct from './business/SelectProduct/index.vue'
+import CrudPagination from './common/CrudPagination/CrudPagination'
+import RichTextEditor from './common/RichTextEditor/index.vue'
+import ShowImage from './common/Show/index.vue'
+import ShowFile from './common/Show/ShowFile'
+import TagList from './common/Tags/TagList.vue'
+import Tags from './common/Tags/Tags.vue'
+import TimePeriod from './common/TimePeriod/TimePeriod.vue'
+import UploadFile from './common/Upload/UploadFile.vue'
 
-export { FormPage, TableLineAction, TablePage } from './PageContainer'
+export { FormPage, TableLineAction, TablePage } from './common/PageContainer'
 
 export {
     CrudPagination,

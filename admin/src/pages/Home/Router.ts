@@ -1,5 +1,3 @@
-import Layout from '@/components/Layout/index.vue'
-// @ts-ignore
 import { DataAnalysis } from '@element-plus/icons-vue'
 import { RouteRecordRaw } from 'vue-router'
 
@@ -10,7 +8,7 @@ export const HOME_PATH = '/'
  * @date 2022-06-14 下午 05:31
  **/
 const RouterConfig: RouteRecordRaw = {
-    component: Layout,
+    component: () => import('@/components/Layout/index.vue'),
     path: HOME_PATH,
     children: [
         {

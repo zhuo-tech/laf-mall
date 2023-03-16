@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import Aside from '@/components/Layout/components/Aside.vue'
 import { StorageServiceImpl } from '@/service/impl/StorageServiceImpl'
 import { StorageService } from '@/service/StorageService'
 import { useUserStore } from '@/store/user'
 import { CircleClose, Expand } from '@element-plus/icons-vue'
 import { ref } from 'vue'
+import Aside from './Aside.vue'
 
 const isOpenMenu = ref(false)
 

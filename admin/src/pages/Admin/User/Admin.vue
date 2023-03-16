@@ -1,9 +1,6 @@
 <script lang="ts" setup>
-import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import ShowImage from '@/components/Show/index.vue'
-import UploadFile from '@/components/Upload/UploadFile.vue'
+import { CrudPagination, ShowImage, UploadFile } from '@/components'
 import { formatDate } from '@/util/Format'
-// @ts-ignore
 import { CirclePlusFilled, Delete, Edit, Refresh, Search, Warning } from '@element-plus/icons-vue'
 import { UserService } from './Service'
 

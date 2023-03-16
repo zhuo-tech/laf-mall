@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { RichTextEditor } from '@/components/RichTextEditor/RichTextEditor'
+import { RichTextEditor } from '@/components'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import '@wangeditor/editor/dist/css/style.css'
 

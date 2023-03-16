@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import PageHeader from '@/components/PageContainer/PageHeader.vue'
 import { CirclePlusFilled, Refresh, Search } from '@element-plus/icons-vue'
 import { ref } from 'vue'
+import PageHeader from './PageHeader.vue'
 
 const emits = defineEmits<{
     (event: 'create'): void

@@ -1,8 +1,5 @@
 <script lang="ts" setup>
-import FormPage from '@/components/PageContainer/FormPage.vue'
-import RichTextEditor from '@/components/RichTextEditor/index.vue'
-import Tags from '@/components/Tags/Tags.vue'
-import UploadFile from '@/components/Upload/UploadFile.vue'
+import { FormPage, RichTextEditor, Tags, UploadFile } from '@/components'
 import SpecForm from '@/pages/Basic/Product/components/SpecForm.vue'
 import { EditorService } from '@/pages/Basic/Product/EditorService'
 import { useBasicRouter } from '@/pages/Basic/Router'

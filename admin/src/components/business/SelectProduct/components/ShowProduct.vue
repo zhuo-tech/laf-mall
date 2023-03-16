@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ShowImage from '@/components/Show/index.vue'
+import { ShowImage } from '@/components'
 import { BasicProduct, formatDate } from 'common'
 
 /**

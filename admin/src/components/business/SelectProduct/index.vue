@@ -1,11 +1,9 @@
 <!--suppress JSUnresolvedVariable -->
 <script lang="ts" setup>
-import CrudPagination from '@/components/CrudPagination/CrudPagination'
-import ShowProduct from '@/components/SelectProduct/components/ShowProduct.vue'
-import { SelectProduct } from '@/components/SelectProduct/SelectProduct'
-// @ts-ignore
+import { CrudPagination, SelectProduct } from '@/components'
 import { Search } from '@element-plus/icons-vue'
 import { BasicProduct } from 'common'
+import ShowProduct from './components/ShowProduct.vue'
 
 /**
  * 选择产品

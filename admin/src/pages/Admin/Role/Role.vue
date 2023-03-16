@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import CrudPagination from '@/components/CrudPagination/CrudPagination'
+import { CrudPagination } from '@/components'
 import { formatDate } from '@/util/Format'
 import { CirclePlusFilled, Delete, Edit, Refresh, Search, Warning } from '@element-plus/icons-vue'
 import { RoleService } from './Service'
