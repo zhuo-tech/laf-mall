@@ -27,19 +27,21 @@ watch(
     { immediate: true },
 )
 
-const prepareAdd = () => {
+const prepareAdd = (e: any) => {
     showInput.value = true
     nextTick(() => inputRef.value?.focus())
 }
 
-const add = () => {
+const add = (e: any) => {
     if (StrTool.isNotEmpty(tempValue.value)) {
         valueList.value.push(tempValue.value)
         emits('update:value', valueList.value)
+        tempValue.value = StrTool.EMPTY
+    } else {
+        showInput.value = false
+        tempValue.value = StrTool.EMPTY
+        nextTick(() => addBtn.value?.ref.focus())
     }
-    showInput.value = false
-    tempValue.value = StrTool.EMPTY
-    nextTick(() => addBtn.value?.ref.focus())
 }
 
 const remove = (item: string, index: number) => {
@@ -67,7 +69,7 @@ const remove = (item: string, index: number) => {
         size="large"
         style="width: 100px"
         @blur="add"
-        @keydown.enter="add"
+        @keydown.enter.prevent="add"
     />
     <el-button v-else ref="addBtn" :icon="Plus" @click="prepareAdd">
         新增
