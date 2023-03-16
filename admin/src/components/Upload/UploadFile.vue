@@ -2,7 +2,7 @@
 import ShowImage from '@/components/Show/index.vue'
 import ShowFile from '@/components/Show/ShowFile'
 import { UploadFileInfo } from '@/service/FileService'
-import { UploadFilled } from '@element-plus/icons-vue'
+import { Plus, UploadFilled } from '@element-plus/icons-vue'
 import { UploadProps, UploadUserFile } from 'element-plus'
 import { UploadFileService } from './UploadFileService'
 import { useFilePreview } from './useFilePreview'
