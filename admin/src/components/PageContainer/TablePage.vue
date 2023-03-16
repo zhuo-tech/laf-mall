@@ -20,11 +20,8 @@ const enterUp = (event: KeyboardEvent) => emits('search')
 <div>
     <main>
         <header>
-            <el-row :gutter="20">
-                <el-col :md="12" :sm="24" :xs="24">
-                    <PageHeader />
-                </el-col>
-                <el-col :md="12" :sm="24" :xs="24">
+            <PageHeader>
+                <template #extra>
                     <el-row justify="end" type="flex">
                         <slot name="action"></slot>
                         <!--suppress JSValidateTypes -->
@@ -34,8 +31,8 @@ const enterUp = (event: KeyboardEvent) => emits('search')
                         <!--suppress JSValidateTypes -->
                         <el-button :icon="Refresh" type="primary" @click="emits('refresh')" />
                     </el-row>
-                </el-col>
-            </el-row>
+                </template>
+            </PageHeader>
         </header>
         <section class="body">
             <el-collapse-transition>
@@ -61,12 +58,12 @@ main
     box-sizing: border-box
     max-width: 1920px
     margin: 0 auto
-    padding: 0 70px 0 20px
+    padding: 0 20px 0 20px
 
     background-color: var(--el-bg-color)
 
     > header
-        padding: 30px
+        padding: 30px 20px
         margin-bottom: 10px
         border-bottom: rgba(0, 0, 0, .1)
 
