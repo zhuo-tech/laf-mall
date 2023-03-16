@@ -191,5 +191,5 @@ export class SeckillTimePeriod {
     /**
      * 持续时间: 时分秒
      */
-    public length: string
+    public end: string
 }
