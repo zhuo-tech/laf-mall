@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { TagList } from '@/components'
 import { BasicSpecRepository } from '@/repository'
 import { StandardErrorProcess } from '@/util'
 import { ArrayTool } from '@es-tool/core'
@@ -60,10 +61,27 @@ const init = () => {
     multiple
     value-key="value._id"
     @change="onSelectChange"
-/>
+>
+    <template #default="{item, index, disabled}">
+        <div class="item">
+            <span>{{ item.label }}</span>
+            <span>
+                <TagList :value="item.value.item" readonly />
+            </span>
+        </div>
+    </template>
+
+</el-select-v2>
 </template>
 
 <style lang="sass" scoped>
 .el-select-v2
-    min-width: 250px
+    min-width: 600px
+
+.item
+    > span:first-child
+        float: left
+
+    > span:last-child
+        float: right
 </style>
