@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Header from '@/components/Layout/components/header.vue'
 import { ref } from 'vue'
 import Aside from './components/Aside.vue'
 import TopHeader from './components/header.vue'
@@ -12,22 +13,22 @@ window.addEventListener('resize', (ev) => {
 </script>
 
 <template>
-<div class="layout">
+<main class="layout">
     <!-- 页眉 -->
-    <div class="header border-b-2">
+    <header class="border-b-2">
         <top-header />
-    </div>
+    </header>
 
-    <el-row class="main flex">
+    <el-row class="body flex">
         <!-- 侧边栏 -->
-        <el-col :lg="3" :sm="3" :xl="2" :xs="3" class="menu hidden sm:block overflow-x-hidden">
+        <el-col :lg="3" :sm="3" :xl="2" :xs="3" class="aside hidden sm:block overflow-x-hidden">
             <Transition>
                 <Aside v-if="!isMenuHidden" :collapse="isMenuCollapsed" />
             </Transition>
         </el-col>
 
         <!-- 路由视图 -->
-        <el-col :lg="21" :sm="21" :xl="22" :xs="21" class="page flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 sm:p-4 p-2">
+        <el-col :lg="21" :sm="21" :xl="22" :xs="21" class="page-wrapper flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 sm:p-4 p-2">
             <router-view v-slot="{ Component }">
                 <transition appear mode="out-in" name="el-fade-in">
                     <keep-alive>
@@ -37,7 +38,7 @@ window.addEventListener('resize', (ev) => {
             </router-view>
         </el-col>
     </el-row>
-</div>
+</main>
 </template>
 
 <style lang="sass" scoped>
@@ -49,13 +50,18 @@ window.addEventListener('resize', (ev) => {
 .layout
     height: var(--layout-height)
 
-    .header
+    > header
         height: var(--layout-header-height)
 
-    .main
+    .body
         height: var(--layout-main-height)
+        overflow: auto
 
-        .menu
+        > *
+            overflow: auto
+            height: 100%
+
+        .aside
             position: relative
 
             .collapse-btn
