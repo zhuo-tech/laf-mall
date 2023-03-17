@@ -35,7 +35,7 @@ export class UploadFileService {
 
     /**
      * 自定义上传
-     * @impl 此函数不能返回 {@link Promise} 否则 element-plus upload 会置 response 为 {@link undefined}
+     * @impl 此函数不能返回 {@link Promise} 否则 element-plus upload 会置 response 为 {@code undefined}
      */
     public upLoadRequest = (options: UploadRequestOptions) => {
         const onProgress = (event: ProgressEvent) => {

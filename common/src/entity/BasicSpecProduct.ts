@@ -81,4 +81,27 @@ export class BasicSpecProduct implements CanUpdateEntity {
     public createTime: number
     public updateBy: string
     public updateTime: number
+
+    public static getDefault(): BasicSpecProduct {
+        return {
+            _id: '',
+            productId: '',
+            specGroupId: '',
+            specName: '',
+            display: '',
+            cover: '',
+            carousel: new Array<string>(),
+            barCode: '',
+            stock: 0,
+            sales: 0,
+            price: 0,
+            cost: 0,
+            originalPrice: 0,
+            postage: 0,
+            createBy: '',
+            createTime: 0,
+            updateBy: '',
+            updateTime: 0,
+        }
+    }
 }
