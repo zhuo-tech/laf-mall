@@ -1,4 +1,4 @@
-import { CanUpdateEntity } from '../entity/Entity'
+import { CanUpdateEntity } from './Entity'
 
 /**
  * MallConfig

@@ -1,5 +1,5 @@
+import { MoneyType } from '../type'
 import { AbstractMallActivity } from './AbstractMallActivity'
-import { MoneyType } from '../type/Financial'
 
 /**
  * <h2>商场活动 砍价</h2>

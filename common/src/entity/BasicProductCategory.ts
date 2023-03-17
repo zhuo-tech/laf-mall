@@ -1,4 +1,4 @@
-import { TreeNode } from '../type/TreeNode'
+import { TreeNode } from '../type'
 import { CanUpdateEntity } from './Entity'
 
 /**

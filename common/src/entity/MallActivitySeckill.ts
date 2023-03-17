@@ -1,6 +1,6 @@
-import { SeckillTimePeriod } from '../entity/MallConfig'
-import { MoneyType } from '../type/Financial'
+import { MoneyType } from '../type'
 import { AbstractMallActivity } from './AbstractMallActivity'
+import { SeckillTimePeriod } from './MallConfig'
 
 /**
  * <h2>商场活动 秒杀</h2>

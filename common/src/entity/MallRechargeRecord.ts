@@ -1,5 +1,5 @@
-import { ReadonlyEntity } from '../entity/Entity'
-import { MoneyType } from '../type/Financial'
+import { MoneyType } from '../type'
+import { ReadonlyEntity } from './Entity'
 
 /**
  * MallRechargeRecord

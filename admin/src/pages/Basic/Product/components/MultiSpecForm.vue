@@ -46,7 +46,7 @@ const initList = () => {
                 <template #default="{row}">
                     <el-form :model="row" label-position="right" label-suffix=":" label-width="100px">
                         <el-form-item label="轮播图" prop="carousel">
-                            <UploadFile v-model:href="row.carousel" :limit="10" />
+                            <UploadFile v-model:hrefs="row.carousel" :limit="10" />
                         </el-form-item>
 
                         <el-row :gutter="20">

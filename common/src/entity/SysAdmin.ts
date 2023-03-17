@@ -1,4 +1,4 @@
-import { LogicDelete } from '../constant/LogicDelete'
+import { LogicDelete } from '../constant'
 import { IntegralEntity } from './Entity'
 
 /**

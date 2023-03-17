@@ -1,5 +1,5 @@
-import { LogicDelete } from '../constant/LogicDelete'
-import { MoneyType } from '../type/Financial'
+import { LogicDelete } from '../constant'
+import { MoneyType } from '../type'
 import { IntegralEntity } from './Entity'
 
 /**

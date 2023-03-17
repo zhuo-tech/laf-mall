@@ -1,4 +1,4 @@
-import { LogicDelete } from '../constant/LogicDelete'
+import { LogicDelete } from '../constant'
 
 /**
  * Mongo 实体
